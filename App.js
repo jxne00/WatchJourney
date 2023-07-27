@@ -2,6 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useFonts } from 'expo-font';
+
+// import constants
+import Constants from './Constants/constants';
 
 // import main screens
 import HomeScreen from './Screens/Home';
@@ -13,11 +17,34 @@ import WatchlistScreen from './Screens/Watchlists';
 const BottomTab = createBottomTabNavigator();
 
 function App() {
+    // load fonts from fonts folder
+    const [fontsLoaded] = useFonts({
+        // src: https://fonts.google.com/specimen/Bangers
+        'Bangers-Regular': require('./assets/fonts/Bangers-Regular.ttf'),
+        // src: https://fonts.google.com/specimen/Poppins
+        'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
+        'Poppins-Italic': require('./assets/fonts/Poppins-Italic.ttf'),
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
     return (
         <NavigationContainer>
             <BottomTab.Navigator
+                // set options for all tabs
                 screenOptions={({ route }) => ({
                     headerShown: true,
+                    headerTintColor: Constants.SECONDARY_COL,
+                    headerStyle: {
+                        backgroundColor: Constants.PRIMARY_COL,
+                    },
+                    tabBarActiveTintColor: '#979CC3',
+                    tabBarInactiveTintColor: Constants.SECONDARY_COL,
+                    tabBarStyle: {
+                        backgroundColor: Constants.PRIMARY_COL,
+                    },
                     tabBarIcon: ({ color, size }) => {
                         let ioniconName;
                         switch (route.name) {
