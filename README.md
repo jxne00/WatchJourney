@@ -18,3 +18,5 @@ npx expo install:
 - @expo/vector-icons/Ionicons
 - @react-navigation/native-stack
 - @react-navigation/material-top-tabs
+- expo-linear-gradient
+- @react-native-masked-view/masked-view

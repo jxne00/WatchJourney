@@ -122,10 +122,7 @@ const App = () => {
         <NavigationContainer>
             <MainStack.Navigator screenOptions={{ headerShown: false }}>
                 <MainStack.Screen name="Login" component={LoginScreen} />
-                <MainStack.Screen
-                    name="AppScreens"
-                    component={BottomTabNav}
-                />
+                <MainStack.Screen name="AppScreens" component={BottomTabNav} />
             </MainStack.Navigator>
         </NavigationContainer>
     );
