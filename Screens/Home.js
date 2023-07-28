@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import Constants from '../Constants/constants';
+import Constants from '../constants/constants';
 
-function HomeScreen() {
+const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
@@ -12,7 +12,7 @@ function HomeScreen() {
             </View>
         </SafeAreaView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

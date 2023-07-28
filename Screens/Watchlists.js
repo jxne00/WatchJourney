@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import Constants from '../Constants/constants';
+import Constants from '../constants/constants';
 
-function WatchlistScreen() {
+const WatchlistScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
@@ -12,7 +12,7 @@ function WatchlistScreen() {
             </View>
         </SafeAreaView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

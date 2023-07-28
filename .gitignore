@@ -36,3 +36,4 @@ yarn-error.*
 
 # vsc workspace settings
 .vscode
+Icon?
