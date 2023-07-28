@@ -4,19 +4,21 @@ import {
     Text,
     StyleSheet,
     SafeAreaView,
-    Button,
+    Pressable,
     TextInput,
 } from 'react-native';
 
 import Constants from '../constants/constants';
+import CustomBtn from '../components/CustomBtn';
 
 const LoginScreen = ({ navigation }) => {
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.safeAreaContainer}>
             <View style={styles.container}>
+                <StatusBar style="auto" />
                 <View style={styles.welcomeContainer}>
                     <Text style={styles.title}>Welcome to</Text>
-                    <Text style={styles.title}>WatchJourney!</Text>
+                    <Text style={styles.appname}>WatchJourney!</Text>
                 </View>
                 <TextInput placeholder="Username" style={styles.input} />
                 <TextInput
@@ -24,10 +26,10 @@ const LoginScreen = ({ navigation }) => {
                     secureTextEntry
                     style={styles.input}
                 />
-                <Button
-                    title="Login"
-                    style={styles.button}
+                <CustomBtn
+                    text="Login"
                     onPress={() => navigation.navigate('AppScreens')}
+                    align={'flex-end'}
                 />
             </View>
         </SafeAreaView>
@@ -35,17 +37,27 @@ const LoginScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+    safeAreaContainer: {
+        flex: 1,
+        backgroundColor: Constants.SECONDARY_COL,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
-        marginHorizontal: 20,
+        backgroundColor: Constants.SECONDARY_COL,
+        paddingHorizontal: 20,
     },
     welcomeContainer: {
         marginBottom: 20,
     },
     title: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-        fontSize: 24,
+        fontSize: 26,
+    },
+    appname: {
+        fontFamily: Constants.BANGER_FONT,
+        fontSize: 36,
+        letterSpacing: 2,
     },
     input: {
         height: 40,
@@ -53,9 +65,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 20,
         padding: 10,
-        borderRadius: 20,
-    },
-    button: {
         borderRadius: 20,
     },
 });
