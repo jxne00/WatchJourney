@@ -8,6 +8,9 @@ const Constants = {
     POPPINS_REGULAR_FONT: 'Poppins-Regular',
     POPPINS_SEMIBOLD_FONT: 'Poppins-SemiBold',
     POPPINS_ITALIC_FONT: 'Poppins-Italic',
+
+    // API paths
+    POSTER_BASE_PATH: 'https://image.tmdb.org/t/p/',
 };
 
 export default Constants;

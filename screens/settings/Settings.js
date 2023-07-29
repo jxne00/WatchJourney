@@ -17,7 +17,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../../constants/constants';
 import CustomBtn from '../../components/CustomBtn';
 
-import OPTIONS from './data/SettingsOptions';
+import OPTIONS from '../../data/SettingsOptions';
 
 // renders a row within a category section
 const CategoryOptionCell = ({

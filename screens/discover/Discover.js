@@ -1,28 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
+import Fetch_API_Data from '../../data/api';
 import Constants from '../../constants/constants';
 
-const DiscoverScreen = () => {
+import moviesFlatlist from './components/MovieFlatlist';
+
+/**
+ * @description The discover page displays a list of movies
+ */
+function DiscoverScreen({ navigation }) {
+    const [data, setData] = useState([]);
+
+    // fetch movie data from API
+    useEffect(() => {
+        Fetch_API_Data('/discover/movie')
+            .then((json) => setData(json))
+            .catch((err) => console.alert(err));
+    }, []);
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
-                <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Discover page</Text>
-            </View>
-        </SafeAreaView>
+        <View style={styles.container}>
+            <Text style={styles.header}>Movies</Text>
+            {/* flatlist diplaying a list of movies */}
+            {moviesFlatlist({ data, navigation })}
+        </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        padding: 10,
+        backgroundColor: Constants.SECONDARY_COL,
     },
-    textStyle: {
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
-        fontSize: 14,
+    header: {
+        fontSize: 24,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+        marginBottom: 10,
     },
 });
 

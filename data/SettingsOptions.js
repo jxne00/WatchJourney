@@ -1,8 +1,8 @@
 /**
  * @description: Data for "Settings" screen
- * @param name: name of each section
- * @param items: options under eacg section
- * @param type: 'toggle' | 'select' | 'more'
+ * @param name: name of each category
+ * @param items: options under each category
+ * @param type: option type ('toggle' | 'select' | 'more')
  */
 const OPTIONS = [
     /* ========-- "Preferences" section --======== */

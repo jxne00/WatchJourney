@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SCREEN_OPTIONS from '../components/StackScreenOptions';
-
 import DiscoverScreen from '../../screens/discover/Discover';
+import MovieDetails from '../../screens/discover/MovieDetail';
 
 /**
  * @description stack navigator for the "Discover" screen
@@ -16,6 +16,13 @@ const DiscoverScreenStack = () => {
                 component={DiscoverScreen}
                 options={{
                     title: 'Discover',
+                }}
+            />
+            <DiscoverStack.Screen
+                name="MovieDetailPage"
+                component={MovieDetails}
+                options={{
+                    title: 'Movie Details',
                 }}
             />
         </DiscoverStack.Navigator>
