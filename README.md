@@ -20,3 +20,4 @@ npx expo install:
 - @react-navigation/material-top-tabs
 - expo-linear-gradient
 - @react-native-masked-view/masked-view
+- @react-native-async-storage/async-storage

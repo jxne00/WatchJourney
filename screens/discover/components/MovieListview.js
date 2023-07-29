@@ -7,13 +7,20 @@ import {
     Image,
     TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Constants from '../../../constants/constants';
 
 /**
- * @description custom flatlist to display movies
+ * @description A custom flatlist to display movies
  */
-const moviesFlatlist = ({ data, navigation }) => {
+const MovieListView = ({ data, navigation }) => {
+    // const [lists, setLists] = useState({
+    //     watchingNow: [],
+    //     watched: [],
+    //     intendToWatch: [],
+    // });
+
     // renders a cell in the flatlist
     const FlatlistCell = ({ item }) => (
         <TouchableOpacity
@@ -108,4 +115,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default moviesFlatlist;
+export default MovieListView;

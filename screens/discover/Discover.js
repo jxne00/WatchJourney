@@ -4,7 +4,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import Fetch_API_Data from '../../data/api';
 import Constants from '../../constants/constants';
 
-import moviesFlatlist from './components/MovieFlatlist';
+import MovieListView from './components/MovieListview';
+import MovieCardView from './components/MovieCardView';
 
 /**
  * @description The discover page displays a list of movies
@@ -12,7 +13,7 @@ import moviesFlatlist from './components/MovieFlatlist';
 function DiscoverScreen({ navigation }) {
     const [data, setData] = useState([]);
 
-    // fetch movie data from API
+    // fetch popular movies from API
     useEffect(() => {
         Fetch_API_Data('/discover/movie')
             .then((json) => setData(json))
@@ -23,7 +24,9 @@ function DiscoverScreen({ navigation }) {
         <View style={styles.container}>
             <Text style={styles.header}>Movies</Text>
             {/* flatlist diplaying a list of movies */}
-            {moviesFlatlist({ data, navigation })}
+            {MovieListView({ data, navigation })}
+            {/* flatlist displaying a list of movies in cards */}
+            {/* {MovieCardView({ data, navigation })} */}
         </View>
     );
 }

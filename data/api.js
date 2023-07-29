@@ -9,6 +9,8 @@ const TMDB_API_KEY = 'c13e2b2ef81e2b4c693abcfcff67a5c0';
 // movie details: movie/{movie_id}
 // tv show details: tv/{tv_id}
 // reviews: review/{review_id}
+// trending movies: trending/movie/{time_window(week, day)}
+// trending tv shows: trending/tv/{time_window(week, day)}
 
 const BASE_PATH = 'https://api.themoviedb.org/3';
 
