@@ -8,7 +8,10 @@ const Watched = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Discover page</Text>
+                <Text style={styles.textStyle}>
+                    This is the "Watched" page. {'\n'} This page will display a
+                    list of shows the user has already watched.
+                </Text>
             </View>
         </SafeAreaView>
     );

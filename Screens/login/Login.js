@@ -9,16 +9,16 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import Constants from '../constants/constants';
-import CustomBtn from '../components/CustomBtn';
-import GradientText from '../components/GradientText';
+import Constants from '../../constants/constants';
+import CustomBtn from '../../components/CustomBtn';
+import GradientText from '../../components/GradientText';
 
 const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            {/* image src: https://unsplash.com/photos/HnYMRLmPfjQ */}
+            {/* image src: https://unsplash.com/photos/A_7s4tbP6lI */}
             <ImageBackground
-                source={require('../assets/images/login-bg.jpg')}
+                source={require('../../assets/images/login-bg.jpg')}
                 style={styles.imgbg}
             />
             <StatusBar style="light" />
@@ -26,7 +26,7 @@ const LoginScreen = ({ navigation }) => {
                 <Text style={styles.title}>Welcome to</Text>
                 <GradientText
                     style={styles.appname}
-                    colors={['#8d6ad3', '#75d7ab', '#c6a362']}>
+                    colors={['#b092ec', '#81e4b7', '#e4c282']}>
                     WatchJourney!
                 </GradientText>
             </View>
@@ -47,17 +47,18 @@ const LoginScreen = ({ navigation }) => {
                     text="Login"
                     onPress={() => navigation.navigate('AppScreens')}
                     align={'flex-end'}
-                    colors={['#0e0e0e', '#211f1f', '#161518']}
+                    textColor={'#343434'}
+                    colors={['#828282', '#c2c2c2', '#e1e0e0']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 0, y: 1.5 }}
-                    borderCol={'#8c8c8c'}
                 />
-            </View>
-            <View style={styles.signUpContainer}>
-                <Text style={styles.signup}>Don't have an account?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.signupBtn}>Sign Up</Text>
-                </TouchableOpacity>
+                <View style={styles.signUpContainer}>
+                    <Text style={styles.signup}>Don't have an account?</Text>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('SignUpScreen')}>
+                        <Text style={styles.signupBtn}>Sign Up</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         padding: 20,
         borderRadius: 13,
-        backgroundColor: 'rgba(150, 150, 150, 0.3)',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
     },
     login: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
@@ -118,17 +119,17 @@ const styles = StyleSheet.create({
     signUpContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 20,
+        marginTop: 30,
     },
     signup: {
         fontFamily: Constants.POPPINS_REGULAR_FONT,
-        fontSize: 16,
+        fontSize: 14,
         marginRight: 5,
         color: '#fff',
     },
     signupBtn: {
         fontFamily: Constants.POPPINS_REGULAR_FONT,
-        fontSize: 16,
+        fontSize: 14,
         color: '#5cb8ed',
     },
 });

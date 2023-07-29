@@ -8,7 +8,12 @@ const WatchingNow = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Discover page</Text>
+                <Text style={styles.textStyle}>
+                    This is the "Watching Now" page.
+                    {'\n'}
+                    This page will display the list of shows the user is
+                    currently watching.
+                </Text>
             </View>
         </SafeAreaView>
     );

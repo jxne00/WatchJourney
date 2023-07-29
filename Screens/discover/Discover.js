@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import Constants from '../constants/constants';
+import Constants from '../../constants/constants';
 
 const DiscoverScreen = () => {
     return (
@@ -12,7 +12,7 @@ const DiscoverScreen = () => {
             </View>
         </SafeAreaView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {

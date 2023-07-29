@@ -8,7 +8,11 @@ const IntendToWatch = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Discover page</Text>
+                <Text style={styles.textStyle}>
+                    This is the "Intend to Watch" page.{'\n'}
+                    This page will display all the shows that the user intends
+                    to watch.
+                </Text>
             </View>
         </SafeAreaView>
     );

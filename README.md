@@ -15,7 +15,7 @@ A react native mobile application that helps you to keep tabs on your favorite s
 npx expo install:
 
 - @react-navigation/bottom-tabs
-- @expo/vector-icons/Ionicons
+- @expo/vector-icons
 - @react-navigation/native-stack
 - @react-navigation/material-top-tabs
 - expo-linear-gradient

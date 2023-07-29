@@ -1,14 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import Constants from '../constants/constants';
+import Constants from '../../constants/constants';
 
 const WatchlistScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Watchlist page</Text>
+                <Text style={styles.textStyle}>
+                    This is the watchlist page.{'\n'}
+                    This page will display all the watchlists including custom
+                    ones.
+                </Text>
             </View>
         </SafeAreaView>
     );

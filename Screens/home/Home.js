@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import Constants from '../constants/constants';
+import Constants from '../../constants/constants';
 
-const SettingsScreen = () => {
+const HomeScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Settings page</Text>
+                <Text style={styles.textStyle}>This is the Home page</Text>
             </View>
         </SafeAreaView>
     );
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SettingsScreen;
+export default HomeScreen;

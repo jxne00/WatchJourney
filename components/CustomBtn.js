@@ -11,7 +11,8 @@ const CustomBtn = (props) => {
     colors = props.colors || ['#fff', '#868686', '#000'];
     start = props.start || { x: 0, y: 0 };
     end = props.end || { x: 1, y: 0 };
-    borderWidth = props.borderCol ? 1 : 0;
+    // scale button width based on text length
+    containerWidth = props.text.length * 20;
 
     return (
         <TouchableOpacity
@@ -20,7 +21,7 @@ const CustomBtn = (props) => {
                 {
                     alignSelf: alignButton,
                     borderColor: props.borderCol,
-                    borderWidth: borderWidth,
+                    width: containerWidth,
                 },
             ]}
             onPress={props.onPress}>
@@ -29,7 +30,9 @@ const CustomBtn = (props) => {
                 start={start}
                 end={end}
                 style={styles.LnrGradient}>
-                <Text style={styles.text}>{props.text}</Text>
+                <Text style={[styles.text, { color: props.textColor }]}>
+                    {props.text}
+                </Text>
             </LinearGradient>
         </TouchableOpacity>
     );
@@ -37,7 +40,6 @@ const CustomBtn = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '30%',
         height: 40,
         borderRadius: 15,
     },
