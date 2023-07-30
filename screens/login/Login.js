@@ -52,13 +52,13 @@ const LoginScreen = ({ navigation }) => {
                     start={{ x: 0, y: 0 }}
                     end={{ x: 0, y: 1.5 }}
                 />
-                <View style={styles.signUpContainer}>
-                    <Text style={styles.signup}>Don't have an account?</Text>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('SignUpScreen')}>
-                        <Text style={styles.signupBtn}>Sign Up</Text>
-                    </TouchableOpacity>
-                </View>
+            </View>
+            <View style={styles.signUpContainer}>
+                <Text style={styles.signup}>Don't have an account?</Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('SignUpScreen')}>
+                    <Text style={styles.signupBtn}>Sign Up</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         paddingHorizontal: 20,
         position: 'absolute',
-        top: '15%',
+        top: '20%',
     },
     title: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         padding: 20,
         borderRadius: 13,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     login: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     signUpContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 30,
+        marginTop: 10,
     },
     signup: {
         fontFamily: Constants.POPPINS_REGULAR_FONT,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     signupBtn: {
         fontFamily: Constants.POPPINS_REGULAR_FONT,
         fontSize: 14,
-        color: '#5cb8ed',
+        color: '#629def',
     },
 });
 

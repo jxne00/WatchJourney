@@ -5,11 +5,13 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+        // "image": "./assets/splash.png",
+        // use custom splash screen image
+        "image": "./assets/images/custom-splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
       "**/*"
