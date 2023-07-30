@@ -16,7 +16,7 @@ const ProfileScreenStack = () => {
                 name="ProfilePage"
                 component={ProfileScreen}
                 options={{
-                    title: 'Settings',
+                    title: 'Profile',
                 }}
             />
             {/* <ProfileStack.Screen

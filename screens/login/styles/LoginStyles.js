@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 13,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        // shadowColor: '#000000',
+        // shadowOffset: { width: -4, height: 4 },
+        // shadowRadius: 4,
+        // shadowOpacity: 0.4,
     },
     login: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,

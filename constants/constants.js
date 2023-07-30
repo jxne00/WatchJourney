@@ -11,6 +11,8 @@ const Constants = {
 
     // API paths
     POSTER_BASE_PATH: 'https://image.tmdb.org/t/p/',
+
+    WATCHLISTS: ['Watched', 'Intend to Watch', 'Watching Now'],
 };
 
 export default Constants;

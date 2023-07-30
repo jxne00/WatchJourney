@@ -7,6 +7,7 @@ import {
     Image,
     Dimensions,
     ImageBackground,
+    ScrollView,
 } from 'react-native';
 
 import Constants from '../../constants/constants';
@@ -19,7 +20,7 @@ function MovieDetails({ route }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 {/* Set image poster image as background */}
                 <ImageBackground
                     source={{
@@ -39,12 +40,10 @@ function MovieDetails({ route }) {
                 {/* details of the show */}
                 <View>
                     <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.release}>
-                        ({item.release_date})
-                    </Text>
+                    <Text style={styles.release}>({item.release_date})</Text>
                 </View>
                 <Text style={styles.overview}>{item.overview}</Text>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
