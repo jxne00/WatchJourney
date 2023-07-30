@@ -5,19 +5,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "splash": {
-        // "image": "./assets/splash.png",
-        // use custom splash screen image
-        "image": "./assets/images/custom-splash.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
+      "image": "./assets/images/custom-splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5B3776"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pangju.WatchJourney"
     },
     "android": {
       "adaptiveIcon": {

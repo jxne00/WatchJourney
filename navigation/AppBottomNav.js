@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -9,7 +9,7 @@ import Constants from '../constants/constants';
 // import screen stacks
 import HomescreenStack from './stacks/HomeStack';
 import DiscoverScreenStack from './stacks/DiscoverStack';
-import SettingsScreenStack from './stacks/SettingsStack';
+import ProfileScreenStack from './stacks/ProfileStack';
 import WatchlistMain from './WatchlistTopTab';
 
 const BottomTab = createBottomTabNavigator();
@@ -30,8 +30,8 @@ const setIcon = ({ color, size, routeName }) => {
         case 'WatchlistBottomTab':
             iconName = 'format-list-bulleted';
             break;
-        case 'SettingsBottomTab':
-            iconName = 'settings';
+        case 'ProfileBottomTab':
+            iconName = 'account-circle';
             break;
         default:
             break;
@@ -55,21 +55,14 @@ const setLabel = ({ color, routeName }) => {
         case 'WatchlistBottomTab':
             labelName = 'Watchlist';
             break;
-        case 'SettingsBottomTab':
-            labelName = 'Settings';
+        case 'ProfileBottomTab':
+            labelName = 'Profile';
             break;
         default:
             break;
     }
     return (
-        <Text
-            style={{
-                color,
-                fontSize: 12,
-                fontFamily: Constants.POPPINS_REGULAR_FONT,
-            }}>
-            {labelName}
-        </Text>
+        <Text style={[{ color: color }, styles.labelStyle]}>{labelName}</Text>
     );
 };
 
@@ -77,7 +70,7 @@ const setLabel = ({ color, routeName }) => {
  * @description The bottom navigation bar that links to
  * the main screens of the app
  */
-const AppBottomNav = () => (
+const MainScreensNav = () => (
     <BottomTab.Navigator
         // set options for all tabs
         screenOptions={({ route }) => ({
@@ -86,6 +79,7 @@ const AppBottomNav = () => (
             tabBarInactiveTintColor: Constants.SECONDARY_COL,
             tabBarStyle: {
                 backgroundColor: Constants.PRIMARY_COL,
+                paddingTop: 5,
             },
             tabBarIcon: ({ color, size }) =>
                 setIcon({ color, size, routeName: route.name }),
@@ -103,10 +97,17 @@ const AppBottomNav = () => (
         <BottomTab.Screen name="WatchlistBottomTab" component={WatchlistMain} />
         {/* Settings Screen Tab */}
         <BottomTab.Screen
-            name="SettingsBottomTab"
-            component={SettingsScreenStack}
+            name="ProfileBottomTab"
+            component={ProfileScreenStack}
         />
     </BottomTab.Navigator>
 );
 
-export default AppBottomNav;
+const styles = StyleSheet.create({
+    labelStyle: {
+        fontSize: 12,
+        fontFamily: Constants.POPPINS_REGULAR_FONT,
+    },
+});
+
+export default MainScreensNav;

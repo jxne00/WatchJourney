@@ -8,11 +8,13 @@ import Constants from '../constants/constants';
 const CustomBtn = (props) => {
     // set default values to use if none passed in
     alignButton = props.align || 'center';
-    colors = props.colors || ['#fff', '#868686', '#000'];
-    start = props.start || { x: 0, y: 0 };
-    end = props.end || { x: 1, y: 0 };
     // scale button width based on text length
     containerWidth = props.text.length * 20;
+    // set default colors and width if none passed in
+    textCol = props.textColor || Constants.SECONDARY_COL;
+    borderCol = props.borderCol || Constants.SECONDARY_COL;
+    borderWidth = props.borderCol ? 1 : 0;
+    bgCol = props.bgCol || Constants.PRIMARY_COL;
 
     return (
         <TouchableOpacity
@@ -20,33 +22,26 @@ const CustomBtn = (props) => {
                 styles.container,
                 {
                     alignSelf: alignButton,
+                    backgroundColor: props.bgCol,
+                    borderWidth: props.borderWidth,
                     borderColor: props.borderCol,
                     width: containerWidth,
                 },
             ]}
             onPress={props.onPress}>
-            <LinearGradient
-                colors={colors}
-                start={start}
-                end={end}
-                style={styles.LnrGradient}>
-                <Text style={[styles.text, { color: props.textColor }]}>
-                    {props.text}
-                </Text>
-            </LinearGradient>
+            <Text style={[styles.text, { color: props.textColor }]}>
+                {props.text}
+            </Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: 40,
-        borderRadius: 15,
-    },
-    LnrGradient: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        height: 40,
         borderRadius: 15,
     },
     text: {

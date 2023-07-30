@@ -1,16 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 import Constants from '../../constants/constants';
 
 const HomeScreen = () => {
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.container}>
-                <StatusBar style="auto" />
-                <Text style={styles.textStyle}>This is the Home page</Text>
-            </View>
-        </SafeAreaView>
+        <View style={styles.container}>
+            <StatusBar style="auto" />
+            <Text style={styles.textStyle}>This is the Home page</Text>
+        </View>
     );
 };
 
