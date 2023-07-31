@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import WatchedList from '../../screens/watchlist/Watched';
 import WatchingNow from '../../screens/watchlist/WatchingNow';
-import IntendToWatch from '../../screens/watchlist/IntendToWatch';
+import WatchLater from '../../screens/watchlist/WatchLater';
 
 const WatchedStackNav = createNativeStackNavigator();
 const WatchingStackNav = createNativeStackNavigator();
@@ -38,13 +38,10 @@ const WatchingNowStack = () => {
 /**
  * @description stack navigator for the "Intend to watch" screen
  */
-const IntendToWatchStack = () => (
+const WatchLaterStack = () => (
     <IntendStackNav.Navigator screenOptions={{ headerShown: false }}>
-        <IntendStackNav.Screen
-            name="Intend to Watch"
-            component={IntendToWatch}
-        />
+        <IntendStackNav.Screen name="WatchLater" component={WatchLater} />
     </IntendStackNav.Navigator>
 );
 
-export { WatchedStack, WatchingNowStack, IntendToWatchStack };
+export { WatchedStack, WatchingNowStack, WatchLaterStack };

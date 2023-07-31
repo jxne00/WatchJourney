@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-    View,
-    Text,
-    FlatList,
-    TouchableOpacity,
-    Image,
-} from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 // to reload the screen so that newly added items are displayed
 import { useFocusEffect } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -15,15 +9,15 @@ import Constants from '../../constants/constants';
 import FetchMovies from './components/FetchWatchlist';
 import removeMovieFromWatchlist from './components/RemoveFromList';
 
-const WatchedMoviesScreen = ({ navigation }) => {
-    const [watchedMovies, setWatchedMovies] = useState([]);
+const WatchLater = ({ navigation }) => {
+    const [watchlater, setWatchLater] = useState([]);
 
     // reload the screen whenever it is visited
     // so that newly added items are displayed
     useFocusEffect(
         React.useCallback(() => {
             // fetch movie data for 'Watched' list
-            FetchMovies('Watched', setWatchedMovies);
+            FetchMovies('Watch Later', setWatchLater);
             return () => {};
         }, []),
     );
@@ -31,7 +25,7 @@ const WatchedMoviesScreen = ({ navigation }) => {
     // Function to render each item in the FlatList
     const renderFlatlistItem = ({ item }) => {
         // display a message if there are no items in the list
-        if (!item) {
+        if (item === undefined || item === null) {
             <Text style={styles.emptyListMsg}>
                 Add some items to the list!
             </Text>;
@@ -43,9 +37,9 @@ const WatchedMoviesScreen = ({ navigation }) => {
                     style={styles.removeItemContainer}
                     onPress={() =>
                         removeMovieFromWatchlist(
-                            'Watched',
+                            'Watch Later',
                             item.id,
-                            setWatchedMovies,
+                            setWatchLater,
                         )
                     }>
                     <MaterialIcons
@@ -83,9 +77,9 @@ const WatchedMoviesScreen = ({ navigation }) => {
     };
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Watched movies</Text>
+            <Text style={styles.mainTitle}>Watch Later</Text>
             <FlatList
-                data={watchedMovies}
+                data={watchlater}
                 renderItem={renderFlatlistItem}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2} // display 2 cards per row
@@ -94,4 +88,4 @@ const WatchedMoviesScreen = ({ navigation }) => {
     );
 };
 
-export default WatchedMoviesScreen;
+export default WatchLater;

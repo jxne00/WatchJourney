@@ -13,7 +13,7 @@ const Constants = {
     POSTER_BASE_PATH: 'https://image.tmdb.org/t/p/',
 
     // watchlist keys for AsyncStorage
-    WATCHLISTS: ['Watched', 'Watching Now', 'Intend to Watch'],
+    WATCHLISTS: ['Watched', 'Watching Now', 'Watch Later'],
 };
 
 export default Constants;
