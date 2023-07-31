@@ -6,11 +6,10 @@ import Constants from '../../constants/constants';
 const SCREEN_OPTIONS = {
     // headerShown: false,
     headerShown: true,
-    headerTintColor: Constants.SECONDARY_COL,
+    headerTintColor: Constants.SECONDARY_COL, // back button color
     headerStyle: {
         backgroundColor: Constants.PRIMARY_COL,
     },
-    headerTintColor: '#fff', // back button color
 };
 
 export default SCREEN_OPTIONS;

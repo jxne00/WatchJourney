@@ -6,10 +6,11 @@ import { View, Text, StyleSheet } from 'react-native';
 import Constants from '../constants/constants';
 
 // import all stacks
-import WatchlistStack from './stacks/WatchlistStack';
-import WatchingNowStack from './stacks/WatchingNowStack';
-import IntendToWatchListStack from './stacks/IntendToWatchStack';
-import WatchedListStack from './stacks/WatchedStack';
+import {
+    WatchedStack,
+    WatchingNowStack,
+    IntendToWatchStack,
+} from './stacks/WatchlistStacks';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -18,7 +19,7 @@ const TopTab = createMaterialTopTabNavigator();
  */
 const WatchlistTopTab = () => (
     <TopTab.Navigator
-        initialRouteName="WatchlistTopTab"
+        initialRouteName="WatchingTopTab"
         // options to use for all tabs
         screenOptions={{
             tabBarActiveTintColor: Constants.PRIMARY_COL,
@@ -30,12 +31,6 @@ const WatchlistTopTab = () => (
                 backgroundColor: Constants.PRIMARY_COL,
             },
         }}>
-        {/* "Watchlists" screen stack */}
-        <TopTab.Screen
-            name="WatchlistTopTab"
-            component={WatchlistStack}
-            options={{ tabBarLabel: 'All' }}
-        />
         {/* "Watching now" screen stack */}
         <TopTab.Screen
             name="WatchingTopTab"
@@ -47,7 +42,7 @@ const WatchlistTopTab = () => (
         {/* "Intend to watch" screen stack */}
         <TopTab.Screen
             name="IntendTopTab"
-            component={IntendToWatchListStack}
+            component={IntendToWatchStack}
             options={{
                 tabBarLabel: 'Watch Later',
             }}
@@ -55,7 +50,7 @@ const WatchlistTopTab = () => (
         {/* "Watched" screen stack */}
         <TopTab.Screen
             name="WatchedTopTab"
-            component={WatchedListStack}
+            component={WatchedStack}
             options={{
                 tabBarLabel: 'Watched',
             }}
