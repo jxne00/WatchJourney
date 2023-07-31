@@ -5,18 +5,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    mainTitle: {
-        fontSize: 22,
-        fontWeight: 'bold',
+    numRecords: {
+        fontSize: 16,
+        marginVertical: 10,
         alignSelf: 'center',
         color: Constants.PRIMARY_COL,
-        marginVertical: 20,
-        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+        fontFamily: Constants.POPPINS_ITALIC_FONT,
     },
     emptyListMsg: {
-        fontSize: 18,
+        fontSize: 16,
         alignSelf: 'center',
-        color: '#4f4f4f',
+        color: '#5b5a5a',
+        marginVertical: '30%',
         fontFamily: Constants.POPPINS_REGULAR_FONT,
     },
     cardContainer: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 // constant variables and screen options
 import Constants from '../constants/constants';
@@ -9,7 +9,7 @@ import Constants from '../constants/constants';
 import {
     WatchedStack,
     WatchingNowStack,
-    IntendToWatchStack,
+    WatchLaterStack,
 } from './stacks/WatchlistStacks';
 
 const TopTab = createMaterialTopTabNavigator();
@@ -41,8 +41,8 @@ const WatchlistTopTab = () => (
         />
         {/* "Intend to watch" screen stack */}
         <TopTab.Screen
-            name="IntendTopTab"
-            component={IntendToWatchStack}
+            name="WatchlaterTopTab"
+            component={WatchLaterStack}
             options={{
                 tabBarLabel: 'Intend to Watch',
             }}

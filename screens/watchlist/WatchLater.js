@@ -9,15 +9,16 @@ import Constants from '../../constants/constants';
 import FetchMovies from './components/FetchWatchlist';
 import removeMovieFromWatchlist from './components/RemoveFromList';
 
-const WatchingNow = ({ navigation }) => {
-    const [watchingNow, setWatchingNow] = useState([]);
+const WatchLater = ({ navigation }) => {
+    // set state to store details of watchlater movies
+    const [watchlater, setWatchLater] = useState([]);
 
     // reload the screen whenever it is visited
     // so that newly added items are displayed
     useFocusEffect(
         React.useCallback(() => {
             // fetch movie data for 'Watched' list
-            FetchMovies('Watching Now', setWatchingNow);
+            FetchMovies('Watch Later', setWatchLater);
             return () => {};
         }, []),
     );
@@ -32,9 +33,9 @@ const WatchingNow = ({ navigation }) => {
                 style={styles.removeItemContainer}
                 onPress={() =>
                     removeMovieFromWatchlist(
-                        'Watching Now',
+                        'Watch Later',
                         item.id,
-                        setWatchingNow,
+                        setWatchLater,
                     )
                 }>
                 <MaterialIcons
@@ -73,23 +74,23 @@ const WatchingNow = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {/* display message if list is empty */}
-            {watchingNow.length === 0 && (
+            {watchlater.length === 0 && (
                 <Text style={styles.emptyListMsg}>
                     Add some movies to your list!
                 </Text>
             )}
             <FlatList
-                data={watchingNow}
+                data={watchlater}
                 renderItem={renderFlatlistItem}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2} // display 2 cards per row
             />
             {/* display number of records found */}
             <Text style={styles.numRecords}>
-                {watchingNow.length} record(s) found
+                {watchlater.length} record(s) found
             </Text>
         </View>
     );
 };
 
-export default WatchingNow;
+export default WatchLater;
