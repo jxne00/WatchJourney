@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
-import {
-    View,
-    Text,
-    FlatList,
-    StyleSheet,
-    TouchableOpacity,
-    Image,
-} from 'react-native';
-// to reload the screen so that newly added items are displayed
-import { useFocusEffect } from '@react-navigation/native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';
 
-import Constants from '../../constants/constants';
 import FetchMovies from './components/FetchWatchlist';
 import removeMovieFromWatchlist from './components/RemoveFromList';
+
+import Constants from '../../constants/constants';
+import styles from './styles/watchlistStyles';
+
+// import MovieCard from './components/MovieCard';
 
 const WatchedMoviesScreen = ({ navigation }) => {
     const [watchedMovies, setWatchedMovies] = useState([]);
@@ -28,8 +24,7 @@ const WatchedMoviesScreen = ({ navigation }) => {
         }, []),
     );
 
-    // Function to render each item in the FlatList
-    const renderFlatlistItem = ({ item }) => {
+    const MovieCard = (item) => {
         // display a message if there are no items in the list
         if (!item) {
             <Text style={styles.emptyListMsg}>
@@ -81,78 +76,18 @@ const WatchedMoviesScreen = ({ navigation }) => {
             </View>
         );
     };
+
     return (
         <View style={styles.container}>
             <Text style={styles.mainTitle}>Watched movies</Text>
             <FlatList
                 data={watchedMovies}
-                renderItem={renderFlatlistItem}
+                renderItem={MovieCard}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2} // display 2 cards per row
             />
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    mainTitle: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        alignSelf: 'center',
-        color: Constants.PRIMARY_COL,
-        marginVertical: 20,
-        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    },
-    emptyListMsg: {
-        fontSize: 18,
-        alignSelf: 'center',
-        color: '#4f4f4f',
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
-    },
-    cardContainer: {
-        flex: 1,
-        margin: 8,
-        backgroundColor: Constants.SECONDARY_COL,
-        borderRadius: 10,
-        padding: 8,
-        elevation: 3, // this adds a drop shadow to the card
-    },
-    removeItemContainer: {
-        alignSelf: 'center',
-        position: 'absolute',
-        backgroundColor: '#0f0f0f',
-        borderRadius: 5,
-        padding: 3,
-        left: 0,
-        top: 0,
-        zIndex: 1, // make button appear on top of image
-    },
-    removeItemButton: {
-        color: '#fa7257',
-        borderRadius: 5,
-    },
-    poster: {
-        height: 150,
-        borderRadius: 10,
-    },
-    movieTitle: {
-        fontSize: 18,
-        marginTop: 10,
-        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    },
-    popularity: {
-        fontSize: 14,
-        color: Constants.PRIMARY_COL,
-        flexDirection: 'row',
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
-    },
-    starIcon: {
-        color: '#ff9900',
-        marginRight: 5,
-    },
-});
 
 export default WatchedMoviesScreen;
