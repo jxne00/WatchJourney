@@ -10,7 +10,7 @@ import {
     ScrollView,
 } from 'react-native';
 
-import Constants from '../../constants/constants';
+import Constants from '../constants/constants';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

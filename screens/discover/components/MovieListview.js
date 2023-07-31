@@ -6,13 +6,14 @@ import {
     Image,
     TouchableOpacity,
     Modal,
+    Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from '../styles/MovieListViewStyles';
 import Constants from '../../../constants/constants';
-import { printAsyncKeyContent } from '../../../components/PrintAsyncContent';
+import { printAsyncKeyContent } from '../../../components/AsyncActions';
 
 /**
  * @description A custom flatlist to display movies.
@@ -41,6 +42,12 @@ const MovieListView = ({ data, navigation }) => {
                 (await AsyncStorage.getItem(storageKey)) || '[]',
             );
 
+            // check if movie is already in list
+            if (currentList.includes(chosenMovieID)) {
+                Alert.alert('The movie is already in the list');
+                setModalVisible(false);
+                return;
+            }
             // add chosenMovieID to list and store back to AsyncStorage
             currentList.push(chosenMovieID);
             await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));

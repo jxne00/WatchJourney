@@ -12,7 +12,10 @@ import {
 import Constants from '../../constants/constants';
 import styles from './styles/ProfileStyle';
 
-import clearAsyncStorage from '../../components/ClearAsync';
+import {
+    clearAsyncStorage,
+    printAllAsyncContent,
+} from '../../components/AsyncActions';
 
 const SettingsScreen = ({ navigation }) => {
     return (
@@ -33,8 +36,19 @@ const SettingsScreen = ({ navigation }) => {
             <View style={styles.clearStorage}>
                 <TouchableOpacity
                     style={styles.clearBtn}
+                    onPress={printAllAsyncContent}>
+                    <Text style={styles.clearBtnText}>
+                        Print all stored content
+                    </Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* clear all contents of async storage */}
+            <View style={styles.clearStorage}>
+                <TouchableOpacity
+                    style={styles.clearBtn}
                     onPress={clearAsyncStorage}>
-                    <Text style={styles.clearBtnText}>Clear Storage</Text>
+                    <Text style={styles.clearBtnText}>Clear Async Storage</Text>
                 </TouchableOpacity>
             </View>
 
