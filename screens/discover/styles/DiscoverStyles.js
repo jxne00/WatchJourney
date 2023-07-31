@@ -2,11 +2,40 @@ import { StyleSheet } from 'react-native';
 import Constants from '../../../constants/constants';
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 10,
+        backgroundColor: Constants.SECONDARY_COL,
+        paddingBottom: 50,
+    },
+    chosenBtnCont: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+    },
+    chosenBtn: {
+        backgroundColor: Constants.PRIMARY_COL,
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 5,
+        alignSelf: 'center',
+        width: '40%',
+    },
+    buttonText: {
+        color: Constants.SECONDARY_COL,
+        fontFamily: Constants.POPPINS_REGULAR_FONT,
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    header: {
+        fontSize: 24,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    },
     contentContainer: {
         paddingVertical: 5,
         backgroundColor: Constants.SECONDARY_COL,
     },
-    movieContainer: {
+    showContainer: {
         flexDirection: 'row',
         padding: 6,
         backgroundColor: Constants.SECONDARY_COL,
@@ -27,19 +56,19 @@ const styles = StyleSheet.create({
     posterImage: {
         resizeMode: 'cover',
         width: 70,
-        height: 88,
+        height: 85,
         borderRadius: 6,
         marginRight: 6,
     },
-    movieDetails: {
+    showDetails: {
         flex: 1,
     },
-    movieTitle: {
+    showTitle: {
         fontSize: 16,
         fontWeight: 'bold',
         marginBottom: 2,
     },
-    movieOverview: {
+    showOverview: {
         fontSize: 14,
         lineHeight: 16,
         color: '#727272',
@@ -52,15 +81,17 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     addToListBtn: {
-        backgroundColor: '#d38c74',
-        borderRadius: 40,
+        backgroundColor: Constants.PRIMARY_COL,
+        borderRadius: 10,
         padding: 5,
         alignContent: 'center',
         alignSelf: 'center',
+        position: 'absolute',
+        bottom: -5,
+        left: -5,
     },
     addToListIcon: {
-        color: '#000000',
-        // padding: 5,
+        color: Constants.SECONDARY_COL,
     },
     // --------------- modal styles ---------------
     modalContainer: {

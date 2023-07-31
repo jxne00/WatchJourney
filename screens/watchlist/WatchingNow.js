@@ -58,13 +58,13 @@ const WatchingNow = ({ navigation }) => {
 
                 {/* movie title and tagline */}
                 <Text style={styles.movieTitle}>{item.title}</Text>
-                <Text style={styles.popularity}>
+                <Text style={styles.rating}>
                     <MaterialIcons
                         name="star"
                         size={14}
                         style={styles.starIcon}
                     />
-                    {item.popularity}
+                    {item.vote_average}
                 </Text>
             </TouchableOpacity>
         </View>

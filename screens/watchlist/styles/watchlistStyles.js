@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
     },
-    popularity: {
+    rating: {
         fontSize: 14,
         color: Constants.PRIMARY_COL,
         flexDirection: 'row',

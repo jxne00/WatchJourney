@@ -17,51 +17,62 @@ import Constants from '../../../constants/constants';
 import { printAsyncKeyContent } from '../../../components/AsyncActions';
 
 /**
- * @description A custom flatlist to display movies.
- * Each cell displays the poster image, title, and overview of the movie.
+ * @description A custom flatlist to display TV shows.
+ * Each cell displays the poster image, title, and overview of the TV show.
  * When the "+" button is pressed, a modal is displayed to allow
- * selection of which watchlist to add the movie to.
+ * selection of which watchlist to add the show to.
  */
-const MovieListView = ({ navigation }) => {
+const TvListView = ({ navigation }) => {
     const [data, setData] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
-    const [chosenMovieID, setChosenMovieID] = useState(null);
+    const [chosenTvID, setChosenTvID] = useState(null);
 
-    // fetch popular movies from API
-    useEffect(() => {
-        Fetch_API_Data('/discover/movie')
-            .then((json) => setData(json))
-            .catch((err) => console.alert(err));
-    }, []);
+    // fetch data from API using access token (to filter by English tv shows)
+    const OPTIONS = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization:
+                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTNlMmIyZWY4MWUyYjRjNjkzYWJjZmNmZjY3YTVjMCIsInN1YiI6IjY0YjhkNDEwNmFhOGUwMDEwZWM4MWY4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8o7LHlXJ2Xo6zB04egK1aF1pmNeG-CLI0NXucCBlv9o',
+        },
+    };
 
-    // when the "+" is pressed, set the selected movie and show the modal
-    const setChosenMovie = async (movie_id) => {
-        setChosenMovieID(movie_id);
+    fetch(
+        'https://api.themoviedb.org/3/discover/tv?with_original_language=en',
+        OPTIONS,
+    )
+        .then((response) => response.json())
+        .then((response) => setData(response))
+        .catch((err) => console.error(err));
+
+    // when the "+" is pressed, set the selected show and show the modal
+    const setChosenTvShow = async (tv_id) => {
+        setChosenTvID(tv_id);
         setModalVisible(true);
     };
 
-    // add 'chosenMovieID' into AsyncStorage with the key of '@{watchlist}_movielist'
-    const addToMovieList = async (watchlist) => {
+    // add 'chosenTvID' into AsyncStorage with the key of '@{watchlist}_tvlist'
+    const addToTvList = async (watchlist) => {
         try {
             // key to use for AsyncStorage
-            const storageKey = `@${watchlist}_movielist`;
+            const storageKey = `@${watchlist}_tvlist`;
 
             // get data from AsyncStorage
             let currentList = JSON.parse(
                 (await AsyncStorage.getItem(storageKey)) || '[]',
             );
 
-            // check if movie is already in list
-            if (currentList.includes(chosenMovieID)) {
-                Alert.alert('The movie is already in the list');
+            // check if tv show is already in list
+            if (currentList.includes(chosenTvID)) {
+                Alert.alert('The show is already in the list');
                 setModalVisible(false);
                 return;
             }
-            // add chosenMovieID to list and store back to AsyncStorage
-            currentList.push(chosenMovieID);
+            // add chosenTvID to list and store back to AsyncStorage
+            currentList.push(chosenTvID);
             await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));
 
-            console.log(chosenMovieID, 'added to', storageKey);
+            console.log(chosenTvID, 'added to', storageKey);
             // printAllAsyncContent();
             printAsyncKeyContent(storageKey);
 
@@ -76,7 +87,7 @@ const MovieListView = ({ navigation }) => {
     // renders a cell in the flatlist
     const FlatlistCell = ({ item }) => (
         <View style={styles.showContainer}>
-            {/* poster image of movie */}
+            {/* poster image of tvshow */}
             <View style={styles.posterContainer}>
                 <Image
                     source={{
@@ -88,8 +99,8 @@ const MovieListView = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.addToListBtn}
                     onPress={() => {
-                        // set the chosen movie and show modal
-                        setChosenMovie(item.id);
+                        // set the chosen tv show and display modal
+                        setChosenTvShow(item.id);
                     }}>
                     <MaterialIcons
                         name="playlist-add"
@@ -99,13 +110,13 @@ const MovieListView = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <TouchableOpacity
-                // navigate to "Movie Details" screen on press
+                // navigate to "TV Show Details" screen on press
                 onPress={() =>
-                    navigation.navigate('MovieDetailPage', { item: item })
+                    navigation.navigate('TVshowDetailPage', { item: item })
                 }
                 style={styles.showDetails}>
-                {/* title and overview of movie */}
-                <Text style={styles.showTitle}>{item.title}</Text>
+                {/* title and overview of tv show */}
+                <Text style={styles.showTitle}>{item.name}</Text>
                 <Text style={styles.showOverview}>
                     {/* only show first 100 characters of overview */}
                     {item.overview.length > 100
@@ -139,7 +150,7 @@ const MovieListView = ({ navigation }) => {
                         {Constants.WATCHLISTS.map((watchList, index) => (
                             <TouchableOpacity
                                 key={index}
-                                onPress={() => addToMovieList(watchList)}
+                                onPress={() => addToTvList(watchList)}
                                 style={styles.modalBtnStyle}>
                                 <Text style={styles.modelBtnText}>
                                     {watchList}
@@ -165,4 +176,4 @@ const MovieListView = ({ navigation }) => {
     );
 };
 
-export default MovieListView;
+export default TvListView;

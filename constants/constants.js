@@ -1,9 +1,9 @@
 // contains variables used throughout the app
 const Constants = {
-    PRIMARY_COL: '#59619B',
+    PRIMARY_COL: '#74369D',
     SECONDARY_COL: '#D8DBE9',
-    DARK_PRIMARY_COL: '#075E8D',
-    DARK_SECONDARY_COL: '#21A0A0',
+    DARK_PRIMARY_COL: '#21A0A0',
+    DARK_SECONDARY_COL: '#075E8D',
     BANGER_FONT: 'Bangers-Regular',
     POPPINS_REGULAR_FONT: 'Poppins-Regular',
     POPPINS_SEMIBOLD_FONT: 'Poppins-SemiBold',

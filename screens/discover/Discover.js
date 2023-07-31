@@ -1,48 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 
-import Fetch_API_Data from '../../data/api';
-import Constants from '../../constants/constants';
+import styles from './styles/DiscoverStyles';
 
 import MovieListView from './components/MovieListview';
-import MovieCardView from './components/MovieCardView';
+import TvListView from './components/TvListView';
 
 /**
- * @description The discover page displays a list of movies
+ * @description Discover screen displays a list of movies and tv shows.
  */
 function DiscoverScreen({ navigation }) {
-    const [data, setData] = useState([]);
+    const [selectedButton, setSelectedButton] = useState(null);
 
-    // fetch popular movies from API
-    useEffect(() => {
-        Fetch_API_Data('/discover/movie')
-            .then((json) => setData(json))
-            .catch((err) => console.alert(err));
-    }, []);
+    const setChosenButton = (button) => {
+        setSelectedButton(button);
+    };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Movies</Text>
-            {/* flatlist diplaying a list of movies */}
-            {MovieListView({ data, navigation })}
-            {/* flatlist displaying a list of movies in cards */}
-            {/* {MovieCardView({ data, navigation })} */}
+            <View style={styles.chosenBtnCont}>
+                {/* button to display movie list */}
+                <TouchableOpacity
+                    style={styles.chosenBtn}
+                    onPress={() => setChosenButton('MovieListView')}>
+                    <Text style={styles.buttonText}>Movies</Text>
+                </TouchableOpacity>
+
+                {/* button to display TV show list */}
+                <TouchableOpacity
+                    style={styles.chosenBtn}
+                    onPress={() => setChosenButton('TvListView')}>
+                    <Text style={styles.buttonText}>TV Shows</Text>
+                </TouchableOpacity>
+            </View>
+            {/* display view according to button pressed */}
+            {selectedButton === 'MovieListView' && (
+                <View>
+                    <Text style={styles.header}>Movies</Text>
+                    <MovieListView navigation={navigation} />
+                </View>
+            )}
+            {selectedButton === 'TvListView' && (
+                <View>
+                    <Text style={styles.header}>TV Shows</Text>
+                    <TvListView navigation={navigation} />
+                </View>
+            )}
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        backgroundColor: Constants.SECONDARY_COL,
-        paddingBottom: 50,
-    },
-    header: {
-        fontSize: 24,
-        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-        marginBottom: 10,
-    },
-});
 
 export default DiscoverScreen;
