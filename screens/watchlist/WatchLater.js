@@ -10,6 +10,7 @@ import FetchMovies from './components/FetchWatchlist';
 import removeMovieFromWatchlist from './components/RemoveFromList';
 
 const WatchLater = ({ navigation }) => {
+    // set state to store details of watchlater movies
     const [watchlater, setWatchLater] = useState([]);
 
     // reload the screen whenever it is visited
@@ -22,68 +23,72 @@ const WatchLater = ({ navigation }) => {
         }, []),
     );
 
-    // Function to render each item in the FlatList
-    const renderFlatlistItem = ({ item }) => {
-        // display a message if there are no items in the list
-        if (item === undefined || item === null) {
-            <Text style={styles.emptyListMsg}>
-                Add some items to the list!
-            </Text>;
-        }
-        return (
-            <View style={styles.cardContainer}>
-                {/* Button to remove item from the list */}
-                <TouchableOpacity
-                    style={styles.removeItemContainer}
-                    onPress={() =>
-                        removeMovieFromWatchlist(
-                            'Watch Later',
-                            item.id,
-                            setWatchLater,
-                        )
-                    }>
-                    <MaterialIcons
-                        name="highlight-remove"
-                        size={30}
-                        style={styles.removeItemButton}
-                    />
-                </TouchableOpacity>
-                {/* navigate to movie details page if clicked */}
-                <TouchableOpacity
-                    onPress={() =>
-                        navigation.navigate('MovieDetailPage', { item })
-                    }>
-                    {/* poster image of the movie */}
-                    <Image
-                        style={styles.poster}
-                        source={{
-                            uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
-                        }}
-                    />
+    /**
+     * @description Renders a custom flatlist item
+     */
+    const renderFlatlistItem = ({ item }) => (
+        <View style={styles.cardContainer}>
+            {/* Button to remove item from the list */}
+            <TouchableOpacity
+                style={styles.removeItemContainer}
+                onPress={() =>
+                    removeMovieFromWatchlist(
+                        'Watch Later',
+                        item.id,
+                        setWatchLater,
+                    )
+                }>
+                <MaterialIcons
+                    name="highlight-remove"
+                    size={30}
+                    style={styles.removeItemButton}
+                />
+            </TouchableOpacity>
+            {/* navigate to movie details page if clicked */}
+            <TouchableOpacity
+                onPress={() =>
+                    navigation.navigate('MovieDetailPage', { item })
+                }>
+                {/* poster image of the movie */}
+                <Image
+                    style={styles.poster}
+                    source={{
+                        uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
+                    }}
+                />
 
-                    {/* movie title and tagline */}
-                    <Text style={styles.movieTitle}>{item.title}</Text>
-                    <Text style={styles.popularity}>
-                        <MaterialIcons
-                            name="star"
-                            size={14}
-                            style={styles.starIcon}
-                        />
-                        {item.popularity}
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        );
-    };
+                {/* movie title and tagline */}
+                <Text style={styles.movieTitle}>{item.title}</Text>
+                <Text style={styles.popularity}>
+                    <MaterialIcons
+                        name="star"
+                        size={14}
+                        style={styles.starIcon}
+                    />
+                    {item.popularity}
+                </Text>
+            </TouchableOpacity>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
-            <Text style={styles.mainTitle}>Watch Later</Text>
+            {/* display message if list is empty */}
+            {watchlater.length === 0 && (
+                <Text style={styles.emptyListMsg}>
+                    Add some movies to your list!
+                </Text>
+            )}
             <FlatList
                 data={watchlater}
                 renderItem={renderFlatlistItem}
                 keyExtractor={(item) => item.id.toString()}
                 numColumns={2} // display 2 cards per row
             />
+            {/* display number of records found */}
+            <Text style={styles.numRecords}>
+                {watchlater.length} record(s) found
+            </Text>
         </View>
     );
 };
