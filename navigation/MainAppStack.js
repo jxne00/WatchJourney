@@ -6,6 +6,7 @@ import SCREEN_OPTIONS from './components/StackScreenOptions';
 import MainScreensNav from './AppBottomNav';
 import LoginStack from './stacks/LoginStack';
 import MovieDetails from '../components/MovieDetail';
+import TVshowDetails from '../components/TvShowDetail';
 
 const MainStack = createNativeStackNavigator();
 
@@ -20,6 +21,14 @@ const MainAppStack = () => (
         <MainStack.Screen
             name="MovieDetailPage"
             component={MovieDetails}
+            options={{
+                title: 'Details',
+                ...SCREEN_OPTIONS,
+            }}
+        />
+        <MainStack.Screen
+            name="TVshowDetailPage"
+            component={TVshowDetails}
             options={{
                 title: 'Details',
                 ...SCREEN_OPTIONS,

@@ -9,8 +9,8 @@ const getTabBarVisibility = (route) => {
         : // default
           route.params?.screen || 'LoginScreen';
 
-    // hide tab bar on the MovieDetailPage screen
-    if (routeName === 'MovieDetailPage') {
+    // tab bar hidden on these screens
+    if (routeName === 'MovieDetailPage' || routeName === 'TVshowDetailPage') {
         return false;
     }
 

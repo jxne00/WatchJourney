@@ -44,7 +44,7 @@ const WatchlistTopTab = () => (
             name="WatchlaterTopTab"
             component={WatchLaterStack}
             options={{
-                tabBarLabel: 'Watch Later',
+                tabBarLabel: 'Intend to Watch',
             }}
         />
         {/* "Watched" screen stack */}
