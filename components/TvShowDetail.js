@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 
-import Constants from '../../constants/constants';
+import Constants from '../constants/constants';
 
-const ShowDetails = () => {
+const TVshowDetails = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ShowDetails;
+export default TVshowDetails;

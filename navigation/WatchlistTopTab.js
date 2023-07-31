@@ -36,7 +36,7 @@ const WatchlistTopTab = () => (
             name="WatchingTopTab"
             component={WatchingNowStack}
             options={{
-                tabBarLabel: 'In Progress',
+                tabBarLabel: 'Watching Now',
             }}
         />
         {/* "Intend to watch" screen stack */}
@@ -44,7 +44,7 @@ const WatchlistTopTab = () => (
             name="IntendTopTab"
             component={IntendToWatchStack}
             options={{
-                tabBarLabel: 'Watch Later',
+                tabBarLabel: 'Intend to Watch',
             }}
         />
         {/* "Watched" screen stack */}
