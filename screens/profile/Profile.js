@@ -12,6 +12,8 @@ import {
 import Constants from '../../constants/constants';
 import styles from './styles/ProfileStyle';
 
+import clearAsyncStorage from '../../components/ClearAsync';
+
 const SettingsScreen = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
@@ -25,6 +27,15 @@ const SettingsScreen = ({ navigation }) => {
                     <Text style={styles.profileName}>June</Text>
                     <Text style={styles.profileUsername}>@kayatoast1234</Text>
                 </View>
+            </View>
+
+            {/* clear all contents of async storage */}
+            <View style={styles.clearStorage}>
+                <TouchableOpacity
+                    style={styles.clearBtn}
+                    onPress={clearAsyncStorage}>
+                    <Text style={styles.clearBtnText}>Clear Storage</Text>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.signout}>

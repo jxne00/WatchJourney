@@ -24,6 +24,10 @@ const POSTER_BASE_PATH = 'https://image.tmdb.org/t/p/';
  */
 const Fetch_API_Data = async (url) => {
     try {
+        console.log(
+            `Fetch_API_Data() fetching from: ${BASE_PATH}${url}?api_key=${TMDB_API_KEY}`,
+        );
+
         // fetch data from API
         const response = await fetch(
             `${BASE_PATH}${url}?api_key=${TMDB_API_KEY}`,
@@ -32,7 +36,7 @@ const Fetch_API_Data = async (url) => {
         return await response.json();
     } catch (error) {
         // exception handling
-        console.log(error);
+        console.log('Fetch_API_Data(): ', error);
     }
 };
 

@@ -12,6 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from '../styles/MovieListViewStyles';
 import Constants from '../../../constants/constants';
+import { printAsyncKeyContent } from '../../../components/PrintAsyncContent';
 
 /**
  * @description A custom flatlist to display movies.
@@ -21,30 +22,39 @@ import Constants from '../../../constants/constants';
  */
 const MovieListView = ({ data, navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [chosenMovieID, setChosenMovieID] = useState('');
+    const [chosenMovieID, setChosenMovieID] = useState(null);
 
     // when the "+" is pressed, set the selected movie and show the modal
-    const onPressAdd = async (movie_id) => {
+    const setChosenMovie = async (movie_id) => {
         setChosenMovieID(movie_id);
         setModalVisible(true);
     };
 
     // add 'chosenMovieID' into AsyncStorage with the key of '@{watchlist}_movielist'
     const addToMovieList = async (watchlist) => {
-        // get data from AsyncStorage using key
-        let currentList = JSON.parse(
-            (await AsyncStorage.getItem(`@${watchlist}_movielist`)) || '[]',
-        );
+        try {
+            // key to use for AsyncStorage
+            const storageKey = `@${watchlist}_movielist`;
 
-        // add chosenMovieID to list and store back to AsyncStorage
-        currentList.push(chosenMovieID);
-        await AsyncStorage.setItem(
-            `@${watchlist}_list`,
-            JSON.stringify(currentList),
-        );
-        console.log(chosenMovieID, 'added to', watchlist, 'list');
-        // close modal after adding to list
-        setModalVisible(false);
+            // get data from AsyncStorage
+            let currentList = JSON.parse(
+                (await AsyncStorage.getItem(storageKey)) || '[]',
+            );
+
+            // add chosenMovieID to list and store back to AsyncStorage
+            currentList.push(chosenMovieID);
+            await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));
+
+            console.log(chosenMovieID, 'added to', storageKey);
+            // printAllAsyncContent();
+            printAsyncKeyContent(storageKey);
+
+            // close modal after adding to list
+            setModalVisible(false);
+        } catch (error) {
+            // exception handling
+            console.log(error);
+        }
     };
 
     // renders a cell in the flatlist
@@ -60,13 +70,15 @@ const MovieListView = ({ data, navigation }) => {
                 />
                 {/* show popup when button is pressed */}
                 <TouchableOpacity
+                    style={styles.addToListBtn}
                     onPress={() => {
-                        onPressAdd(item.id);
+                        // set the chosen movie and show modal
+                        setChosenMovie(item.id);
                     }}>
                     <MaterialIcons
                         name="playlist-add"
                         size={24}
-                        style={styles.addToListBtn}
+                        style={styles.addToListIcon}
                     />
                 </TouchableOpacity>
             </View>

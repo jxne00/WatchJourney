@@ -52,10 +52,17 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     addToListBtn: {
-        backgroundColor: Constants.PRIMARY_COL,
-        color: Constants.SECONDARY_COL,
+        backgroundColor: '#d38c74',
+        borderRadius: 40,
+        padding: 5,
+        alignContent: 'center',
+        alignSelf: 'center',
     },
-    // ----------------- Add to list popup -----------------
+    addToListIcon: {
+        color: '#000000',
+        // padding: 5,
+    },
+    // --------------- modal styles ---------------
     modalContainer: {
         flex: 1,
         justifyContent: 'center',

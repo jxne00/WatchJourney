@@ -43,6 +43,28 @@ const styles = StyleSheet.create({
         fontFamily: Constants.POPPINS_REGULAR_FONT,
         color: '#6a6a6a',
     },
+    clearStorage: {
+        marginVertical: 24,
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: '80%',
+        paddingVertical: 12,
+        borderRadius: 23,
+        backgroundColor: Constants.PRIMARY_COL,
+    },
+    clearBtn: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: '80%',
+        paddingVertical: 12,
+        borderRadius: 23,
+        backgroundColor: Constants.PRIMARY_COL,
+    },
+    clearBtnText: {
+        color: Constants.SECONDARY_COL,
+        fontSize: 16,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    },
     signout: {
         marginVertical: 24,
     },
