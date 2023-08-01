@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
-import Fetch_API_Data from '../data/api';
+import { Fetch_API_Data } from '../data/api';
 
 /**
  * @description Print the content of a key in AsyncStorage

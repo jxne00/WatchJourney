@@ -24,16 +24,16 @@ const WatchingNow = ({ navigation }) => {
     // so that newly added items are displayed
     useFocusEffect(
         useCallback(() => {
-            // fetch movie data for 'Watched' list
+            // fetch movie data for 'watching now' list
             FetchMovies('Watching Now', setWatchingNow);
-            // fetch tv show data for 'Watched' list
+            // fetch tv show data for 'watching now' list
             FetchTvShows('Watching Now', setWatchingNowTv);
             return () => {};
         }, []),
     );
 
     /**
-     * @description Renders a custom flatlist item for watched movies.
+     * @description Renders a custom flatlist item for "Watching now" movies.
      */
     const renderFlatlistItem = ({ item }) => (
         <View style={styles.cardContainer}>
@@ -81,7 +81,7 @@ const WatchingNow = ({ navigation }) => {
     );
 
     /**
-     * @description Renders a custom flatlist item for watched tv shows.
+     * @description Renders a custom flatlist item for "watching now" tv shows.
      */
     const renderFlatlistItemTv = ({ item }) => (
         <View style={styles.cardContainer}>
@@ -104,7 +104,7 @@ const WatchingNow = ({ navigation }) => {
             {/* navigate to Tv show detail page if clicked */}
             <TouchableOpacity
                 onPress={() =>
-                    navigation.navigate('TVshowDetailPage', { item })
+                    navigation.navigate('TVshowDetailPage', { item: item })
                 }>
                 {/* poster image of the movie */}
                 <Image
@@ -154,7 +154,7 @@ const WatchingNow = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            {/* display message if "watched movies" list is empty */}
+            {/* display message if "watching now movies" list is empty */}
             {chosenButton === 'MovieView' && watchingNow.length === 0 && (
                 // display message if list is empty
                 <Text style={styles.emptyListMsg}>
@@ -162,7 +162,7 @@ const WatchingNow = ({ navigation }) => {
                 </Text>
             )}
 
-            {/* display message if "watched tv shows" list is empty */}
+            {/* display message if "watching now tv shows" list is empty */}
             {chosenButton === 'TvView' && watchingNowTv.length === 0 && (
                 // display message if list is empty
                 <Text style={styles.emptyListMsg}>
@@ -174,7 +174,9 @@ const WatchingNow = ({ navigation }) => {
             and "movies watching now" contains items */}
             {chosenButton === 'MovieView' && watchingNow.length > 0 && (
                 <View>
-                    <Text style={styles.flatlistTitle}>Watched Movies</Text>
+                    <Text style={styles.flatlistTitle}>
+                        Movies currently watching
+                    </Text>
                     <FlatList
                         data={watchingNow}
                         renderItem={renderFlatlistItem}
@@ -192,7 +194,9 @@ const WatchingNow = ({ navigation }) => {
             and "Tv shows watching now "contains items */}
             {chosenButton === 'TvView' && watchingNowTv.length > 0 && (
                 <View>
-                    <Text style={styles.flatlistTitle}>Watched TV Shows</Text>
+                    <Text style={styles.flatlistTitle}>
+                        TV Shows currently watching
+                    </Text>
                     <FlatList
                         data={watchingNowTv}
                         renderItem={renderFlatlistItemTv}

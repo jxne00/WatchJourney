@@ -23,11 +23,14 @@ import { printAsyncKeyContent } from './AsyncActions';
 const movieGenres = genres.movie;
 
 function MovieDetails({ route }) {
+    // state to determine show/hide modal
     const [modalVisible, setModalVisible] = useState(false);
 
     const { item } = route.params;
 
-    // add movie to selected watchlist
+    /**
+     * @description Add ID of movie to selected watchlist in AsyncStorage
+     */
     const addToMovieList = async (watchlist) => {
         try {
             // key to use for AsyncStorage
@@ -38,9 +41,9 @@ function MovieDetails({ route }) {
                 (await AsyncStorage.getItem(storageKey)) || '[]',
             );
 
-            // check if movie is already in list
+            // check for duplicates
             if (currentList.includes(item.id)) {
-                Alert.alert('The movie is already in the list');
+                Alert.alert('This movie is already in the list');
                 setModalVisible(false);
                 return;
             }
@@ -49,13 +52,12 @@ function MovieDetails({ route }) {
             await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));
 
             console.log(item.id, 'added to', storageKey);
-            // printAllAsyncContent();
+            // print contents of AsyncStorage
             printAsyncKeyContent(storageKey);
 
             // close modal after adding to list
             setModalVisible(false);
         } catch (error) {
-            // exception handling
             console.log(error);
         }
     };
@@ -157,8 +159,8 @@ function MovieDetails({ route }) {
                 <View style={styles.horizontalLine} />
                 <Text style={styles.sectionTitle}>Genres</Text>
 
-                {/* display genres associated with the movie.
-                    the API returns 'item.genre_ids' when fetched from /discover endpoint,
+                {/* Display genres associated with the movie.
+                    The API returns 'item.genre_ids' when fetched from /discover endpoint,
                     and 'item.genres' when fetched through movie_id. 
                     The code below handles both cases.
                 */}

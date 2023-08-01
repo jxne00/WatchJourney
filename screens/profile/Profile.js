@@ -27,7 +27,7 @@ const SettingsScreen = ({ navigation }) => {
                     style={styles.profileAvatar}
                 />
                 <View style={styles.profileTexts}>
-                    <Text style={styles.profileName}>June</Text>
+                    <Text style={styles.profileName}>Potato Doe</Text>
                     <Text style={styles.profileUsername}>@kayatoast1234</Text>
                 </View>
             </View>
