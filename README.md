@@ -10,7 +10,7 @@ A react native mobile application that helps you to keep tabs on your favorite s
 
 3. `npx expo start` to start the simulator.
 
-## Imported
+## Packages installed
 
 npx expo install:
 
@@ -22,3 +22,4 @@ npx expo install:
 - @react-native-masked-view/masked-view
 - @react-native-async-storage/async-storage
 - @reduxjs/toolkit
+- react-native-paper
