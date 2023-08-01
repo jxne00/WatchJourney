@@ -5,15 +5,17 @@ import {
     StyleSheet,
     SafeAreaView,
     Image,
-    Dimensions,
     ImageBackground,
     ScrollView,
 } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import Constants from '../constants/constants';
+import styles from './styles/MovieTvDetailsStyle';
+import genres from '../data/genres';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+// get a list of movie genres
+const movieGenres = genres.movie;
 
 function MovieDetails({ route }) {
     const { item } = route.params;
@@ -21,7 +23,7 @@ function MovieDetails({ route }) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.container}>
-                {/* Set image poster image as background */}
+                {/* Set backdrop image as background */}
                 <ImageBackground
                     source={{
                         uri: `${Constants.POSTER_BASE_PATH}/original/${item.backdrop_path}`,
@@ -29,67 +31,56 @@ function MovieDetails({ route }) {
                     style={styles.ImageBg}>
                     {/* Dark overlay on top of background image */}
                     <View style={styles.darkOverlay} />
-                    {/* Poster image of show */}
+
+                    {/* Poster image of movie */}
                     <Image
                         source={{
                             uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
                         }}
                         style={styles.posterImage}
                     />
+                    <View style={styles.ratingContainer}>
+                        <Text style={styles.rating}>
+                            <MaterialIcons
+                                name="star"
+                                size={16}
+                                color={'#ff9900'}
+                            />{' '}
+                            {item.vote_average}
+                        </Text>
+                    </View>
                 </ImageBackground>
-                {/* details of the show */}
+
                 <View>
+                    {/* details of the movie */}
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.release}>({item.release_date})</Text>
                 </View>
+                <View style={styles.horizontalLine} />
+                <Text style={styles.sectionTitle}>Overview</Text>
                 <Text style={styles.overview}>{item.overview}</Text>
+
+                <View style={styles.horizontalLine} />
+                <Text style={styles.sectionTitle}>Genres</Text>
+
+                {/* map through genre IDs associated to the movie and map it to its name using data stored in data/genres.js */}
+                <View style={styles.genresContainer}>
+                    {item.genre_ids.map((index) => {
+                        const movieGenre = movieGenres.find(
+                            (genre) => genre.id === index,
+                        );
+                        return (
+                            <View style={styles.genre} key={index}>
+                                <Text style={styles.genreText}>
+                                    {movieGenre?.name}
+                                </Text>
+                            </View>
+                        );
+                    })}
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    title: {
-        fontSize: 24,
-        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-        marginLeft: 5,
-    },
-    release: {
-        fontSize: 16,
-        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-        color: '#606060',
-        marginLeft: 5,
-    },
-    overview: {
-        fontSize: 16,
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
-        margin: 5,
-    },
-    ImageBg: {
-        width: windowWidth,
-        height: windowHeight * 0.44,
-        resizeMode: 'cover',
-        justifyContent: 'center',
-        marginBottom: 10,
-    },
-    darkOverlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-    },
-    posterImage: {
-        resizeMode: 'contain',
-        width: windowWidth * 0.95,
-        height: windowHeight * 0.42,
-        borderRadius: windowHeight * 0.04,
-        alignSelf: 'center',
-    },
-});
 
 export default MovieDetails;
