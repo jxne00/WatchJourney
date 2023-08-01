@@ -100,17 +100,18 @@ const styles = StyleSheet.create({
         fontFamily: Constants.POPPINS_REGULAR_FONT,
         color: '#000',
     },
-    castContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginHorizontal: 10,
-        marginVertical: 5,
+    addToListBtn: {
+        backgroundColor: Constants.PRIMARY_COL,
+        borderRadius: 5,
+        padding: 5,
+        alignContent: 'center',
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 5,
+        left: 10,
     },
-    cast: {
-        fontSize: 16,
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
-        color: '#565656',
-        marginRight: 5,
+    addToListIcon: {
+        color: Constants.SECONDARY_COL,
     },
 });
 

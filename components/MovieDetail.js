@@ -1,24 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
-    StyleSheet,
     SafeAreaView,
     Image,
     ImageBackground,
     ScrollView,
+    TouchableOpacity,
+    Modal,
+    Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import Constants from '../constants/constants';
 import styles from './styles/MovieTvDetailsStyle';
+import modalStyles from './styles/ModalStyles';
 import genres from '../data/genres';
+import { printAsyncKeyContent } from './AsyncActions';
 
 // get a list of movie genres
 const movieGenres = genres.movie;
 
 function MovieDetails({ route }) {
+    const [modalVisible, setModalVisible] = useState(false);
+
     const { item } = route.params;
+
+    // add movie to selected watchlist
+    const addToMovieList = async (watchlist) => {
+        try {
+            // key to use for AsyncStorage
+            const storageKey = `@${watchlist}_movielist`;
+
+            // get data from AsyncStorage
+            let currentList = JSON.parse(
+                (await AsyncStorage.getItem(storageKey)) || '[]',
+            );
+
+            // check if movie is already in list
+            if (currentList.includes(item.id)) {
+                Alert.alert('The movie is already in the list');
+                setModalVisible(false);
+                return;
+            }
+            // add id to list and store back to AsyncStorage
+            currentList.push(item.id);
+            await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));
+
+            console.log(item.id, 'added to', storageKey);
+            // printAllAsyncContent();
+            printAsyncKeyContent(storageKey);
+
+            // close modal after adding to list
+            setModalVisible(false);
+        } catch (error) {
+            // exception handling
+            console.log(error);
+        }
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -31,7 +71,6 @@ function MovieDetails({ route }) {
                     style={styles.ImageBg}>
                     {/* Dark overlay on top of background image */}
                     <View style={styles.darkOverlay} />
-
                     {/* Poster image of movie */}
                     <Image
                         source={{
@@ -39,6 +78,7 @@ function MovieDetails({ route }) {
                         }}
                         style={styles.posterImage}
                     />
+                    {/* Movie Rating */}
                     <View style={styles.ratingContainer}>
                         <Text style={styles.rating}>
                             <MaterialIcons
@@ -49,6 +89,60 @@ function MovieDetails({ route }) {
                             {item.vote_average}
                         </Text>
                     </View>
+                    {/* show modal when "+" button is pressed */}
+                    <TouchableOpacity
+                        style={styles.addToListBtn}
+                        onPress={() => setModalVisible(true)}>
+                        <MaterialIcons
+                            name="playlist-add"
+                            size={34}
+                            style={styles.addToListIcon}
+                        />
+                    </TouchableOpacity>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => setModalVisible(false)}>
+                        <View style={modalStyles.modalContainer}>
+                            <View style={modalStyles.modalView}>
+                                <Text style={modalStyles.modalText}>
+                                    Add to watchlist:
+                                </Text>
+
+                                {/* render a button for each watchlist */}
+                                {Constants.WATCHLISTS.map(
+                                    (watchList, index) => (
+                                        <TouchableOpacity
+                                            key={index}
+                                            onPress={() =>
+                                                addToMovieList(watchList)
+                                            }
+                                            style={modalStyles.modalBtnStyle}>
+                                            <Text
+                                                style={
+                                                    modalStyles.modelBtnText
+                                                }>
+                                                {watchList}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    ),
+                                )}
+
+                                {/* close modal when cancel pressed */}
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setModalVisible(false);
+                                    }}>
+                                    <MaterialIcons
+                                        name="cancel"
+                                        size={30}
+                                        style={modalStyles.modalCancelIcon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </Modal>
                 </ImageBackground>
 
                 <View>
@@ -63,20 +157,32 @@ function MovieDetails({ route }) {
                 <View style={styles.horizontalLine} />
                 <Text style={styles.sectionTitle}>Genres</Text>
 
-                {/* map through genre IDs associated to the movie and map it to its name using data stored in data/genres.js */}
+                {/* display genres associated with the movie.
+                    the API returns 'item.genre_ids' when fetched from /discover endpoint,
+                    and 'item.genres' when fetched through movie_id. 
+                    The code below handles both cases.
+                */}
                 <View style={styles.genresContainer}>
-                    {item.genre_ids.map((index) => {
-                        const movieGenre = movieGenres.find(
-                            (genre) => genre.id === index,
-                        );
-                        return (
-                            <View style={styles.genre} key={index}>
-                                <Text style={styles.genreText}>
-                                    {movieGenre?.name}
-                                </Text>
-                            </View>
-                        );
-                    })}
+                    {item.genre_ids
+                        ? item.genre_ids.map((index) => {
+                              const movieGenre = movieGenres.find(
+                                  (genre) => genre.id === index,
+                              );
+                              return (
+                                  <View style={styles.genre} key={index}>
+                                      <Text style={styles.genreText}>
+                                          {movieGenre?.name}
+                                      </Text>
+                                  </View>
+                              );
+                          })
+                        : item.genres.map((genre, index) => (
+                              <View style={styles.genre} key={index}>
+                                  <Text style={styles.genreText}>
+                                      {genre.name}
+                                  </Text>
+                              </View>
+                          ))}
                 </View>
             </ScrollView>
         </SafeAreaView>

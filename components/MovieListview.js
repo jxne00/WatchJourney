@@ -15,7 +15,6 @@ import { Fetch_API_Data } from '../data/api';
 import styles from './styles/MovieTvListStyle';
 import Constants from '../constants/constants';
 import { printAsyncKeyContent } from './AsyncActions';
-import { fetch_createAsyncThunk } from '../data/api';
 
 /**
  * @description A custom flatlist to display movies.
