@@ -11,10 +11,11 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import Fetch_API_Data from '../../../data/api';
-import styles from '../styles/DiscoverStyles';
-import Constants from '../../../constants/constants';
-import { printAsyncKeyContent } from '../../../components/AsyncActions';
+import { Fetch_API_Data } from '../data/api';
+import styles from './styles/MovieTvListStyle';
+import Constants from '../constants/constants';
+import { printAsyncKeyContent } from './AsyncActions';
+import { fetch_createAsyncThunk } from '../data/api';
 
 /**
  * @description A custom flatlist to display movies.
@@ -29,9 +30,7 @@ const MovieListView = ({ navigation }) => {
 
     // fetch popular movies from API
     useEffect(() => {
-        Fetch_API_Data('/discover/movie')
-            .then((json) => setData(json))
-            .catch((err) => console.alert(err));
+        Fetch_API_Data('/discover/movie').then((json) => setData(json));
     }, []);
 
     // when the "+" is pressed, set the selected movie and show the modal

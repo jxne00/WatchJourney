@@ -11,10 +11,10 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import Fetch_API_Data from '../../../data/api';
-import styles from '../styles/DiscoverStyles';
-import Constants from '../../../constants/constants';
-import { printAsyncKeyContent } from '../../../components/AsyncActions';
+import { fetch_API_with_param } from '../data/api';
+import styles from './styles/MovieTvListStyle';
+import Constants from '../constants/constants';
+import { printAsyncKeyContent } from './AsyncActions';
 
 /**
  * @description A custom flatlist to display TV shows.
@@ -27,23 +27,12 @@ const TvListView = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [chosenTvID, setChosenTvID] = useState(null);
 
-    // fetch data from API using access token (to filter by English tv shows)
-    const OPTIONS = {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-            Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMTNlMmIyZWY4MWUyYjRjNjkzYWJjZmNmZjY3YTVjMCIsInN1YiI6IjY0YjhkNDEwNmFhOGUwMDEwZWM4MWY4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8o7LHlXJ2Xo6zB04egK1aF1pmNeG-CLI0NXucCBlv9o',
-        },
-    };
-
-    fetch(
-        'https://api.themoviedb.org/3/discover/tv?with_original_language=en',
-        OPTIONS,
-    )
-        .then((response) => response.json())
-        .then((response) => setData(response))
-        .catch((err) => console.error(err));
+    // fetch tvshows (filtered by english language) from API using access token
+    useEffect(() => {
+        fetch_API_with_param('/discover/tv?with_original_language=en').then(
+            (response) => setData(response),
+        );
+    }, []);
 
     // when the "+" is pressed, set the selected show and show the modal
     const setChosenTvShow = async (tv_id) => {

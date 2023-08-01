@@ -21,3 +21,4 @@ npx expo install:
 - expo-linear-gradient
 - @react-native-masked-view/masked-view
 - @react-native-async-storage/async-storage
+- @reduxjs/toolkit

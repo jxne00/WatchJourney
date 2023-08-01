@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-import styles from './styles/DiscoverStyles';
+import styles from './DiscoverStyles';
 
-import MovieListView from './components/MovieListview';
-import TvListView from './components/TvListView';
+// import flatlist components
+import MovieListView from '../../components/MovieListview';
+import TvListView from '../../components/TvListView';
 
 /**
- * @description Discover screen displays a list of movies and tv shows.
+ * @description The discover screen displays a list of movies and tv shows.
  */
 function DiscoverScreen({ navigation }) {
     const [selectedButton, setSelectedButton] = useState(null);

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import GradientText from '../../components/GradientText';
-import styles from './styles/LoginStyles';
+import styles from './LoginStyles';
 
 const LoginScreen = ({ navigation }) => {
     return (
