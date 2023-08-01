@@ -19,4 +19,22 @@ const FetchMovies = async (key, setListState) => {
     }
 };
 
-export default FetchMovies;
+/**
+ * @description The function first fetches tvshow IDs stored in AsyncStorage using key,
+ * then returns the show details from API using those tv IDs.
+ */
+const FetchTvShows = async (key, setListState) => {
+    try {
+        const storedTvShows =
+            JSON.parse(await AsyncStorage.getItem(`@${key}_tvlist`)) || [];
+        const promises = storedTvShows.map((tv_id) =>
+            Fetch_API_Data(`/tv/${tv_id}`),
+        );
+        const data = await Promise.all(promises);
+        setListState(data);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export { FetchMovies, FetchTvShows };

@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         marginVertical: '30%',
         fontFamily: Constants.POPPINS_REGULAR_FONT,
     },
+    // ------- styles for flatlist items ------- //
     cardContainer: {
         flex: 1,
         margin: 8,
@@ -59,6 +60,41 @@ const styles = StyleSheet.create({
     starIcon: {
         color: '#ff9900',
         marginRight: 5,
+    },
+    // ------- styles for view choosing button ------- //
+    flatlistTitle: {
+        fontSize: 20,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+        alignSelf: 'center',
+        marginVertical: 5,
+    },
+    chosenBtnCont: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginVertical: 10,
+    },
+    chosenBtn: {
+        backgroundColor: Constants.PRIMARY_COL,
+        opacity: 0.6,
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 3,
+        alignSelf: 'center',
+        width: '40%',
+    },
+    notChosenBtn: {
+        backgroundColor: Constants.PRIMARY_COL,
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 3,
+        alignSelf: 'center',
+        width: '40%',
+    },
+    buttonText: {
+        color: Constants.SECONDARY_COL,
+        fontFamily: Constants.POPPINS_REGULAR_FONT,
+        fontSize: 16,
+        textAlign: 'center',
     },
 });
 

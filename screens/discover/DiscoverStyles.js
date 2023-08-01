@@ -15,6 +15,15 @@ const styles = StyleSheet.create({
     },
     chosenBtn: {
         backgroundColor: Constants.PRIMARY_COL,
+        opacity: 0.6,
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 5,
+        alignSelf: 'center',
+        width: '40%',
+    },
+    notChosenBtn: {
+        backgroundColor: Constants.PRIMARY_COL,
         borderRadius: 10,
         padding: 10,
         marginVertical: 5,

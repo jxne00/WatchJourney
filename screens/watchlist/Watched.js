@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles/watchlistStyles';
 import Constants from '../../constants/constants';
-import FetchMovies from './components/FetchWatchlist';
+import { FetchMovies } from './components/FetchWatchlist';
 import removeMovieFromWatchlist from './components/RemoveFromList';
 
 const WatchedMoviesScreen = ({ navigation }) => {
