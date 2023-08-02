@@ -1,6 +1,7 @@
 /**
  * @description A list of genres for movies and tv shows
- * taken from TMDB to be used instead of repeatedly fetching from API
+ * taken from TMDB to be used instead of repeatedly fetching from API.
+ * (used in components "MovieDetail.js" and "TvShowDetail.js"")
  *
  * @see https://developers.themoviedb.org/3/genres/get-movie-list
  * @see https://developers.themoviedb.org/3/genres/get-tv-list
