@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
     View,
@@ -9,27 +9,34 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import Constants from '../../constants/constants';
-import styles from './styles/ProfileStyle';
-
 import {
     clearAsyncStorage,
     printAllAsyncContent,
 } from '../../components/AsyncActions';
+import Constants from '../../constants/constants';
+import styles from './styles/ProfileStyle';
 
 const SettingsScreen = ({ navigation }) => {
     return (
         <ScrollView style={styles.container}>
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
             <View style={styles.profile}>
                 <Image
                     source={require('../../assets/images/profile-avatar.jpeg')}
                     style={styles.profileAvatar}
                 />
                 <View style={styles.profileTexts}>
-                    <Text style={styles.profileName}>Potato Doe</Text>
+                    <Text style={styles.profileName}>June</Text>
                     <Text style={styles.profileUsername}>@kayatoast1234</Text>
                 </View>
+            </View>
+
+            <View style={styles.faq}>
+                <TouchableOpacity
+                    style={styles.faqBtn}
+                    onPress={() => navigation.navigate('FaqPage')}>
+                    <Text style={styles.faqBtnText}>FAQ</Text>
+                </TouchableOpacity>
             </View>
 
             {/* clear all contents of async storage */}

@@ -17,7 +17,11 @@ const MainStack = createNativeStackNavigator();
 const MainAppStack = () => (
     <MainStack.Navigator screenOptions={{ headerShown: false }}>
         <MainStack.Screen name="Login" component={LoginStack} />
-        <MainStack.Screen name="AppScreens" component={MainScreensNav} />
+        <MainStack.Screen
+            name="AppScreens"
+            component={MainScreensNav}
+            options={{ gestureEnabled: false }}
+        />
         <MainStack.Screen
             name="MovieDetailPage"
             component={MovieDetails}

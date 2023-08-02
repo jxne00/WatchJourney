@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './DiscoverStyles';
 
@@ -19,6 +20,7 @@ function DiscoverScreen({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <StatusBar style="light" />
             <View style={styles.chosenBtnCont}>
                 {/* button to display movie list */}
                 <TouchableOpacity

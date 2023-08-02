@@ -2,9 +2,13 @@ import { StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
+        backgroundColor: 'transparent',
     },
     imgbg: {
         resizeMode: 'cover',
@@ -19,33 +23,38 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         position: 'absolute',
         top: '20%',
+        alignSelf: 'center',
+        alignItems: 'center',
     },
     title: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-        fontSize: 26,
+        fontSize: 28,
         color: Constants.SECONDARY_COL,
     },
     appname: {
         fontFamily: Constants.BANGER_FONT,
-        fontSize: 36,
+        fontSize: 38,
         letterSpacing: 2,
-        color: '#5cb8ed',
     },
     contentContainer: {
         marginHorizontal: 10,
         padding: 20,
         borderRadius: 13,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        // shadowColor: '#000000',
-        // shadowOffset: { width: -4, height: 4 },
-        // shadowRadius: 4,
-        // shadowOpacity: 0.4,
+        backgroundColor: '#282828',
+        shadowColor: '#000000',
+        shadowOffset: { width: -4, height: 4 },
+        shadowRadius: 4,
+        shadowOpacity: 0.4,
+    },
+    loginTextCont: {
+        flexDirection: 'row',
+        marginBottom: 20,
     },
     login: {
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
         color: Constants.SECONDARY_COL,
+        marginLeft: 5,
         fontSize: 18,
-        marginBottom: 20,
         color: '#ffffff',
     },
     loginBtn: {
@@ -67,7 +76,7 @@ const styles = StyleSheet.create({
         height: 40,
         marginBottom: 20,
         borderRadius: 20,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: Constants.SECONDARY_COL,
         fontFamily: Constants.POPPINS_REGULAR_FONT,
         fontSize: 16,
         textAlign: 'center',
@@ -86,7 +95,7 @@ const styles = StyleSheet.create({
     signupBtn: {
         fontFamily: Constants.POPPINS_REGULAR_FONT,
         fontSize: 14,
-        color: '#6cadee',
+        color: '#70b2f4',
     },
 });
 

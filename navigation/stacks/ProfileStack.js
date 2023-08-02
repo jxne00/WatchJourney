@@ -3,7 +3,7 @@ import SCREEN_OPTIONS from '../components/StackScreenOptions';
 
 // import screens
 import ProfileScreen from '../../screens/profile/Profile';
-// import FaqScreen from '../../screens/profile/CategoryOptions/Faq';
+import FaqScreen from '../../screens/profile/Faq';
 
 /**
  * @description stack navigator for the "Settings" screen
@@ -19,13 +19,13 @@ const ProfileScreenStack = () => {
                     title: 'Profile',
                 }}
             />
-            {/* <ProfileStack.Screen
+            <ProfileStack.Screen
                 name="FaqPage"
                 component={FaqScreen}
                 options={{
                     title: 'FAQ',
                 }}
-            /> */}
+            />
         </ProfileStack.Navigator>
     );
 };

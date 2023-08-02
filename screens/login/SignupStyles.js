@@ -8,11 +8,13 @@ const styles = StyleSheet.create({
     },
     scrollview: {
         paddingBottom: 140,
+        backgroundColor: Constants.SECONDARY_COL,
     },
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: Constants.SECONDARY_COL,
     },
     headerText: {
         fontSize: 36,

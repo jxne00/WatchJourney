@@ -11,19 +11,14 @@ import {
     FlatList,
     TouchableOpacity,
 } from 'react-native';
-import { SegmentedButtons } from 'react-native-paper';
+import { SegmentedButtons, Divider } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
-
-// import stylesheets
-import styles from './HomeStyles';
-
-import GradientText from '../../components/GradientText';
+// import API fetch functions
 import { Fetch_API_Data, fetch_API_with_param } from '../../data/API/api';
+// import stylesheet and custom components
+import styles from './HomeStyles';
+import GradientText from '../../components/GradientText';
 import CarouselCard from './components/CarouselCard';
-
-const OFFSET = 40;
-const windowWidth = Dimensions.get('window').width;
-const ITEM_WIDTH = windowWidth - OFFSET * 2;
 
 const HomeScreen = ({ navigation }) => {
     // state for movies showing in theaters now
@@ -33,6 +28,10 @@ const HomeScreen = ({ navigation }) => {
     const [searchResults, setSearchResults] = React.useState([]);
     // state to filter between movie and tv show search
     const [searchType, setSearchType] = React.useState('movie');
+
+    const OFFSET = 40;
+    const windowWidth = Dimensions.get('window').width;
+    const ITEM_WIDTH = windowWidth - OFFSET * 2;
 
     // value to track scroll position of carousel cards
     const scrollX = React.useRef(new Animated.Value(0)).current;
@@ -46,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
     }, []);
 
     /**
-     * @description function to fetch either movie or tv show search results
+     * @description fetch either movie or tv show search results
      * @see https://developer.themoviedb.org/reference/search-movie (movie)
      * @see https://developer.themoviedb.org/reference/search-tv (tv)
      */
@@ -56,10 +55,7 @@ const HomeScreen = ({ navigation }) => {
         );
     };
 
-    /**
-     * @description function to navigate to either movie or tv show details page
-     * based on item type
-     */
+    // navigate to either movie or tv show details page
     const handleNavigation = (item) => {
         if (item.title) {
             // navigate to movie details page
@@ -93,6 +89,7 @@ const HomeScreen = ({ navigation }) => {
                     ({item.release_date || item.first_air_date}) &#x2022;
                 </Text>
 
+                {/* display rating */}
                 <View style={styles.ratingContainer}>
                     <MaterialIcons name="star" style={styles.ratingIcon} />
                     <Text style={styles.ratingNumber}>{item.vote_average}</Text>
@@ -112,19 +109,23 @@ const HomeScreen = ({ navigation }) => {
                     colors={['#688CB6', '#42648A', '#283C53']}>
                     WatchJourney{' '}
                 </GradientText>
-                <View style={styles.horizontalLine}></View>
+                <Divider />
 
                 {/* ========= carousel cards ========= */}
                 <View>
-                    <Text style={styles.sectionTitle}>In Theaters Now!</Text>
-
+                    <View style={styles.sectionContainer}>
+                        <MaterialIcons name="movie" size={24} />
+                        <Text style={styles.sectionTitle}>
+                            {' '}
+                            In Theatres Now
+                        </Text>
+                    </View>
                     <ScrollView
                         horizontal={true}
                         decelerationRate={'normal'}
                         snapToInterval={ITEM_WIDTH}
                         style={styles.scrollviewStyle}
                         showsHorizontalScrollIndicator={false}
-                        bounces={false}
                         disableIntervalMomentum
                         onScroll={Animated.event(
                             [
@@ -179,6 +180,9 @@ const HomeScreen = ({ navigation }) => {
                         }
                         onChangeText={(text) => setSearchQuery(text)}
                         value={searchQuery}
+                        // no auto complete
+                        autoCompleteType={'off'}
+                        textContentType={'none'}
                     />
                     <TouchableOpacity onPress={getSearchResults}>
                         <MaterialIcons

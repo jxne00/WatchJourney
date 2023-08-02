@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import {
     View,
     Text,
-    StyleSheet,
     SafeAreaView,
     Image,
-    Dimensions,
     ImageBackground,
     ScrollView,
     TouchableOpacity,
@@ -66,6 +65,7 @@ function TVshowDetails({ route }) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar style="light" />
             <ScrollView style={styles.container}>
                 {/* Set image backdrop image as background */}
                 <ImageBackground

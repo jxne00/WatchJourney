@@ -6,55 +6,82 @@ import {
     ImageBackground,
     KeyboardAvoidingView,
     TouchableOpacity,
+    TouchableWithoutFeedback,
+    Keyboard,
 } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import GradientText from '../../components/GradientText';
 import styles from './LoginStyles';
 
 const LoginScreen = ({ navigation }) => {
     return (
-        <View style={styles.container}>
-            {/* image src: https://unsplash.com/photos/A_7s4tbP6lI */}
-            <ImageBackground
-                source={require('../../assets/images/login-bg.jpg')}
-                style={styles.imgbg}
-            />
-            <StatusBar style="light" />
-            <View style={styles.welcomeContainer}>
-                <Text style={styles.title}>Welcome to</Text>
-                <GradientText
-                    style={styles.appname}
-                    colors={['#b092ec', '#81e4b7', '#e4c282']}>
-                    WatchJourney!
-                </GradientText>
-            </View>
-            <View style={styles.contentContainer}>
-                <Text style={styles.login}>Login to continue</Text>
+        // hide keyboard when user clicks the screen
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={styles.container}>
+                <ImageBackground
+                    source={require('../../assets/images/login-bg.jpg')}
+                    style={styles.imgbg}
+                />
+                <StatusBar style="light" />
+
+                <View style={styles.welcomeContainer}>
+                    <Text style={styles.title}>Welcome to</Text>
+
+                    <GradientText
+                        style={styles.appname}
+                        colors={['#5ab9f1', '#849bef', '#d39ffd']}>
+                        WatchJourney!
+                    </GradientText>
+                </View>
+
+                {/* sign in area */}
                 <KeyboardAvoidingView behavior="padding">
-                    <TextInput
-                        placeholder="&#128100; Username"
-                        style={styles.input}
-                    />
-                    <TextInput
-                        placeholder="&#128274; Password"
-                        secureTextEntry
-                        style={styles.input}
-                    />
+                    <View style={styles.contentContainer}>
+                        <View style={styles.loginTextCont}>
+                            <MaterialIcons
+                                name="login"
+                                size={24}
+                                color="white"
+                            />
+                            <Text style={styles.login}> Login to continue</Text>
+                        </View>
+                        {/* username and password input */}
+                        <TextInput
+                            placeholder="Username"
+                            placeholderTextColor={'#8d8d8d'}
+                            style={styles.input}
+                        />
+
+                        <TextInput
+                            placeholder="Password"
+                            placeholderTextColor={'#8d8d8d'}
+                            secureTextEntry
+                            style={styles.input}
+                        />
+
+                        {/* login button */}
+                        <TouchableOpacity
+                            style={styles.loginBtn}
+                            onPress={() => navigation.navigate('AppScreens')}>
+                            <Text style={styles.loginBtnText}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    {/* sign up link */}
+                    <View style={styles.signUpContainer}>
+                        <Text style={styles.signup}>
+                            Don't have an account?
+                        </Text>
+
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('SignUpScreen')}>
+                            <Text style={styles.signupBtn}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
                 </KeyboardAvoidingView>
-                <TouchableOpacity
-                    style={styles.loginBtn}
-                    onPress={() => navigation.navigate('AppScreens')}>
-                    <Text style={styles.loginBtnText}>Login</Text>
-                </TouchableOpacity>
             </View>
-            <View style={styles.signUpContainer}>
-                <Text style={styles.signup}>Don't have an account?</Text>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('SignUpScreen')}>
-                    <Text style={styles.signupBtn}>Sign Up</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 };
 

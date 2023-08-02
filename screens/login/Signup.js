@@ -25,11 +25,7 @@ const SignupScreen = ({ navigation }) => {
      * @description handles what happens when "Sign up" button is pressed
      */
     const handleSignup = () => {
-        const alertmsg =
-            username === ''
-                ? 'Successfully signed up!'
-                : `Successfully signed up with @${username}`;
-        Alert.alert('Success', alertmsg, [
+        Alert.alert('Notice', 'This function has not been implemented yet.', [
             {
                 text: 'Cancel',
                 style: 'cancel',
@@ -54,6 +50,8 @@ const SignupScreen = ({ navigation }) => {
                             value={name}
                             onChangeText={(text) => setName(text)}
                             autoFocus={true}
+                            autoCompleteType={'off'}
+                            textContentType={'none'}
                         />
 
                         {/* "Username" input box */}
@@ -63,7 +61,9 @@ const SignupScreen = ({ navigation }) => {
                             placeholderTextColor="gray"
                             value={username}
                             onChangeText={(text) => setUsername(text)}
-                            autoFocus={true}
+                            // no auto complete
+                            autoCompleteType={'off'}
+                            textContentType={'none'}
                         />
 
                         {/* "Password" input box */}
@@ -75,6 +75,7 @@ const SignupScreen = ({ navigation }) => {
                             onChangeText={(text) => setPassword(text)}
                             secureTextEntry={true}
                             textContentType="password"
+                            autoCompleteType={'off'}
                         />
 
                         {/* "Sign up" button */}

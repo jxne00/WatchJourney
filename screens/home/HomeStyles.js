@@ -7,12 +7,17 @@ const styles = StyleSheet.create({
         backgroundColor: Constants.SECONDARY_COL,
         paddingBottom: 10,
     },
+    sectionContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 5,
+        marginLeft: 20,
+    },
     sectionTitle: {
         fontSize: 20,
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
         color: '#000',
-        marginVertical: 5,
-        marginLeft: 20,
     },
     appname: {
         fontSize: 30,
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 10,
         marginHorizontal: 15,
-        marginVertical: 15,
+        marginTop: 15,
         paddingHorizontal: 10,
         paddingVertical: 10,
         flexDirection: 'row',
@@ -65,15 +70,19 @@ const styles = StyleSheet.create({
         color: '#000',
     },
     searchResultsContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 10,
+        backgroundColor: Constants.SECONDARY_COL,
+        borderRightWidth: 1,
+        borderLeftWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: '#000',
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
         marginHorizontal: 20,
-        marginVertical: 10,
         paddingHorizontal: 10,
         paddingVertical: 5,
     },
     searchScrollStyle: {
-        maxHeight: 200,
+        maxHeight: 290,
     },
 
     // ------ search results ------

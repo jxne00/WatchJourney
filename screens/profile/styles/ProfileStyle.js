@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     profileUsername: {
         fontSize: 16,
         fontFamily: Constants.POPPINS_REGULAR_FONT,
+        letterSpacing: 1,
         color: '#6a6a6a',
     },
     // "clear async storage" button styles
@@ -77,6 +78,26 @@ const styles = StyleSheet.create({
     },
     SignoutBtnText: {
         color: Constants.SECONDARY_COL,
+        fontSize: 16,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    },
+    // "FAQ" button styles
+    faq: {
+        marginVertical: 20,
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: '90%',
+    },
+    faqBtn: {
+        alignSelf: 'center',
+        alignItems: 'center',
+        width: '90%',
+        paddingVertical: 12,
+        borderRadius: 15,
+        backgroundColor: '#7b859c',
+    },
+    faqBtnText: {
+        color: '#ffffff',
         fontSize: 16,
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
     },

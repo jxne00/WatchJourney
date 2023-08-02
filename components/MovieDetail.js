@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import {
     View,
     Text,
@@ -64,6 +65,7 @@ function MovieDetails({ route }) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar style="light" />
             <ScrollView style={styles.container}>
                 {/* Set backdrop image as background */}
                 <ImageBackground
