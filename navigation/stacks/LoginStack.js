@@ -3,6 +3,7 @@ import SCREEN_OPTIONS from '../components/StackScreenOptions';
 
 import LoginScreen from '../../screens/login/Login';
 import SignupScreen from '../../screens/login/Signup';
+import Constants from '../../constants/constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,12 @@ const LoginStack = () => {
             <Stack.Screen
                 name="SignUpScreen"
                 component={SignupScreen}
-                options={{ ...SCREEN_OPTIONS, title: 'Sign Up' }}
+                options={{
+                    headerBackButtonMenuEnabled: true,
+                    headerTransparent: true,
+                    headerTitle: '',
+                    headerTintColor: Constants.PRIMARY_COL,
+                }}
             />
         </Stack.Navigator>
     );
