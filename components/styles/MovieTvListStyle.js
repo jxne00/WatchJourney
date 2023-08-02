@@ -4,7 +4,8 @@ import Constants from '../../constants/constants';
 const styles = StyleSheet.create({
     // --------------- scrollview styles ---------------
     contentContainer: {
-        paddingVertical: 5,
+        paddingTop: 5,
+        marginBottom: '20%',
         backgroundColor: Constants.SECONDARY_COL,
     },
     showContainer: {
@@ -51,6 +52,19 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         alignSelf: 'flex-end',
         fontSize: 12,
+    },
+
+    // --------------- footer styles ---------------
+    footer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    pageNum: {
+        color: '#000',
+        fontFamily: Constants.POPPINS_REGULAR_FONT,
+        fontSize: 15,
     },
     addToListBtn: {
         backgroundColor: Constants.PRIMARY_COL,

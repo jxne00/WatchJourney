@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import React, { useRef, useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -8,11 +7,13 @@ import {
     TouchableOpacity,
     Modal,
     Alert,
+    ActivityIndicator,
+    Button,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { Fetch_API_Data } from '../data/API/api';
+import { fetch_API_with_param } from '../data/API/api';
 import styles from './styles/MovieTvListStyle';
 import Constants from '../constants/constants';
 import { printAsyncKeyContent } from './AsyncActions';
@@ -25,13 +26,21 @@ import { printAsyncKeyContent } from './AsyncActions';
  */
 const MovieListView = ({ navigation }) => {
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const [chosenMovieID, setChosenMovieID] = useState(null);
+    const flatListRef = useRef();
 
     // fetch popular movies from API
+    // docs: https://developer.themoviedb.org/reference/movie-popular-list
     useEffect(() => {
-        Fetch_API_Data('/discover/movie').then((json) => setData(json));
-    }, []);
+        setIsLoading(true);
+        fetch_API_with_param(`/movie/popular?language=en-US&page=${page}`).then(
+            (json) => setData(json),
+        );
+        setIsLoading(false);
+    }, [page]);
 
     // when the "+" is pressed, set the selected movie and show the modal
     const setChosenMovie = async (movie_id) => {
@@ -117,13 +126,40 @@ const MovieListView = ({ navigation }) => {
         </View>
     );
     return (
-        <View>
+        <View style={styles.contentContainer}>
             {/* render flatlist containing "FlatlistCell"s */}
             <FlatList
+                ref={flatListRef}
                 data={data.results}
                 renderItem={FlatlistCell}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={styles.contentContainer}
+                ListFooterComponent={
+                    isLoading ? (
+                        <ActivityIndicator />
+                    ) : (
+                        <View style={styles.footer}>
+                            <Button
+                                title="< Back"
+                                onPress={() => {
+                                    setPage(Math.max(1, page - 1));
+                                }}
+                                disabled={page === 1}
+                            />
+                            <Text style={styles.pageNum}>page {page}</Text>
+                            <Button
+                                title="Next >"
+                                onPress={() => {
+                                    setPage(page + 1);
+                                    // scroll to top of flatlist when 'next' is pressed
+                                    flatListRef.current.scrollToOffset({
+                                        animated: true,
+                                        offset: 0,
+                                    });
+                                }}
+                            />
+                        </View>
+                    )
+                }
             />
             {/* modal (popup to allow user to choose which list to add to) */}
             <Modal
@@ -133,7 +169,9 @@ const MovieListView = ({ navigation }) => {
                 onRequestClose={() => setModalVisible(false)}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Add to watchlist:</Text>
+                        <Text style={styles.modalText}>
+                            Add to movie watchlist:
+                        </Text>
                         {/* render a button for each watchlist */}
                         {Constants.WATCHLISTS.map((watchList, index) => (
                             <TouchableOpacity

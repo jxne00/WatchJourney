@@ -114,7 +114,7 @@ function TVshowDetails({ route }) {
                         <View style={modalStyles.modalContainer}>
                             <View style={modalStyles.modalView}>
                                 <Text style={modalStyles.modalText}>
-                                    Add to watchlist:
+                                    Add to TV watchlist:
                                 </Text>
 
                                 {/* render a button for each watchlist */}

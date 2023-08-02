@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         padding: 10,
@@ -11,7 +14,7 @@ const styles = StyleSheet.create({
     chosenBtnCont: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginVertical: 10,
+        marginVertical: 5,
     },
     chosenBtn: {
         backgroundColor: Constants.PRIMARY_COL,

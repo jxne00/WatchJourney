@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     Modal,
     Alert,
+    ActivityIndicator,
+    Button,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -24,15 +26,22 @@ import { printAsyncKeyContent } from './AsyncActions';
  */
 const TvListView = ({ navigation }) => {
     const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState(false);
     const [chosenTvID, setChosenTvID] = useState(null);
 
-    // fetch tvshows (filtered by english language) from API using access token
+    const flatListRef = useRef();
+
+    // fetch popular tv shows
+    // docs: https://developer.themoviedb.org/reference/discover-tv
     useEffect(() => {
-        fetch_API_with_param('/discover/tv?with_original_language=en').then(
+        setIsLoading(true);
+        fetch_API_with_param(`/tv/top_rated?language=en-US&page=${page}`).then(
             (response) => setData(response),
         );
-    }, []);
+        setIsLoading(false);
+    }, [page]);
 
     // when the "+" is pressed, set the selected show and show the modal
     const setChosenTvShow = async (tv_id) => {
@@ -118,13 +127,41 @@ const TvListView = ({ navigation }) => {
         </View>
     );
     return (
-        <View>
+        <View style={styles.contentContainer}>
             {/* render flatlist containing "FlatlistCell"s */}
             <FlatList
+                ref={flatListRef}
                 data={data.results}
                 renderItem={FlatlistCell}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={styles.contentContainer}
+                ListFooterComponent={
+                    isLoading ? (
+                        <ActivityIndicator />
+                    ) : (
+                        <View style={styles.footer}>
+                            <Button
+                                title="< Back"
+                                onPress={() => {
+                                    setPage(Math.max(1, page - 1));
+                                }}
+                                disabled={page === 1}
+                            />
+
+                            <Text style={styles.pageNum}>page {page}</Text>
+
+                            <Button
+                                title="Next >"
+                                onPress={() => {
+                                    setPage(page + 1); // scroll to top of flatlist when 'next' is pressed
+                                    flatListRef.current.scrollToOffset({
+                                        animated: true,
+                                        offset: 0,
+                                    });
+                                }}
+                            />
+                        </View>
+                    )
+                }
             />
             {/* modal (popup to allow user to choose which list to add to) */}
             <Modal
@@ -134,7 +171,9 @@ const TvListView = ({ navigation }) => {
                 onRequestClose={() => setModalVisible(false)}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Add to watchlist:</Text>
+                        <Text style={styles.modalText}>
+                            Add to TV watchlist:
+                        </Text>
                         {/* render a button for each watchlist */}
                         {Constants.WATCHLISTS.map((watchList, index) => (
                             <TouchableOpacity
