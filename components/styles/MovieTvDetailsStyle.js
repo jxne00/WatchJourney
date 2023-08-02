@@ -113,6 +113,20 @@ const styles = StyleSheet.create({
     addToListIcon: {
         color: Constants.SECONDARY_COL,
     },
+    seeReviewsBtn: {
+        backgroundColor: Constants.PRIMARY_COL,
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 10,
+        marginLeft: 10,
+        alignContent: 'center',
+        alignSelf: 'left',
+    },
+    reviewLink: {
+        color: Constants.SECONDARY_COL,
+        fontSize: 16,
+        fontFamily: Constants.POPPINS_REGULAR_FONT,
+    },
 });
 
 export default styles;

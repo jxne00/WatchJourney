@@ -56,24 +56,4 @@ const fetch_API_with_param = async (url) => {
     }
 };
 
-/**
- * @description Fetch data from TMDB API using AsyncThunk
- * @param type - Prefix for the generated Redux action types
- * @param url - API endpoint
- * @returns response data in JSON format
- */
-const fetch_createAsyncThunk = (type, url) =>
-    createAsyncThunk(type, async () => {
-        try {
-            console.log(
-                `fetch_createAsyncThunk() fetching from: ${BASE_PATH}${url}`,
-            );
-            const response = await fetch(`${BASE_PATH}${url}`, OPTIONS);
-            const data = await response.json();
-            return data;
-        } catch (err) {
-            console.log('fetch_API_with_AsyncThunk(): ', err);
-        }
-    });
-
-export { Fetch_API_Data, fetch_API_with_param, fetch_createAsyncThunk };
+export { Fetch_API_Data, fetch_API_with_param };

@@ -8,6 +8,8 @@ import LoginStack from './stacks/LoginStack';
 import MovieDetails from '../components/MovieDetail';
 import TVshowDetails from '../components/TvShowDetail';
 
+import Reviews from '../screens/reviews/Reviews';
+
 const MainStack = createNativeStackNavigator();
 
 /**
@@ -35,6 +37,14 @@ const MainAppStack = () => (
             component={TVshowDetails}
             options={{
                 title: 'Details',
+                ...SCREEN_OPTIONS,
+            }}
+        />
+        <MainStack.Screen
+            name="ReviewsPage"
+            component={Reviews}
+            options={{
+                title: 'Reviews',
                 ...SCREEN_OPTIONS,
             }}
         />

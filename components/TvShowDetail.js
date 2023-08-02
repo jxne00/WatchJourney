@@ -23,7 +23,7 @@ import { printAsyncKeyContent } from './AsyncActions';
 // get a list of tv show genres
 const tvGenres = genres.tv;
 
-function TVshowDetails({ route }) {
+function TVshowDetails({ route, navigation }) {
     // state to determine show/hide modal
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -191,6 +191,20 @@ function TVshowDetails({ route }) {
                               </View>
                           ))}
                 </View>
+
+                <View style={styles.horizontalLine} />
+                <Text style={styles.sectionTitle}>Reviews</Text>
+                <TouchableOpacity
+                    style={styles.seeReviewsBtn}
+                    onPress={() =>
+                        navigation.navigate('ReviewsPage', {
+                            id: item.id,
+                            name: item.name,
+                            type: 'tv',
+                        })
+                    }>
+                    <Text style={styles.reviewLink}>View reviews</Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );

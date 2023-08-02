@@ -23,7 +23,7 @@ import { printAsyncKeyContent } from './AsyncActions';
 // get a list of movie genres
 const movieGenres = genres.movie;
 
-function MovieDetails({ route }) {
+function MovieDetails({ route, navigation }) {
     // state to determine show/hide modal
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -188,6 +188,20 @@ function MovieDetails({ route }) {
                               </View>
                           ))}
                 </View>
+
+                <View style={styles.horizontalLine} />
+                <Text style={styles.sectionTitle}>Reviews</Text>
+                <TouchableOpacity
+                    style={styles.seeReviewsBtn}
+                    onPress={() =>
+                        navigation.navigate('ReviewsPage', {
+                            id: item.id,
+                            name: item.title,
+                            type: 'movie',
+                        })
+                    }>
+                    <Text style={styles.reviewLink}>View reviews</Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );
