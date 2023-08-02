@@ -8,12 +8,12 @@ import {
     Dimensions,
     TouchableOpacity,
 } from 'react-native';
-import Constants from '../constants/constants';
+import Constants from '../../../constants/constants';
 
 const OFFSET = 40;
 const windowWidth = Dimensions.get('window').width;
 const ITEM_WIDTH = windowWidth - OFFSET * 2;
-const ITEM_HEIGHT = 200;
+const ITEM_HEIGHT = 180;
 
 /**
  * @description A custom carousel card to that displays movie poster and title.
@@ -44,7 +44,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
         ? {
               uri: `${Constants.POSTER_BASE_PATH}/original/${item.backdrop_path}`,
           }
-        : require('../assets/images/poster-placeholder.png');
+        : require('../../../assets/images/poster-placeholder.png');
 
     return (
         <TouchableOpacity
@@ -66,10 +66,15 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
                 <ImageBackground
                     source={poster_src}
                     style={styles.imgBgStyle}
-                    imageStyle={{ borderRadius: 6 }}
+                    imageStyle={{ borderRadius: 20 }}
                 />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.title}>
+                        {/* only show first 50 chars of title */}
+                        {item.title.length > 25
+                            ? item.title.slice(0, 25) + '...'
+                            : item.title}
+                    </Text>
                 </View>
             </Animated.View>
         </TouchableOpacity>
@@ -85,9 +90,13 @@ const styles = StyleSheet.create({
     titleContainer: {
         position: 'absolute',
         bottom: 0,
-        width: ITEM_WIDTH,
+        width: ITEM_WIDTH * 0.9,
         height: 40,
-        backgroundColor: 'rgba(51, 24, 50, 0.8)',
+        backgroundColor: Constants.PRIMARY_COL,
+        borderWidth: 1,
+        borderColor: Constants.SECONDARY_COL,
+        borderBottomLeftRadius: 20,
+        borderTopRightRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },

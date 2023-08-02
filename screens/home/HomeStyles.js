@@ -15,17 +15,34 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     appname: {
-        fontSize: 36,
+        fontSize: 30,
         fontFamily: Constants.BANGER_FONT,
-        margin: 20,
+        marginTop: 10,
+        textAlign: 'center',
         letterSpacing: 2,
     },
     scrollviewStyle: {
-        backgroundColor: '#ced0ce',
         paddingHorizontal: 0,
         paddingVertical: 10,
     },
-    // ------ search section ------
+    horizontalLine: {
+        borderBottomColor: '#919191',
+        borderBottomWidth: 1,
+        width: '90%',
+        alignSelf: 'center',
+        marginVertical: 15,
+    },
+
+    // ------ radio buttons ------
+    segBtnStyle: {
+        marginHorizontal: 20,
+    },
+    segBtnTextStyle: {
+        fontSize: 16,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+        color: '#000',
+    },
+    // ------ search box ------
     searchBoxContainer: {
         backgroundColor: '#fff',
         borderRadius: 10,
@@ -58,35 +75,31 @@ const styles = StyleSheet.create({
     searchScrollStyle: {
         maxHeight: 200,
     },
-    // ------ radio buttons ------
-    radioGroup: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        marginVertical: 10,
-    },
-    buttonGrp: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: '#000',
-    },
-    radioBtnTxt: {
-        fontSize: 16,
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
-        color: '#000',
-    },
+
     // ------ search results ------
     searchResult: {
+        // flexDirection: 'row',
+        alignItems: 'left',
+        marginVertical: 5,
+        paddingBottom: 5,
+        borderBottomColor: '#ababab',
+        borderBottomWidth: 1,
+    },
+    title: {
         fontSize: 16,
-        fontFamily: Constants.POPPINS_REGULAR_FONT,
+        fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
         color: '#000',
-        paddingVertical: 5,
+        // paddingVertical: 5,
+    },
+    releaseRating: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     releaseDate: {
         fontSize: 14,
         fontFamily: Constants.POPPINS_ITALIC_FONT,
         color: '#303030',
-        paddingVertical: 5,
+        marginRight: 5,
     },
     ratingContainer: {
         flexDirection: 'row',
@@ -95,7 +108,7 @@ const styles = StyleSheet.create({
     ratingIcon: {
         fontSize: 14,
         color: '#d88928',
-        marginRight: 5,
+        marginRight: 2,
     },
     ratingNumber: {
         fontSize: 14,

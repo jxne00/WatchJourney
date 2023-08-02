@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
         width: '80%',
         height: '40%',
     },
-
     modalText: {
         marginBottom: 15,
         textAlign: 'center',

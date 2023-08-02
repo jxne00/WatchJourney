@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SCREEN_OPTIONS from '../components/StackScreenOptions';
 
 import HomeScreen from '../../screens/home/Home';
+import SearchResults from '../../screens/home/SearchRes';
 
 const HomeStack = createNativeStackNavigator();
 
@@ -10,12 +11,12 @@ const HomeStack = createNativeStackNavigator();
  */
 const HomescreenStack = () => {
     return (
-        <HomeStack.Navigator screenOptions={SCREEN_OPTIONS}>
+        <HomeStack.Navigator>
             <HomeStack.Screen
                 name="Homepage"
                 component={HomeScreen}
                 options={{
-                    title: 'Home',
+                    headerShown: false,
                 }}
             />
         </HomeStack.Navigator>

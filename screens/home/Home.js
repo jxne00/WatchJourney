@@ -11,29 +11,25 @@ import {
     FlatList,
     TouchableOpacity,
 } from 'react-native';
-import { RadioButton } from 'react-native-paper';
+import { SegmentedButtons } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 
 // import stylesheets
 import styles from './HomeStyles';
-import globalStyles from '../../constants/GlobalStyles';
 
-import Constants from '../../constants/constants';
 import GradientText from '../../components/GradientText';
 import { Fetch_API_Data, fetch_API_with_param } from '../../data/API/api';
-import CarouselCard from '../../components/CarouselCard';
+import CarouselCard from './components/CarouselCard';
 
 const OFFSET = 40;
 const windowWidth = Dimensions.get('window').width;
 const ITEM_WIDTH = windowWidth - OFFSET * 2;
-const ITEM_HEIGHT = 200;
 
 const HomeScreen = ({ navigation }) => {
     // state for movies showing in theaters now
     const [nowShowing, setNowShowing] = React.useState([]);
-    // state to store search query
+    // state to store search query and results
     const [searchQuery, setSearchQuery] = React.useState('');
-    // state to store movie search results
     const [searchResults, setSearchResults] = React.useState([]);
     // state to filter between movie and tv show search
     const [searchType, setSearchType] = React.useState('movie');
@@ -74,21 +70,33 @@ const HomeScreen = ({ navigation }) => {
         }
     };
 
+    // clears the search query and results
+    const resetSearch = () => {
+        setSearchQuery('');
+        setSearchResults([]);
+    };
+
     /**
      * @description function to render search results
      */
     const renderSearchResults = ({ item }) => (
-        <TouchableOpacity key={item.id} onPress={() => handleNavigation(item)}>
+        <TouchableOpacity
+            key={item.id}
+            style={styles.searchResult}
+            onPress={() => handleNavigation(item)}>
             {/* "item.title" for movies, "item.name" for tvshows */}
-            <Text style={styles.searchResult}>{item.title || item.name}</Text>
-            <Text style={styles.releaseDate}>
-                {/* "item.release_date" for movies, "item.first_air_date" for tvshows */}
-                ({item.release_date || item.first_air_date})
-            </Text>
+            <Text style={styles.title}>{item.title || item.name}</Text>
 
-            <View style={styles.ratingContainer}>
-                <MaterialIcons name="star" style={styles.ratingIcon} />
-                <Text style={styles.ratingNumber}>{item.vote_average}</Text>
+            <View style={styles.releaseRating}>
+                <Text style={styles.releaseDate}>
+                    {/* "item.release_date" for movies, "item.first_air_date" for tvshows */}
+                    ({item.release_date || item.first_air_date}) &#x2022;
+                </Text>
+
+                <View style={styles.ratingContainer}>
+                    <MaterialIcons name="star" style={styles.ratingIcon} />
+                    <Text style={styles.ratingNumber}>{item.vote_average}</Text>
+                </View>
             </View>
         </TouchableOpacity>
     );
@@ -96,7 +104,7 @@ const HomeScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                <StatusBar style="light" />
+                <StatusBar style="dark" />
 
                 {/* App Name */}
                 <GradientText
@@ -104,10 +112,12 @@ const HomeScreen = ({ navigation }) => {
                     colors={['#688CB6', '#42648A', '#283C53']}>
                     WatchJourney{' '}
                 </GradientText>
+                <View style={styles.horizontalLine}></View>
 
+                {/* ========= carousel cards ========= */}
                 <View>
                     <Text style={styles.sectionTitle}>In Theaters Now!</Text>
-                    {/* ========= carousel cards ========= */}
+
                     <ScrollView
                         horizontal={true}
                         decelerationRate={'normal'}
@@ -141,28 +151,32 @@ const HomeScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
 
-                {/* =========== Search section =========== */}
+                <View style={styles.horizontalLine}></View>
 
-                {/* radio buttons to select movie or tv show search */}
-                <View style={styles.radioGroup}>
-                    <RadioButton.Group
-                        onValueChange={(newValue) => setSearchType(newValue)}
-                        value={searchType}>
-                        <View style={styles.buttonGrp}>
-                            <Text style={styles.radioBtnTxt}>Movies</Text>
-                            <RadioButton value="movie" />
-                        </View>
-                        <View style={styles.buttonGrp}>
-                            <Text style={styles.radioBtnTxt}>TV Shows</Text>
-                            <RadioButton value="tv" />
-                        </View>
-                    </RadioButton.Group>
-                </View>
+                {/* =========== Search section =========== */}
+                {/* buttons for indicating "tv show" or "movie" search */}
+                <SegmentedButtons
+                    value={searchType}
+                    onValueChange={(newValue) => {
+                        setSearchType(newValue);
+                        resetSearch();
+                    }}
+                    buttons={[
+                        { label: 'Movies', value: 'movie' },
+                        { label: 'TV Shows', value: 'tv' },
+                    ]}
+                    style={styles.segBtnStyle}
+                />
+
                 {/* search box */}
                 <View style={styles.searchBoxContainer}>
                     <TextInput
                         style={styles.searchInput}
-                        placeholder="Search for a movie or TV show"
+                        placeholder={
+                            searchType === 'movie'
+                                ? 'Search for a movie'
+                                : 'Search for a TV show'
+                        }
                         onChangeText={(text) => setSearchQuery(text)}
                         value={searchQuery}
                     />
