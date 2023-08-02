@@ -20,7 +20,7 @@ import globalStyles from '../../constants/GlobalStyles';
 
 import Constants from '../../constants/constants';
 import GradientText from '../../components/GradientText';
-import { Fetch_API_Data, fetch_API_with_param } from '../../data/api';
+import { Fetch_API_Data, fetch_API_with_param } from '../../data/API/api';
 import CarouselCard from '../../components/CarouselCard';
 
 const OFFSET = 40;

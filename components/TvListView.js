@@ -11,7 +11,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { fetch_API_with_param } from '../data/api';
+import { fetch_API_with_param } from '../data/API/api';
 import styles from './styles/MovieTvListStyle';
 import Constants from '../constants/constants';
 import { printAsyncKeyContent } from './AsyncActions';
