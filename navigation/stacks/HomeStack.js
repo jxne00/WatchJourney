@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SCREEN_OPTIONS from '../components/StackScreenOptions';
 
-import CarouselCard from '../../components/CarouselCard';
 import HomeScreen from '../../screens/home/Home';
 
 const HomeStack = createNativeStackNavigator();

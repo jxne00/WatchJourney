@@ -5,12 +5,9 @@ import { View, StyleSheet } from 'react-native';
 // constant variables and screen options
 import Constants from '../constants/constants';
 
-// import all stacks
-import {
-    WatchedStack,
-    WatchingNowStack,
-    WatchLaterStack,
-} from './stacks/WatchlistStacks';
+import WatchedList from '../screens/watchlist/Watched';
+import WatchingNow from '../screens/watchlist/WatchingNow';
+import WatchLater from '../screens/watchlist/WatchLater';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -34,7 +31,7 @@ const WatchlistTopTab = () => (
         {/* "Watching now" screen stack */}
         <TopTab.Screen
             name="WatchingTopTab"
-            component={WatchingNowStack}
+            component={WatchingNow}
             options={{
                 tabBarLabel: 'Watching Now',
             }}
@@ -42,7 +39,7 @@ const WatchlistTopTab = () => (
         {/* "Intend to watch" screen stack */}
         <TopTab.Screen
             name="WatchlaterTopTab"
-            component={WatchLaterStack}
+            component={WatchLater}
             options={{
                 tabBarLabel: 'Watch Later',
             }}
@@ -50,7 +47,7 @@ const WatchlistTopTab = () => (
         {/* "Watched" screen stack */}
         <TopTab.Screen
             name="WatchedTopTab"
-            component={WatchedStack}
+            component={WatchedList}
             options={{
                 tabBarLabel: 'Watched',
             }}
