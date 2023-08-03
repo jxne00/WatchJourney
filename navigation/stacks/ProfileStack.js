@@ -10,24 +10,24 @@ import FaqScreen from '../../screens/profile/Faq';
  */
 const ProfileStack = createNativeStackNavigator();
 const ProfileScreenStack = () => {
-    return (
-        <ProfileStack.Navigator screenOptions={SCREEN_OPTIONS}>
-            <ProfileStack.Screen
-                name="ProfilePage"
-                component={ProfileScreen}
-                options={{
-                    title: 'Profile',
-                }}
-            />
-            <ProfileStack.Screen
-                name="FaqPage"
-                component={FaqScreen}
-                options={{
-                    title: 'FAQ',
-                }}
-            />
-        </ProfileStack.Navigator>
-    );
+  return (
+    <ProfileStack.Navigator screenOptions={SCREEN_OPTIONS}>
+      <ProfileStack.Screen
+        name="ProfilePage"
+        component={ProfileScreen}
+        options={{
+          title: 'Profile',
+        }}
+      />
+      <ProfileStack.Screen
+        name="FaqPage"
+        component={FaqScreen}
+        options={{
+          title: 'FAQ',
+        }}
+      />
+    </ProfileStack.Navigator>
+  );
 };
 
 export default ProfileScreenStack;

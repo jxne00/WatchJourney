@@ -12,59 +12,59 @@ import TvListView from '../../components/TvListView';
  * @description The discover screen displays a list of movies and tv shows.
  */
 function DiscoverScreen({ navigation }) {
-    const [selectedButton, setSelectedButton] = useState('MovieListView');
+  const [selectedButton, setSelectedButton] = useState('MovieListView');
 
-    const setChosenButton = (button) => {
-        setSelectedButton(button);
-    };
+  const setChosenButton = (button) => {
+    setSelectedButton(button);
+  };
 
-    return (
-        <SafeAreaView style={styles.safeArea}>
-            <View style={styles.container}>
-                <StatusBar style="light" />
-                <View style={styles.chosenBtnCont}>
-                    {/* button to display movie list */}
-                    <TouchableOpacity
-                        style={
-                            // set a different style for chosen button
-                            selectedButton == 'MovieListView'
-                                ? styles.chosenBtn
-                                : styles.notChosenBtn
-                        }
-                        onPress={() => setChosenButton('MovieListView')}>
-                        <Text style={styles.buttonText}>Movies</Text>
-                    </TouchableOpacity>
+  return (
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <StatusBar style="dark" />
+        <View style={styles.chosenBtnCont}>
+          {/* button to display movie list */}
+          <TouchableOpacity
+            style={
+              // set a different style for chosen button
+              selectedButton == 'MovieListView'
+                ? styles.chosenBtn
+                : styles.notChosenBtn
+            }
+            onPress={() => setChosenButton('MovieListView')}>
+            <Text style={styles.buttonText}>Movies</Text>
+          </TouchableOpacity>
 
-                    {/* button to display TV show list */}
-                    <TouchableOpacity
-                        style={
-                            // set a different style for chosen button
-                            selectedButton == 'TvListView'
-                                ? styles.chosenBtn
-                                : styles.notChosenBtn
-                        }
-                        onPress={() => setChosenButton('TvListView')}>
-                        <Text style={styles.buttonText}>TV Shows</Text>
-                    </TouchableOpacity>
-                </View>
+          {/* button to display TV show list */}
+          <TouchableOpacity
+            style={
+              // set a different style for chosen button
+              selectedButton == 'TvListView'
+                ? styles.chosenBtn
+                : styles.notChosenBtn
+            }
+            onPress={() => setChosenButton('TvListView')}>
+            <Text style={styles.buttonText}>TV Shows</Text>
+          </TouchableOpacity>
+        </View>
 
-                {/* display view according to button pressed */}
-                {selectedButton === 'MovieListView' && (
-                    <View>
-                        <Text style={styles.header}>Movies</Text>
-                        <MovieListView navigation={navigation} />
-                    </View>
-                )}
+        {/* display view according to button pressed */}
+        {selectedButton === 'MovieListView' && (
+          <View>
+            <Text style={styles.header}>Movies</Text>
+            <MovieListView navigation={navigation} />
+          </View>
+        )}
 
-                {selectedButton === 'TvListView' && (
-                    <View>
-                        <Text style={styles.header}>TV Shows</Text>
-                        <TvListView navigation={navigation} />
-                    </View>
-                )}
-            </View>
-        </SafeAreaView>
-    );
+        {selectedButton === 'TvListView' && (
+          <View>
+            <Text style={styles.header}>TV Shows</Text>
+            <TvListView navigation={navigation} />
+          </View>
+        )}
+      </View>
+    </SafeAreaView>
+  );
 }
 
 export default DiscoverScreen;
