@@ -25,11 +25,11 @@ import { printAsyncKeyContent } from './AsyncActions';
  * selection of which watchlist to add the movie to.
  */
 const MovieListView = ({ navigation }) => {
-    const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
+    const [data, setData] = useState([]); // data to be displayed
+    const [page, setPage] = useState(1); // for pagination
     const [isLoading, setIsLoading] = useState(true);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [chosenMovieID, setChosenMovieID] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false); // show/hide modal
+    const [chosenMovieID, setChosenMovieID] = useState(null); // id to add to watchlist
     const flatListRef = useRef();
 
     // fetch popular movies from API
@@ -37,7 +37,7 @@ const MovieListView = ({ navigation }) => {
     useEffect(() => {
         setIsLoading(true);
         fetch_API_with_param(`/movie/popular?language=en-US&page=${page}`).then(
-            (json) => setData(json),
+            (movieData) => setData(movieData.results),
         );
         setIsLoading(false);
     }, [page]);
@@ -92,6 +92,7 @@ const MovieListView = ({ navigation }) => {
                     }}
                     style={styles.posterImage}
                 />
+
                 {/* show popup when button is pressed */}
                 <TouchableOpacity
                     style={styles.addToListBtn}
@@ -114,12 +115,14 @@ const MovieListView = ({ navigation }) => {
                 style={styles.showDetails}>
                 {/* title and overview of movie */}
                 <Text style={styles.showTitle}>{item.title}</Text>
+
                 <Text style={styles.showOverview}>
                     {/* only show first 100 characters of overview */}
                     {item.overview.length > 100
                         ? `${item.overview.substring(0, 100)}... `
                         : item.overview}
                 </Text>
+
                 <Text style={styles.readMore}>See more &#x2192;</Text>
                 {/* </View> */}
             </TouchableOpacity>
@@ -130,7 +133,7 @@ const MovieListView = ({ navigation }) => {
             {/* render flatlist containing "FlatlistCell"s */}
             <FlatList
                 ref={flatListRef}
-                data={data.results}
+                data={data}
                 renderItem={FlatlistCell}
                 keyExtractor={(item) => item.id.toString()}
                 ListFooterComponent={
@@ -146,6 +149,7 @@ const MovieListView = ({ navigation }) => {
                                 disabled={page === 1}
                             />
                             <Text style={styles.pageNum}>page {page}</Text>
+
                             <Button
                                 title="Next >"
                                 onPress={() => {
@@ -161,6 +165,7 @@ const MovieListView = ({ navigation }) => {
                     )
                 }
             />
+
             {/* modal (popup to allow user to choose which list to add to) */}
             <Modal
                 animationType="slide"

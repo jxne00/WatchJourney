@@ -183,6 +183,9 @@ const HomeScreen = ({ navigation }) => {
                         // no auto complete
                         autoCompleteType={'off'}
                         textContentType={'none'}
+                        contextMenuHidden={true}
+                        maxLength={100}
+                        onKeyPress={getSearchResults}
                     />
                     <TouchableOpacity onPress={getSearchResults}>
                         <MaterialIcons

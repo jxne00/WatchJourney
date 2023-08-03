@@ -47,10 +47,11 @@ const styles = StyleSheet.create({
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
         color: '#000',
     },
+    
     // ------ search box ------
     searchBoxContainer: {
         backgroundColor: '#fff',
-        borderRadius: 10,
+        borderRadius: 20,
         marginHorizontal: 15,
         marginTop: 15,
         paddingHorizontal: 10,
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
     },
     searchIcon: {
-        fontSize: 20,
+        fontSize: 25,
         color: '#000',
     },
     searchResultsContainer: {
