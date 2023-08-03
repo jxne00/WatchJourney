@@ -8,50 +8,76 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-
+import { MaterialIcons } from '@expo/vector-icons';
 import {
   clearAsyncStorage,
   printAllAsyncContent,
 } from '../../components/AsyncActions';
 import Constants from '../../constants/constants';
-import styles from './styles/ProfileStyle';
+import styles from './ProfileStyle';
 
 const SettingsScreen = ({ navigation }) => {
+  // confirms if user wants to clear async storage
+  const confirmAsyncClear = () => {
+    Alert.alert(
+      'Confirmation',
+      'This will clear all contents stored in async storage. Do you want to proceed?',
+      [
+        {
+          // dont clear if "Cancel" pressed
+          text: 'Cancel',
+          onPress: () => '',
+          style: 'cancel',
+        },
+        {
+          // clear if "Yes" pressed
+          text: 'Yes',
+          onPress: () => clearAsyncStorage(),
+        },
+      ],
+    );
+  };
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="light" />
+      {/* profile card */}
       <View style={styles.profile}>
         <Image
           source={require('../../assets/images/profile-avatar.jpeg')}
           style={styles.profileAvatar}
         />
+
         <View style={styles.profileTexts}>
           <Text style={styles.profileName}>June</Text>
           <Text style={styles.profileUsername}>@kayatoast1234</Text>
         </View>
       </View>
 
-      <View style={styles.faq}>
+      <View style={styles.optionContainer}>
         <TouchableOpacity
-          style={styles.faqBtn}
+          style={styles.optionBtn}
           onPress={() => navigation.navigate('FaqPage')}>
-          <Text style={styles.faqBtnText}>FAQ</Text>
+          <Text style={styles.optionText}>FAQ</Text>
+          <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
 
-      {/* clear all contents of async storage */}
-      <View style={styles.clearStorage}>
+      {/* print all contents of async storage */}
+      <View style={styles.optionContainer}>
         <TouchableOpacity
-          style={styles.clearBtn}
+          style={styles.optionBtn}
           onPress={printAllAsyncContent}>
-          <Text style={styles.clearBtnText}>Print all stored content</Text>
+          <Text style={styles.optionText}>Print all stored content</Text>
+          <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
 
       {/* clear all contents of async storage */}
-      <View style={styles.clearStorage}>
-        <TouchableOpacity style={styles.clearBtn} onPress={clearAsyncStorage}>
-          <Text style={styles.clearBtnText}>Clear Async Storage</Text>
+      <View style={styles.optionContainer}>
+        <TouchableOpacity style={styles.optionBtn} onPress={confirmAsyncClear}>
+          <Text style={styles.optionText}>Clear Async Storage</Text>
+          <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
 

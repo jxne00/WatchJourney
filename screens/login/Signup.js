@@ -3,7 +3,6 @@ import { StatusBar } from 'expo-status-bar';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
@@ -14,7 +13,6 @@ import {
 
 // import stylesheets
 import styles from './SignupStyles';
-import globalStyles from '../../constants/GlobalStyles';
 
 const SignupScreen = ({ navigation }) => {
   const [name, setName] = useState('');

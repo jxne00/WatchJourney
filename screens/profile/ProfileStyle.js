@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Constants from '../../../constants/constants';
+import Constants from '../../constants/constants';
 
 /**
  * @description stylesheet for settings screen
@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     padding: 14,
-    backgroundColor: '#a3b6df',
+    backgroundColor: '#c8d6e8',
     borderWidth: 2,
-    borderColor: Constants.PRIMARY_COL,
+    borderColor: '#000',
     borderRadius: 16,
     shadowColor: '#000',
     shadowOffset: { width: -3, height: 3 },
@@ -44,26 +44,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     color: '#6a6a6a',
   },
-  // "clear async storage" button styles
-  clearStorage: {
-    marginVertical: 20,
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '90%',
-  },
-  clearBtn: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '90%',
-    paddingVertical: 12,
-    borderRadius: 15,
-    backgroundColor: '#9c3939',
-  },
-  clearBtnText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-  },
+
   // "sign out" button styles
   signout: {
     marginVertical: 24,
@@ -81,24 +62,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
   },
-  // "FAQ" button styles
-  faq: {
+
+  optionContainer: {
     marginVertical: 20,
     alignSelf: 'center',
-    alignItems: 'center',
-    width: '90%',
-  },
-  faqBtn: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '90%',
+    width: '100%',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: '#000000',
+    backgroundColor: Constants.SECONDARY_COL,
     paddingVertical: 12,
-    borderRadius: 15,
-    backgroundColor: '#7b859c',
   },
-  faqBtnText: {
-    color: '#ffffff',
-    fontSize: 16,
+  optionBtn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: '5%',
+  },
+  optionText: {
+    color: '#000000',
+    fontSize: 20,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
   },
 });
