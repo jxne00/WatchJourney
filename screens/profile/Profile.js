@@ -16,7 +16,7 @@ import {
 import Constants from '../../constants/constants';
 import styles from './ProfileStyle';
 
-const SettingsScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation }) => {
   // confirms if user wants to clear async storage
   const confirmAsyncClear = () => {
     Alert.alert(
@@ -108,4 +108,4 @@ const SettingsScreen = ({ navigation }) => {
   );
 };
 
-export default SettingsScreen;
+export default ProfileScreen;
