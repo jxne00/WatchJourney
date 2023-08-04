@@ -38,10 +38,12 @@ const LoginScreen = ({ navigation }) => {
         {/* sign in area */}
         <KeyboardAvoidingView behavior="padding">
           <View style={styles.contentContainer}>
-            <View style={styles.loginTextCont}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('AppScreens')}
+              style={styles.loginTextCont}>
               <MaterialIcons name="login" size={24} color="white" />
               <Text style={styles.login}> Login to continue</Text>
-            </View>
+            </TouchableOpacity>
             {/* username and password input */}
             <TextInput
               placeholder="Username"

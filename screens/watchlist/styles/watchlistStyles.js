@@ -26,21 +26,20 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.SECONDARY_COL,
     borderRadius: 10,
     padding: 8,
-    elevation: 3, // this adds a drop shadow to the card
+    elevation: 3, // for android
+    shadowOffset: { width: 1, height: 1 }, // for ios
   },
   removeItemContainer: {
     alignSelf: 'center',
     position: 'absolute',
-    backgroundColor: '#0f0f0f',
+    backgroundColor: '#efefef',
+    borderWidth: 2,
+    borderColor: '#f31f1f',
     borderRadius: 5,
     padding: 3,
     left: 0,
     top: 0,
     zIndex: 1, // make button appear on top of image
-  },
-  removeItemButton: {
-    color: '#fa7257',
-    borderRadius: 5,
   },
   poster: {
     height: 150,
@@ -95,6 +94,15 @@ const styles = StyleSheet.create({
     fontFamily: Constants.POPPINS_REGULAR_FONT,
     fontSize: 16,
     textAlign: 'center',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  shareIcon: {
+    color: '#2e2e2e',
+    paddingLeft: '3%',
   },
 });
 

@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
-import { Fetch_API_Data } from '../data/API/api';
+import { fetch_API_with_param } from '../data/API/api';
 
 /**
  * @description Print the content of a key in AsyncStorage
@@ -32,6 +32,9 @@ const printAllAsyncContent = async () => {
   }
 };
 
+/**
+ * @description clear all contents of AsyncStorage
+ */
 const clearAsyncStorage = async () => {
   try {
     await AsyncStorage.clear();
@@ -42,11 +45,15 @@ const clearAsyncStorage = async () => {
   }
 };
 
+/**
+ * @description fetch data from API using movie_id from AsyncStorage
+ * @param key - key for AsyncStorage
+ */
 const fetchFromAsyncStorage = async (key) => {
   try {
     const storedMovies = JSON.parse(await AsyncStorage.getItem(key)) || [];
     const promises = storedMovies.map((movie_id) =>
-      Fetch_API_Data(`/movie/${movie_id}`),
+      fetch_API_with_param(`/movie/${movie_id}`),
     );
     const data = await Promise.all(promises);
     return data;

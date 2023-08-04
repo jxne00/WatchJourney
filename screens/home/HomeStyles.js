@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   sectionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: '10%',
     marginBottom: 5,
     marginLeft: 20,
   },
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   // ------ radio buttons ------
   segBtnStyle: {
     marginHorizontal: 20,
+    marginTop: '5%',
   },
   segBtnTextStyle: {
     fontSize: 16,
@@ -81,6 +82,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
+    alignSelf: 'center',
+    top: '24%',
+    position: 'absolute',
+    zIndex: 1,
   },
   searchScrollStyle: {
     maxHeight: 290,

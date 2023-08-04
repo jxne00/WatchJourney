@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles/watchlistStyles';
 import Constants from '../../constants/constants';
@@ -10,6 +10,7 @@ import {
   removeMovieFromWatchlist,
   removeTvShowFromWatchlist,
 } from './components/RemoveFromList';
+import ShareWatchlist from './components/ShareWatchlist';
 
 const WatchLater = ({ navigation }) => {
   // set state to store details of watchlater movies
@@ -42,11 +43,7 @@ const WatchLater = ({ navigation }) => {
         onPress={() =>
           removeMovieFromWatchlist('Watch Later', item.id, setWatchLater)
         }>
-        <MaterialIcons
-          name="highlight-remove"
-          size={30}
-          style={styles.removeItemButton}
-        />
+        <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to movie details page if clicked */}
       <TouchableOpacity
@@ -80,11 +77,7 @@ const WatchLater = ({ navigation }) => {
         onPress={() =>
           removeTvShowFromWatchlist('Watch Later', item.id, setWatchLaterTv)
         }>
-        <MaterialIcons
-          name="highlight-remove"
-          size={30}
-          style={styles.removeItemButton}
-        />
+        <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to Tv show detail page if clicked */}
       <TouchableOpacity
@@ -154,10 +147,26 @@ const WatchLater = ({ navigation }) => {
             keyExtractor={(item) => item.id.toString()}
             numColumns={2} // display 2 cards per row
           />
+
           {/* display number of records found */}
-          <Text style={styles.numRecords}>
-            {watchlater.length} record(s) found
-          </Text>
+          <View style={styles.footer}>
+            <Text style={styles.numRecords}>
+              {watchlater.length} record(s) found
+            </Text>
+            {/* share button */}
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => {
+                // share the titles of the movies/tv shows in the list
+                ShareWatchlist('movie', watchlater);
+              }}>
+              <FontAwesome
+                name="share-square-o"
+                size={25}
+                style={styles.shareIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
@@ -173,9 +182,24 @@ const WatchLater = ({ navigation }) => {
             numColumns={2} // display 2 cards per row
           />
           {/* display number of records found */}
-          <Text style={styles.numRecords}>
-            {watchlaterTv.length} record(s) found
-          </Text>
+          <View style={styles.footer}>
+            <Text style={styles.numRecords}>
+              {watchlaterTv.length} record(s) found
+            </Text>
+            {/* share button */}
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => {
+                // share the titles of the movies/tv shows in the list
+                ShareWatchlist('tv', watchlaterTv);
+              }}>
+              <FontAwesome
+                name="share-square-o"
+                size={25}
+                style={styles.shareIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </View>

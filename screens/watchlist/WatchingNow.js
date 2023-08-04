@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 // to reload the screen so that newly added items are displayed
 import { useFocusEffect } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 import styles from './styles/watchlistStyles';
 import Constants from '../../constants/constants';
@@ -11,6 +11,7 @@ import {
   removeMovieFromWatchlist,
   removeTvShowFromWatchlist,
 } from './components/RemoveFromList';
+import ShareWatchlist from './components/ShareWatchlist';
 
 const WatchingNow = ({ navigation }) => {
   // state for movies in 'Watching Now' list
@@ -31,7 +32,6 @@ const WatchingNow = ({ navigation }) => {
       return () => {};
     }, []),
   );
-
   /**
    * @description Renders a custom flatlist item for "Watching now" movies.
    */
@@ -43,11 +43,7 @@ const WatchingNow = ({ navigation }) => {
         onPress={() =>
           removeMovieFromWatchlist('Watching Now', item.id, setWatchingNow)
         }>
-        <MaterialIcons
-          name="highlight-remove"
-          size={30}
-          style={styles.removeItemButton}
-        />
+        <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to movie details page if clicked */}
       <TouchableOpacity
@@ -81,11 +77,7 @@ const WatchingNow = ({ navigation }) => {
         onPress={() =>
           removeTvShowFromWatchlist('Watching Now', item.id, setWatchingNowTv)
         }>
-        <MaterialIcons
-          name="highlight-remove"
-          size={30}
-          style={styles.removeItemButton}
-        />
+        <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to Tv show detail page if clicked */}
       <TouchableOpacity
@@ -98,7 +90,7 @@ const WatchingNow = ({ navigation }) => {
           }}
         />
 
-        {/* tv show title and tagline */}
+        {/* tv show title and rating */}
         <Text style={styles.movieTitle}>{item.name}</Text>
         <Text style={styles.rating}>
           <MaterialIcons name="star" size={14} style={styles.starIcon} />
@@ -134,13 +126,11 @@ const WatchingNow = ({ navigation }) => {
 
       {/* display message if "watching now movies" list is empty */}
       {chosenButton === 'MovieView' && watchingNow.length === 0 && (
-        // display message if list is empty
         <Text style={styles.emptyListMsg}>Add some movies to your list!</Text>
       )}
 
       {/* display message if "watching now tv shows" list is empty */}
       {chosenButton === 'TvView' && watchingNowTv.length === 0 && (
-        // display message if list is empty
         <Text style={styles.emptyListMsg}>Add some TV shows to your list!</Text>
       )}
 
@@ -155,10 +145,27 @@ const WatchingNow = ({ navigation }) => {
             keyExtractor={(item) => item.id.toString()}
             numColumns={2} // display 2 cards per row
           />
-          {/* display number of records found */}
-          <Text style={styles.numRecords}>
-            {watchingNow.length} record(s) found
-          </Text>
+
+          <View style={styles.footer}>
+            {/* display number of records found */}
+            <Text style={styles.numRecords}>
+              {watchingNow.length} record(s) found
+            </Text>
+
+            {/* share button */}
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => {
+                // share the titles of the movies/tv shows in the list
+                ShareWatchlist('movie', watchingNow);
+              }}>
+              <FontAwesome
+                name="share-square-o"
+                size={25}
+                style={styles.shareIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
@@ -171,12 +178,29 @@ const WatchingNow = ({ navigation }) => {
             data={watchingNowTv}
             renderItem={renderFlatlistItemTv}
             keyExtractor={(item) => item.id.toString()}
-            numColumns={2} // display 2 cards per row
+            numColumns={2} // 2 cards per row
           />
-          {/* display number of records found */}
-          <Text style={styles.numRecords}>
-            {watchingNowTv.length} record(s) found
-          </Text>
+
+          <View style={styles.footer}>
+            {/* display number of records found */}
+            <Text style={styles.numRecords}>
+              {watchingNowTv.length} record(s) found
+            </Text>
+
+            {/* share button */}
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => {
+                // share the titles of the movies/tv shows in the list
+                ShareWatchlist('tv', watchingNowTv);
+              }}>
+              <FontAwesome
+                name="share-square-o"
+                size={25}
+                style={styles.shareIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </View>

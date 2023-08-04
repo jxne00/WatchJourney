@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Constants from '../constants/constants';
 
-// renders a custom button
+/**
+ * @description custom button component
+ */
 const CustomBtn = (props) => {
   // set default values to use if none passed in
   alignButton = props.align || 'center';

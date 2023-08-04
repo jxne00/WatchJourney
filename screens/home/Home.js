@@ -111,46 +111,6 @@ const HomeScreen = ({ navigation }) => {
         </GradientText>
         <Divider />
 
-        {/* ========= carousel cards ========= */}
-        <View>
-          <View style={styles.sectionContainer}>
-            <MaterialIcons name="movie" size={24} />
-            <Text style={styles.sectionTitle}> In Theatres Now</Text>
-          </View>
-          <ScrollView
-            horizontal={true}
-            decelerationRate={'normal'}
-            snapToInterval={ITEM_WIDTH}
-            style={styles.scrollviewStyle}
-            showsHorizontalScrollIndicator={false}
-            disableIntervalMomentum
-            onScroll={Animated.event(
-              [
-                {
-                  nativeEvent: {
-                    contentOffset: { x: scrollX },
-                  },
-                },
-              ],
-              { useNativeDriver: false },
-            )}
-            scrollEventThrottle={12}>
-            {/* render custom carousel cards */}
-            {nowShowing.map((item, index) => (
-              <CarouselCard
-                key={item.id}
-                item={item}
-                navigation={navigation}
-                index={index}
-                scrollX={scrollX}
-                last_index={nowShowing.length - 1}
-              />
-            ))}
-          </ScrollView>
-        </View>
-
-        <View style={styles.horizontalLine}></View>
-
         {/* =========== Search section =========== */}
         {/* buttons for indicating "tv show" or "movie" search */}
         <SegmentedButtons
@@ -200,6 +160,46 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
         )}
+
+        {/* ========= carousel cards ========= */}
+        <View>
+          <View style={styles.sectionContainer}>
+            <MaterialIcons name="movie" size={24} />
+            <Text style={styles.sectionTitle}> In Theatres Now</Text>
+          </View>
+          <ScrollView
+            horizontal={true}
+            decelerationRate={'normal'}
+            snapToInterval={ITEM_WIDTH}
+            style={styles.scrollviewStyle}
+            showsHorizontalScrollIndicator={false}
+            disableIntervalMomentum
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent: {
+                    contentOffset: { x: scrollX },
+                  },
+                },
+              ],
+              { useNativeDriver: false },
+            )}
+            scrollEventThrottle={12}>
+            {/* render custom carousel cards */}
+            {nowShowing.map((item, index) => (
+              <CarouselCard
+                key={item.id}
+                item={item}
+                navigation={navigation}
+                index={index}
+                scrollX={scrollX}
+                last_index={nowShowing.length - 1}
+              />
+            ))}
+          </ScrollView>
+        </View>
+
+        <View style={styles.horizontalLine}></View>
       </View>
     </SafeAreaView>
   );

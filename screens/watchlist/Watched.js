@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 // to reload the screen so that newly added items are displayed
 import { useFocusEffect } from '@react-navigation/native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
 import styles from './styles/watchlistStyles';
 import Constants from '../../constants/constants';
@@ -11,6 +11,7 @@ import {
   removeMovieFromWatchlist,
   removeTvShowFromWatchlist,
 } from './components/RemoveFromList';
+import ShareWatchlist from './components/ShareWatchlist';
 
 const WatchedMoviesScreen = ({ navigation }) => {
   // set state to store details of watched movies
@@ -43,11 +44,7 @@ const WatchedMoviesScreen = ({ navigation }) => {
         onPress={() =>
           removeMovieFromWatchlist('Watched', item.id, setWatchedMovies)
         }>
-        <MaterialIcons
-          name="highlight-remove"
-          size={30}
-          style={styles.removeItemButton}
-        />
+        <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to movie details page if clicked */}
       <TouchableOpacity
@@ -81,11 +78,7 @@ const WatchedMoviesScreen = ({ navigation }) => {
         onPress={() =>
           removeTvShowFromWatchlist('Watched', item.id, setWatchedTvShows)
         }>
-        <MaterialIcons
-          name="highlight-remove"
-          size={30}
-          style={styles.removeItemButton}
-        />
+        <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to Tv show detail page if clicked */}
       <TouchableOpacity
@@ -154,15 +147,32 @@ const WatchedMoviesScreen = ({ navigation }) => {
             keyExtractor={(item) => item.id.toString()}
             numColumns={2} // display 2 cards per row
           />
+
           {/* display number of records found */}
-          <Text style={styles.numRecords}>
-            {watchedMovies.length} record(s) found
-          </Text>
+          <View style={styles.footer}>
+            <Text style={styles.numRecords}>
+              {watchedMovies.length} record(s) found
+            </Text>
+
+            {/* share button */}
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => {
+                // share the titles of the movies/tv shows in the list
+                ShareWatchlist('movie', watchedMovies);
+              }}>
+              <FontAwesome
+                name="share-square-o"
+                size={25}
+                style={styles.shareIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
       {/* render tv show flatlist if "tv" button pressed 
-            and "Tv shows watching now "contains items */}
+            and "Tv shows watching now" contains items */}
       {chosenButton === 'TvView' && watchedTvShows.length > 0 && (
         <View>
           <Text style={styles.flatlistTitle}>TV Shows currently watching</Text>
@@ -172,10 +182,26 @@ const WatchedMoviesScreen = ({ navigation }) => {
             keyExtractor={(item) => item.id.toString()}
             numColumns={2} // display 2 cards per row
           />
+
           {/* display number of records found */}
-          <Text style={styles.numRecords}>
-            {watchedTvShows.length} record(s) found
-          </Text>
+          <View style={styles.footer}>
+            <Text style={styles.numRecords}>
+              {watchedTvShows.length} record(s) found
+            </Text>
+            {/* share button */}
+            <TouchableOpacity
+              style={styles.shareBtn}
+              onPress={() => {
+                // share the titles of the movies/tv shows in the list
+                ShareWatchlist('tv', watchedTvShows);
+              }}>
+              <FontAwesome
+                name="share-square-o"
+                size={25}
+                style={styles.shareIcon}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </View>
