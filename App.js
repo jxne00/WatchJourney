@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
-
 import RootStack from './navigation/RootStack';
 
 const App = () => {

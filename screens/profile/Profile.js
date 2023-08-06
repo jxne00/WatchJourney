@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Switch,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {
@@ -41,19 +42,20 @@ const ProfileScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="light" />
+
       {/* profile card */}
       <View style={styles.profile}>
         <Image
           source={require('../../assets/images/profile-avatar.jpeg')}
           style={styles.profileAvatar}
         />
-
         <View style={styles.profileTexts}>
           <Text style={styles.profileName}>June</Text>
           <Text style={styles.profileUsername}>@kayatoast1234</Text>
         </View>
       </View>
 
+      {/* FAQ button - navigate to FAQ page when clicked */}
       <View style={styles.optionContainer}>
         <TouchableOpacity
           style={styles.optionBtn}

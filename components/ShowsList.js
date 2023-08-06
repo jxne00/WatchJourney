@@ -6,86 +6,45 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Alert,
   ActivityIndicator,
   Button,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { fetch_API_with_param } from '../data/API/api';
-import styles from './styles/MovieTvListStyle';
+import styles from './styles/ShowsListStyle';
 import Constants from '../constants/constants';
-import { printAsyncKeyContent } from './AsyncActions';
+import { addShowToAsync } from './AsyncActions';
 
-/**
- * @description A custom flatlist to display TV shows.
- * Each cell displays the poster image, title, and overview of the TV show.
- * When the "+" button is pressed, a modal is displayed to allow
- * selection of which watchlist to add the show to.
- */
-const TvListView = ({ navigation }) => {
+const ShowsList = ({ navigation, type }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [chosenTvID, setChosenTvID] = useState(null);
+  const [chosenShowID, setChosenShowID] = useState(null);
 
   const flatListRef = useRef();
 
-  // fetch popular tv shows
-  // docs: https://developer.themoviedb.org/reference/discover-tv
   useEffect(() => {
     setIsLoading(true);
-    fetch_API_with_param(`/tv/top_rated?language=en-US&page=${page}`).then(
+    // fetch popular movies/tv shows based on type
+    const endpoint = type === 'movie' ? '/movie/popular' : '/tv/top_rated';
+    fetch_API_with_param(`${endpoint}?language=en-US&page=${page}`).then(
       (response) => setData(response),
     );
     setIsLoading(false);
-  }, [page]);
+  }, [page, type]);
 
-  // when the "+" is pressed, set the selected show and show the modal
-  const setChosenTvShow = async (tv_id) => {
-    setChosenTvID(tv_id);
+  // set the selected show and display the modal
+  const setChosenShow = async (id) => {
+    setChosenShowID(id);
     setModalVisible(true);
-  };
-
-  // add 'chosenTvID' into AsyncStorage with the key of '@{watchlist}_tvlist'
-  const addToTvList = async (watchlist) => {
-    try {
-      // key to use for AsyncStorage
-      const storageKey = `@${watchlist}_tvlist`;
-
-      // get data from AsyncStorage
-      let currentList = JSON.parse(
-        (await AsyncStorage.getItem(storageKey)) || '[]',
-      );
-
-      // check if tv show is already in list
-      if (currentList.includes(chosenTvID)) {
-        Alert.alert('The show is already in the list');
-        setModalVisible(false);
-        return;
-      }
-      // add chosenTvID to list and store back to AsyncStorage
-      currentList.push(chosenTvID);
-      await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));
-
-      console.log(chosenTvID, 'added to', storageKey);
-      // printAllAsyncContent();
-      printAsyncKeyContent(storageKey);
-
-      // close modal after adding to list
-      setModalVisible(false);
-    } catch (error) {
-      // exception handling
-      console.log(error);
-    }
   };
 
   // renders a cell in the flatlist
   const FlatlistCell = ({ item }) => (
     <View style={styles.showContainer}>
-      {/* poster image of tvshow */}
+      {/* poster image */}
       <View style={styles.posterContainer}>
         <Image
           source={{
@@ -93,12 +52,12 @@ const TvListView = ({ navigation }) => {
           }}
           style={styles.posterImage}
         />
-        {/* show popup when button is pressed */}
+
+        {/* show modal when button is pressed */}
         <TouchableOpacity
           style={styles.addToListBtn}
           onPress={() => {
-            // set the chosen tv show and display modal
-            setChosenTvShow(item.id);
+            setChosenShow(item.id);
           }}>
           <MaterialIcons
             name="playlist-add"
@@ -107,31 +66,41 @@ const TvListView = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
+
       <TouchableOpacity
-        // navigate to "TV Show Details" screen on press
-        onPress={() => navigation.navigate('TVshowDetailPage', { item: item })}
+        // navigate to "ShowDetails" component on press
+        onPress={() => navigation.navigate('ShowDetailsPage', { item })}
         style={styles.showDetails}>
         {/* title and overview of tv show */}
-        <Text style={styles.showTitle}>{item.name}</Text>
+        <Text style={styles.showTitle}>{item.name || item.title}</Text>
+
         <Text style={styles.showOverview}>
           {/* only show first 100 characters of overview */}
           {item.overview.length > 100
             ? `${item.overview.substring(0, 100)}... `
             : item.overview}
         </Text>
+
         <Text style={styles.readMore}>See more &#x2192;</Text>
-        {/* </View> */}
       </TouchableOpacity>
     </View>
   );
+
   return (
     <View style={styles.contentContainer}>
-      {/* render flatlist containing "FlatlistCell"s */}
       <FlatList
         ref={flatListRef}
         data={data.results}
+        // flatlist cells containing movie/tv show details
         renderItem={FlatlistCell}
         keyExtractor={(item) => item.id.toString()}
+        // header
+        ListHeaderComponent={
+          <Text style={styles.header}>
+            {type === 'movie' ? 'Popular Movies' : 'Top Rated TV Shows'}
+          </Text>
+        }
+        // pagination
         ListFooterComponent={
           isLoading ? (
             <ActivityIndicator />
@@ -161,7 +130,8 @@ const TvListView = ({ navigation }) => {
           )
         }
       />
-      {/* modal (popup to allow user to choose which list to add to) */}
+
+      {/* modal to allow user to choose which list to add to */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -174,7 +144,9 @@ const TvListView = ({ navigation }) => {
             {Constants.WATCHLISTS.map((watchList, index) => (
               <TouchableOpacity
                 key={index}
-                onPress={() => addToTvList(watchList)}
+                onPress={() =>
+                  addShowToAsync(watchList, type, chosenShowID, setModalVisible)
+                }
                 style={styles.modalBtnStyle}>
                 <Text style={styles.modelBtnText}>{watchList}</Text>
               </TouchableOpacity>
@@ -198,4 +170,4 @@ const TvListView = ({ navigation }) => {
   );
 };
 
-export default TvListView;
+export default ShowsList;

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import styles from './styles/watchlistStyles';
 import Constants from '../../constants/constants';
 import { FetchMovies, FetchTvShows } from './components/FetchWatchlist';
@@ -11,11 +11,11 @@ import {
 } from './components/RemoveFromList';
 import ShareWatchlist from './components/ShareWatchlist';
 
-const WatchLater = ({ navigation }) => {
-  // set state to store details of watchlater movies
-  const [watchlater, setWatchLater] = useState([]);
-  // set state to store details of watchlater tv shows
-  const [watchlaterTv, setWatchLaterTv] = useState([]);
+const WatchedMoviesScreen = ({ navigation }) => {
+  // set state to store details of watched movies
+  const [watchedMovies, setWatchedMovies] = useState([]);
+  // set state to store details of watched tv shows
+  const [watchedTvShows, setWatchedTvShows] = useState([]);
   // state to determine if display movie or tv show list
   const [chosenButton, setChosenButton] = useState('MovieView');
 
@@ -23,16 +23,16 @@ const WatchLater = ({ navigation }) => {
   // so that newly added items are displayed
   useFocusEffect(
     useCallback(() => {
-      // fetch movie data for 'watch later' list
-      FetchMovies('Watch Later', setWatchLater);
-      // fetch tv show data for 'watch later' list
-      FetchTvShows('Watch Later', setWatchLaterTv);
+      // fetch movie data for 'Watched' list
+      FetchMovies('Watched', setWatchedMovies);
+      // fetch tv show data for 'Watched' list
+      FetchTvShows('Watched', setWatchedTvShows);
       return () => {};
     }, []),
   );
 
   /**
-   * @description Renders a custom flatlist item for "Watch Later" movies.
+   * @description Renders a custom flatlist item for "watched" movies.
    */
   const renderFlatlistItem = ({ item }) => (
     <View style={styles.cardContainer}>
@@ -40,13 +40,13 @@ const WatchLater = ({ navigation }) => {
       <TouchableOpacity
         style={styles.removeItemContainer}
         onPress={() =>
-          removeMovieFromWatchlist('Watch Later', item.id, setWatchLater)
+          removeMovieFromWatchlist('Watched', item.id, setWatchedMovies)
         }>
         <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
       {/* navigate to movie details page if clicked */}
       <TouchableOpacity
-        onPress={() => navigation.navigate('MovieDetailPage', { item })}>
+        onPress={() => navigation.navigate('ShowDetails', { item })}>
         {/* poster image of the movie */}
         <Image
           style={styles.poster}
@@ -66,7 +66,7 @@ const WatchLater = ({ navigation }) => {
   );
 
   /**
-   * @description Renders a custom flatlist item for "watch later" tv shows.
+   * @description Renders a custom flatlist item for "watched" tv shows.
    */
   const renderFlatlistItemTv = ({ item }) => (
     <View style={styles.cardContainer}>
@@ -74,7 +74,7 @@ const WatchLater = ({ navigation }) => {
       <TouchableOpacity
         style={styles.removeItemContainer}
         onPress={() =>
-          removeTvShowFromWatchlist('Watch Later', item.id, setWatchLaterTv)
+          removeTvShowFromWatchlist('Watched', item.id, setWatchedTvShows)
         }>
         <FontAwesome name="remove" size={25} color={'#f31f1f'} />
       </TouchableOpacity>
@@ -98,7 +98,6 @@ const WatchLater = ({ navigation }) => {
       </TouchableOpacity>
     </View>
   );
-
   return (
     <View style={styles.container}>
       <View style={styles.chosenBtnCont}>
@@ -123,25 +122,25 @@ const WatchLater = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {/* display message if "watch later movies" list is empty */}
-      {chosenButton === 'MovieView' && watchlater.length === 0 && (
+      {/* display message if "watched movies" list is empty */}
+      {chosenButton === 'MovieView' && watchedMovies.length === 0 && (
         // display message if list is empty
         <Text style={styles.emptyListMsg}>Add some movies to your list!</Text>
       )}
 
-      {/* display message if "watch later tv shows" list is empty */}
-      {chosenButton === 'TvView' && watchlaterTv.length === 0 && (
+      {/* display message if "watched tv shows" list is empty */}
+      {chosenButton === 'TvView' && watchedTvShows.length === 0 && (
         // display message if list is empty
         <Text style={styles.emptyListMsg}>Add some TV shows to your list!</Text>
       )}
 
       {/* render movies flatlist if "movie" button pressed 
-            and "watchlater" contains items */}
-      {chosenButton === 'MovieView' && watchlater.length > 0 && (
+            and "movies watching now" contains items */}
+      {chosenButton === 'MovieView' && watchedMovies.length > 0 && (
         <View>
           <Text style={styles.flatlistTitle}>Movies currently watching</Text>
           <FlatList
-            data={watchlater}
+            data={watchedMovies}
             renderItem={renderFlatlistItem}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2} // display 2 cards per row
@@ -150,14 +149,15 @@ const WatchLater = ({ navigation }) => {
           {/* display number of records found */}
           <View style={styles.footer}>
             <Text style={styles.numRecords}>
-              {watchlater.length} record(s) found
+              {watchedMovies.length} record(s) found
             </Text>
+
             {/* share button */}
             <TouchableOpacity
               style={styles.shareBtn}
               onPress={() => {
                 // share the titles of the movies/tv shows in the list
-                ShareWatchlist('movie', watchlater);
+                ShareWatchlist('movie', watchedMovies);
               }}>
               <FontAwesome
                 name="share-square-o"
@@ -170,27 +170,28 @@ const WatchLater = ({ navigation }) => {
       )}
 
       {/* render tv show flatlist if "tv" button pressed 
-            and "watchlaterTv" contains items */}
-      {chosenButton === 'TvView' && watchlaterTv.length > 0 && (
+            and "Tv shows watching now" contains items */}
+      {chosenButton === 'TvView' && watchedTvShows.length > 0 && (
         <View>
           <Text style={styles.flatlistTitle}>TV Shows currently watching</Text>
           <FlatList
-            data={watchlaterTv}
+            data={watchedTvShows}
             renderItem={renderFlatlistItemTv}
             keyExtractor={(item) => item.id.toString()}
             numColumns={2} // display 2 cards per row
           />
+
           {/* display number of records found */}
           <View style={styles.footer}>
             <Text style={styles.numRecords}>
-              {watchlaterTv.length} record(s) found
+              {watchedTvShows.length} record(s) found
             </Text>
             {/* share button */}
             <TouchableOpacity
               style={styles.shareBtn}
               onPress={() => {
                 // share the titles of the movies/tv shows in the list
-                ShareWatchlist('tv', watchlaterTv);
+                ShareWatchlist('tv', watchedTvShows);
               }}>
               <FontAwesome
                 name="share-square-o"
@@ -205,4 +206,4 @@ const WatchLater = ({ navigation }) => {
   );
 };
 
-export default WatchLater;
+export default WatchedMoviesScreen;

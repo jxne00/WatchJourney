@@ -1,18 +1,14 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SCREEN_OPTIONS from './components/StackScreenOptions';
-// import screens and stacks
+import SCREEN_OPTIONS from './stacks/StackScreenOptions';
 import MainScreensNav from './AppBottomNav';
 import LoginStack from './stacks/LoginStack';
-import MovieDetails from '../components/MovieDetail';
-import TVshowDetails from '../components/TvShowDetail';
 import Reviews from '../screens/reviews/Reviews';
 
 const MainStack = createNativeStackNavigator();
 
 /**
- * @description the main stack navigator linking the login screen
- * to the main screens
+ * @description the main stack navigator linking the login screen to the main screens
  */
 const RootStack = () => (
   <MainStack.Navigator screenOptions={{ headerShown: false }}>
@@ -22,24 +18,6 @@ const RootStack = () => (
       name="AppScreens"
       component={MainScreensNav}
       options={{ gestureEnabled: false }}
-    />
-
-    <MainStack.Screen
-      name="MovieDetailPage"
-      component={MovieDetails}
-      options={{
-        title: 'Details',
-        ...SCREEN_OPTIONS,
-      }}
-    />
-
-    <MainStack.Screen
-      name="TVshowDetailPage"
-      component={TVshowDetails}
-      options={{
-        title: 'Details',
-        ...SCREEN_OPTIONS,
-      }}
     />
 
     <MainStack.Screen

@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SCREEN_OPTIONS from '../components/StackScreenOptions';
-
-// import screens
+import SCREEN_OPTIONS from './StackScreenOptions';
 import ProfileScreen from '../../screens/profile/Profile';
 import FaqScreen from '../../screens/profile/Faq';
 

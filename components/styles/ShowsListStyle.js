@@ -2,10 +2,15 @@ import { StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
 
 const styles = StyleSheet.create({
-  // --------------- scrollview styles ---------------
+  header: {
+    fontSize: 22,
+    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    paddingBottom: 5,
+    textAlign: 'center',
+  },
   contentContainer: {
     paddingTop: 5,
-    marginBottom: '20%',
+    paddingBottom: 10,
     backgroundColor: Constants.SECONDARY_COL,
   },
   showContainer: {

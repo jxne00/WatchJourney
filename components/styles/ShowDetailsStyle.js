@@ -1,9 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -27,6 +23,8 @@ const styles = StyleSheet.create({
   ratingContainer: {
     backgroundColor: Constants.SECONDARY_COL,
     borderRadius: 10,
+    width: 60,
+    height: 35,
     padding: 5,
     position: 'absolute',
     bottom: 10,
@@ -56,9 +54,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 15,
   },
+  
+  // ---- poster image ----
   ImageBg: {
-    width: windowWidth,
-    height: windowHeight * 0.44,
+    width: Constants.WIDTH,
+    height: Constants.HEIGHT * 0.44,
     resizeMode: 'cover',
     justifyContent: 'center',
     marginBottom: 10,
@@ -73,17 +73,18 @@ const styles = StyleSheet.create({
   },
   posterImage: {
     resizeMode: 'contain',
-    width: windowWidth * 0.95,
-    height: windowHeight * 0.42,
-    borderRadius: windowHeight * 0.04,
+    width: Constants.WIDTH * 0.95,
+    height: Constants.HEIGHT * 0.42,
+    borderRadius: Constants.HEIGHT * 0.04,
     alignSelf: 'center',
   },
+
+  // ---- genres section ----
   genresContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginVertical: 5,
     justifyContent: 'center',
-    marginVertical: 10,
   },
   genre: {
     fontSize: 16,
@@ -100,6 +101,8 @@ const styles = StyleSheet.create({
     fontFamily: Constants.POPPINS_REGULAR_FONT,
     color: '#000',
   },
+  
+  // ---- adding to list ----
   addToListBtn: {
     backgroundColor: Constants.PRIMARY_COL,
     borderRadius: 5,
@@ -113,9 +116,13 @@ const styles = StyleSheet.create({
   addToListIcon: {
     color: Constants.SECONDARY_COL,
   },
+  
+  // ---- reviews section ----
   seeReviewsBtn: {
     backgroundColor: Constants.PRIMARY_COL,
     borderRadius: 5,
+    width: '45%',
+    height: 45,
     padding: 10,
     marginVertical: 10,
     marginLeft: 10,
@@ -123,6 +130,7 @@ const styles = StyleSheet.create({
     alignSelf: 'left',
   },
   reviewLink: {
+    textAlign: 'center',
     color: Constants.SECONDARY_COL,
     fontSize: 16,
     fontFamily: Constants.POPPINS_REGULAR_FONT,

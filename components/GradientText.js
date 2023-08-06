@@ -3,11 +3,13 @@ import { Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
 
+/**
+ * @description component text with gradient colors
+ */
 const GradientText = (props) => {
-  // use default colors if none passed in
+  // default values to use if none passed in
   const defaultColors = ['#ffffff', '#868686', '#000000'];
   const colors = props.colors || defaultColors;
-  // use default start and end points if none passed in
   const start = props.start || { x: 0, y: 0 };
   const end = props.end || { x: 1, y: 0 };
 

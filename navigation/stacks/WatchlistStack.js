@@ -1,15 +1,17 @@
 import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, StyleSheet } from 'react-native';
-
-import Constants from '../constants/constants';
-
-// import screens
-import WatchedList from '../screens/watchlist/Watched';
-import WatchingNow from '../screens/watchlist/WatchingNow';
-import WatchLater from '../screens/watchlist/WatchLater';
+import Constants from '../../constants/constants';
+import SCREEN_OPTIONS from './StackScreenOptions';
+// import WatchedList from '../../screens/watchlist/Watched';
+import WatchedScreen from '../../screens/watchlist/Watched';
+import WatchingNow from '../../screens/watchlist/WatchingNow';
+import WatchLater from '../../screens/watchlist/WatchLater';
+import ShowDetails from '../../components/showDetails';
 
 const TopTab = createMaterialTopTabNavigator();
+const WatchlistStack = createNativeStackNavigator();
 
 /**
  * @description Top tab navigator for "watchlist" screen.
@@ -49,7 +51,7 @@ const WatchlistTopTab = () => (
     {/* "Watched" screen stack */}
     <TopTab.Screen
       name="WatchedTopTab"
-      component={WatchedList}
+      component={WatchedScreen}
       options={{
         tabBarLabel: 'Watched',
       }}
@@ -57,15 +59,32 @@ const WatchlistTopTab = () => (
   </TopTab.Navigator>
 );
 
-/**
- * @description Make the tab navigator start
- * slightly below the top of the screen
- */
+// let tabs start slightly below the top of the screen
 const WatchlistMain = () => (
   <View style={styles.container}>
     <View style={styles.header}></View>
     <WatchlistTopTab />
   </View>
+);
+
+const WatchlistStackNav = () => (
+  <WatchlistStack.Navigator>
+    <WatchlistStack.Screen
+      name="WatchlistMain"
+      component={WatchlistMain}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <WatchlistStack.Screen
+      name="ShowDetailsPage"
+      component={ShowDetails}
+      options={{
+        title: 'Details',
+        ...SCREEN_OPTIONS,
+      }}
+    />
+  </WatchlistStack.Navigator>
 );
 
 const styles = StyleSheet.create({
@@ -78,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WatchlistMain;
+export default WatchlistStackNav;

@@ -5,15 +5,13 @@ import {
   Text,
   Animated,
   ImageBackground,
-  Dimensions,
   TouchableOpacity,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Constants from '../../../constants/constants';
+import Constants from '../constants/constants';
 
 const OFFSET = 40;
-const windowWidth = Dimensions.get('window').width;
-const ITEM_WIDTH = windowWidth - OFFSET * 2;
+const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
 const ITEM_HEIGHT = 180;
 
 /**
@@ -46,7 +44,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
 
   // use placeholder image if poster & backdrop from API are null
   if (!item.backdrop_path && !item.poster_path) {
-    poster_src = require('../../../assets/images/poster-placeholder.png');
+    poster_src = require('../assets/images/poster-placeholder.png');
   } else {
     // use poster path if backdrop path is null
     poster_src = item.backdrop_path
@@ -61,11 +59,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
   return (
     // go to movie details page when card is pressed
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate('MovieDetailPage', {
-          item: item,
-        })
-      }>
+      onPress={() => navigation.navigate('ShowDetailsPage', { item })}>
       <Animated.View
         style={[
           styles.animatedView,
@@ -81,6 +75,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
           style={styles.imgBgStyle}
           imageStyle={{ borderRadius: 20 }}
         />
+
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {/* only show first 50 chars of title */}
@@ -89,6 +84,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
               : item.title}
           </Text>
         </View>
+
         <View style={styles.ratingContainer}>
           <Text style={styles.ratingText}>
             <MaterialIcons name="star" size={16} color={'#deb72d'} />

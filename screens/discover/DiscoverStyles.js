@@ -41,10 +41,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  header: {
-    fontSize: 24,
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-  },
 });
 
 export default styles;

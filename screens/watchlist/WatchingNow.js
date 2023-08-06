@@ -1,9 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
-// to reload the screen so that newly added items are displayed
 import { useFocusEffect } from '@react-navigation/native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
-
 import styles from './styles/watchlistStyles';
 import Constants from '../../constants/constants';
 import { FetchMovies, FetchTvShows } from './components/FetchWatchlist';

@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
-
 import styles from './DiscoverStyles';
-
-// import flatlist components
-import MovieListView from '../../components/MovieListview';
-import TvListView from '../../components/TvListView';
+// import MovieListView from '../../components/MoviesList';
+// import TvListView from '../../components/TvShowsList';
+import ShowsList from '../../components/ShowsList';
 
 /**
  * @description The discover screen displays a list of movies and tv shows.
  */
 function DiscoverScreen({ navigation }) {
-  const [selectedButton, setSelectedButton] = useState('MovieListView');
-
-  const setChosenButton = (button) => {
-    setSelectedButton(button);
-  };
+  const [type, setType] = useState('movie');
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -27,11 +21,9 @@ function DiscoverScreen({ navigation }) {
           <TouchableOpacity
             style={
               // set a different style for chosen button
-              selectedButton == 'MovieListView'
-                ? styles.chosenBtn
-                : styles.notChosenBtn
+              type === 'movie' ? styles.chosenBtn : styles.notChosenBtn
             }
-            onPress={() => setChosenButton('MovieListView')}>
+            onPress={() => setType('movie')}>
             <Text style={styles.buttonText}>Movies</Text>
           </TouchableOpacity>
 
@@ -39,29 +31,17 @@ function DiscoverScreen({ navigation }) {
           <TouchableOpacity
             style={
               // set a different style for chosen button
-              selectedButton == 'TvListView'
-                ? styles.chosenBtn
-                : styles.notChosenBtn
+              type == 'tv' ? styles.chosenBtn : styles.notChosenBtn
             }
-            onPress={() => setChosenButton('TvListView')}>
+            onPress={() => setType('tv')}>
             <Text style={styles.buttonText}>TV Shows</Text>
           </TouchableOpacity>
         </View>
 
-        {/* display view according to button pressed */}
-        {selectedButton === 'MovieListView' && (
-          <View>
-            <Text style={styles.header}>Movies</Text>
-            <MovieListView navigation={navigation} />
-          </View>
-        )}
-
-        {selectedButton === 'TvListView' && (
-          <View>
-            <Text style={styles.header}>TV Shows</Text>
-            <TvListView navigation={navigation} />
-          </View>
-        )}
+        {/* display a list of movies/tv shows according to button pressed */}
+        <View>
+          <ShowsList navigation={navigation} type={type} />
+        </View>
       </View>
     </SafeAreaView>
   );

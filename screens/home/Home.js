@@ -13,12 +13,10 @@ import {
 } from 'react-native';
 import { SegmentedButtons, Divider } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
-// import API fetch functions
 import { Fetch_API_Data, fetch_API_with_param } from '../../data/API/api';
-// import stylesheet and custom components
 import styles from './HomeStyles';
 import GradientText from '../../components/GradientText';
-import CarouselCard from './components/CarouselCard';
+import CarouselCard from '../../components/CarouselCard';
 
 const HomeScreen = ({ navigation }) => {
   // state for movies showing in theaters now
@@ -39,8 +37,8 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     // fetch movies showing in theaters now
     // docs: https://developer.themoviedb.org/reference/movie-now-playing-list
-    Fetch_API_Data('/movie/now_playing').then((json) =>
-      setNowShowing(json.results),
+    Fetch_API_Data('/movie/now_playing').then((response) =>
+      setNowShowing(response.results),
     );
   }, []);
 
@@ -51,19 +49,8 @@ const HomeScreen = ({ navigation }) => {
    */
   const getSearchResults = () => {
     fetch_API_with_param(`/search/${searchType}?query=${searchQuery}`).then(
-      (json) => setSearchResults(json.results),
+      (response) => setSearchResults(response.results),
     );
-  };
-
-  // navigate to either movie or tv show details page
-  const handleNavigation = (item) => {
-    if (item.title) {
-      // navigate to movie details page
-      navigation.navigate('MovieDetailPage', { item });
-    } else {
-      // navigate to tv show details page
-      navigation.navigate('TVshowDetailPage', { item });
-    }
   };
 
   // clears the search query and results
@@ -79,7 +66,7 @@ const HomeScreen = ({ navigation }) => {
     <TouchableOpacity
       key={item.id}
       style={styles.searchResult}
-      onPress={() => handleNavigation(item)}>
+      onPress={() => navigation.navigate('ShowDetailsPage', { item })}>
       {/* "item.title" for movies, "item.name" for tvshows */}
       <Text style={styles.title}>{item.title || item.name}</Text>
 

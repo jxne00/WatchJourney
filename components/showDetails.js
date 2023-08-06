@@ -9,65 +9,39 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  Alert,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import Constants from '../constants/constants';
-import styles from './styles/MovieTvDetailsStyle';
+import styles from './styles/ShowDetailsStyle';
 import modalStyles from './styles/ModalStyles';
-import genres from '../data/genres';
-import { printAsyncKeyContent } from './AsyncActions';
+import genres from '../data/API/genres';
+import { addShowToAsync } from './AsyncActions';
 
-// get a list of movie genres
-const movieGenres = genres.movie;
-
-function MovieDetails({ route, navigation }) {
-  // state to determine show/hide modal
+const ShowDetails = ({ route, navigation }) => {
+  const { item } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { item } = route.params;
-
-  /**
-   * @description Add ID of movie to selected watchlist in AsyncStorage
-   */
-  const addToMovieList = async (watchlist) => {
-    try {
-      // key to use for AsyncStorage
-      const storageKey = `@${watchlist}_movielist`;
-
-      // get data from AsyncStorage
-      let currentList = JSON.parse(
-        (await AsyncStorage.getItem(storageKey)) || '[]',
-      );
-
-      // check for duplicates
-      if (currentList.includes(item.id)) {
-        Alert.alert('This movie is already in the list');
-        setModalVisible(false);
-        return;
-      }
-      // add id to list and store back to AsyncStorage
-      currentList.push(item.id);
-      await AsyncStorage.setItem(storageKey, JSON.stringify(currentList));
-
-      console.log(item.id, 'added to', storageKey);
-      // print contents of AsyncStorage
-      printAsyncKeyContent(storageKey);
-
-      // close modal after adding to list
-      setModalVisible(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // variables to use based on whether item is a movie or tv show
+  let genresList, showName, type, releaseDate;
+  if (item.title) {
+    // if movie
+    showName = item.title;
+    genresList = genres.movie;
+    type = 'movie';
+    releaseDate = item.release_date;
+  } else {
+    // if tv show
+    genresList = genres.tv;
+    showName = item.name;
+    type = 'tv';
+    releaseDate = item.first_air_date;
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       <ScrollView style={styles.container}>
-        {/* Set backdrop image as background */}
+        {/* Set image backdrop image as background */}
         <ImageBackground
           source={{
             uri: `${Constants.POSTER_BASE_PATH}/original/${item.backdrop_path}`,
@@ -76,7 +50,7 @@ function MovieDetails({ route, navigation }) {
           {/* Dark overlay on top of background image */}
           <View style={styles.darkOverlay} />
 
-          {/* Poster image of movie */}
+          {/* Poster image of show */}
           <Image
             source={{
               uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
@@ -84,23 +58,23 @@ function MovieDetails({ route, navigation }) {
             style={styles.posterImage}
           />
 
-          {/* Movie Rating */}
+          {/* show rating - go to reviw page when clicked */}
           <TouchableOpacity
             style={styles.ratingContainer}
             onPress={() =>
               navigation.navigate('ReviewsPage', {
                 id: item.id,
-                name: item.title,
-                type: 'movie',
+                name: showName,
+                type,
               })
             }>
             <Text style={styles.rating}>
               <MaterialIcons name="star" size={16} color={'#ff9900'} />{' '}
-              {item.vote_average}
+              {item.vote_average.toFixed(1)}
             </Text>
           </TouchableOpacity>
 
-          {/* show modal when "+" button is pressed */}
+          {/* Button to add to watchlist - show modal when pressed. */}
           <TouchableOpacity
             style={styles.addToListBtn}
             onPress={() => setModalVisible(true)}>
@@ -110,6 +84,8 @@ function MovieDetails({ route, navigation }) {
               style={styles.addToListIcon}
             />
           </TouchableOpacity>
+
+          {/* Modal to select watchlist */}
           <Modal
             animationType="slide"
             transparent={true}
@@ -117,15 +93,15 @@ function MovieDetails({ route, navigation }) {
             onRequestClose={() => setModalVisible(false)}>
             <View style={modalStyles.modalContainer}>
               <View style={modalStyles.modalView}>
-                <Text style={modalStyles.modalText}>
-                  Add to movie watchlist:
-                </Text>
+                <Text style={modalStyles.modalText}>Add to TV watchlist:</Text>
 
                 {/* render a button for each watchlist */}
                 {Constants.WATCHLISTS.map((watchList, index) => (
                   <TouchableOpacity
                     key={index}
-                    onPress={() => addToMovieList(watchList)}
+                    onPress={() =>
+                      addShowToAsync(watchList, type, item.id, setModalVisible)
+                    }
                     style={modalStyles.modalBtnStyle}>
                     <Text style={modalStyles.modelBtnText}>{watchList}</Text>
                   </TouchableOpacity>
@@ -148,33 +124,32 @@ function MovieDetails({ route, navigation }) {
         </ImageBackground>
 
         <View>
-          {/* details of the movie */}
-          <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.release}>({item.release_date})</Text>
+          {/* details of the show */}
+          <Text style={styles.title}>{showName}</Text>
+          <Text style={styles.release}>({releaseDate})</Text>
         </View>
 
-        {/* movie overview */}
         <View style={styles.horizontalLine} />
+
+        {/* TV show overview */}
         <Text style={styles.sectionTitle}>Overview</Text>
         <Text style={styles.overview}>{item.overview}</Text>
 
         <View style={styles.horizontalLine} />
         <Text style={styles.sectionTitle}>Genres</Text>
 
-        {/* Display genres associated with the movie.
-                    The API returns 'item.genre_ids' when fetched from /discover endpoint,
-                    and 'item.genres' when fetched through movie_id. 
-                    The code below handles both cases.
-                */}
+        {/* Display genres associated with the tv show.
+            The API returns 'item.genre_ids' when fetched from /discover endpoint,
+            and 'item.genres' when fetched through series_id. 
+            The code below handles both cases.
+        */}
         <View style={styles.genresContainer}>
           {item.genre_ids
             ? item.genre_ids.map((index) => {
-                const movieGenre = movieGenres.find(
-                  (genre) => genre.id === index,
-                );
+                const genres = genresList.find((genre) => genre.id === index);
                 return (
                   <View style={styles.genre} key={index}>
-                    <Text style={styles.genreText}>{movieGenre?.name}</Text>
+                    <Text style={styles.genreText}>{genres?.name}</Text>
                   </View>
                 );
               })
@@ -192,15 +167,15 @@ function MovieDetails({ route, navigation }) {
           onPress={() =>
             navigation.navigate('ReviewsPage', {
               id: item.id,
-              name: item.title,
-              type: 'movie',
+              name: showName,
+              type,
             })
           }>
-          <Text style={styles.reviewLink}>View reviews</Text>
+          <Text style={styles.reviewLink}>See reviews</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
-export default MovieDetails;
+export default ShowDetails;

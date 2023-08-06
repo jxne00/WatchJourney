@@ -2,67 +2,39 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { fetchFromAsyncStorage } from '../../../components/AsyncActions';
 
 /**
- * @description Removes the movie_id from the watchlist stored in AsyncStorage
- * @param watchlist Name of the watchlist to remove the movie from
- * @param movieID movie_id to remove from the watchlist
- * @param listState State of the watchlist to update
+ * @description Remove a movie or TV show ID from a watchlist in AsyncStorage
+ * @param watchlist - the watchlist to remove from
+ * @param id - the ID of the movie/TV show to remove
+ * @param setStateItem - the state item to update
+ * @param type - 'movie' or 'tv'
  */
-const removeMovieFromWatchlist = async (watchlist, movieID, listState) => {
+const removeIDfromList = async (watchlist, id, setStateItem, type) => {
   try {
-    // Retrieve the current list of movie IDs
-    const storedMovieIDs =
-      JSON.parse(await AsyncStorage.getItem(`@${watchlist}_movielist`)) || [];
+    // Retrieve the current list of IDs
+    const storedIDs =
+      JSON.parse(await AsyncStorage.getItem(`@${watchlist}_${type}list`)) || [];
 
-    // Filter out the ID of the movie to remove
-    const updatedMovieIDs = storedMovieIDs.filter((id) => id !== movieID);
+    // Filter out the ID to remove
+    const updatedIDs = storedIDs.filter((storedID) => storedID !== id);
 
     // Store the updated list back in AsyncStorage
     await AsyncStorage.setItem(
-      `@${watchlist}_movielist`,
-      JSON.stringify(updatedMovieIDs),
+      `@${watchlist}_${type}list`,
+      JSON.stringify(updatedIDs),
     );
 
-    // Fetch the updated list of movies from AsyncStorage
-    const updatedMovies = await fetchFromAsyncStorage(
-      `@${watchlist}_movielist`,
+    // Fetch the updated list of IDs from AsyncStorage
+    const updatedList = await fetchFromAsyncStorage(
+      `@${watchlist}_${type}list`,
     );
+    setStateItem(updatedList);
 
-    // Update the state of the list
-    listState(updatedMovies);
-  } catch (error) {
-    console.log('Error removing movie from watchlist: ', error);
+    console.log(id, 'removed from', `@${watchlist}_${type}list`);
+  } catch (err) {
+    type === 'movie'
+      ? console.log(`Error removing movie from ${watchlist} list: `, err)
+      : console.log(`Error removing TV show from ${watchlist} list: `, err);
   }
 };
 
-/**
- * @description Removes the tv_id from the watchlist stored in AsyncStorage
- * @param watchlist Name of the watchlist to remove the tv show from
- * @param movieID tv_id to remove from the watchlist
- * @param listState State of the watchlist to update
- */
-const removeTvShowFromWatchlist = async (watchlist, tvID, listState) => {
-  try {
-    // Retrieve the current list of movie IDs
-    const storedTvIDs =
-      JSON.parse(await AsyncStorage.getItem(`@${watchlist}_tvlist`)) || [];
-
-    // Filter out the ID of the movie to remove
-    const updatedTvIDs = storedTvIDs.filter((id) => id !== tvID);
-
-    // Store the updated list back in AsyncStorage
-    await AsyncStorage.setItem(
-      `@${watchlist}_tvlist`,
-      JSON.stringify(updatedTvIDs),
-    );
-
-    // Fetch the updated list of movies from AsyncStorage
-    const updatedTvs = await fetchFromAsyncStorage(`@${watchlist}_tvlist`);
-
-    // Update the state of the list
-    listState(updatedTvs);
-  } catch (error) {
-    console.log('Error removing tv show from watchlist: ', error);
-  }
-};
-
-export { removeMovieFromWatchlist, removeTvShowFromWatchlist };
+export default removeIDfromList;

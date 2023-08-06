@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     color: Constants.SECONDARY_COL,
     marginLeft: 5,
     fontSize: 18,
-    color: '#ffffff',
   },
   loginBtn: {
     alignSelf: 'flex-end',

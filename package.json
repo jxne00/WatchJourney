@@ -14,7 +14,6 @@
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/material-top-tabs": "^6.6.3",
     "@react-navigation/native-stack": "^6.9.13",
-    "@reduxjs/toolkit": "^1.9.5",
     "expo": "~49.0.5",
     "expo-linear-gradient": "~12.3.0",
     "expo-splash-screen": "~0.20.4",
@@ -22,7 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.3",
-    "react-native-paper": "^5.9.1"
+    "react-native-paper": "^5.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

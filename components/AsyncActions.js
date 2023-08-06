@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 
-import { fetch_API_with_param } from '../data/API/api';
+import { fetch_API_with_param, Fetch_API_Data } from '../data/API/api';
 
 /**
- * @description Print the content of a key in AsyncStorage
+ * @description Print the contents of a key in AsyncStorage
  */
 const printAsyncKeyContent = async (key) => {
   try {
@@ -62,9 +62,69 @@ const fetchFromAsyncStorage = async (key) => {
   }
 };
 
+/**
+ * @description Add ID of TV show/movie to AsyncStorage
+ * @param watchlist - the watchlist to add to
+ * @param type - 'movie' or 'tv'
+ * @param id - id of movie/tv show
+ */
+const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
+  try {
+    const asyncKey =
+      type === 'movie' ? `@${watchlist}_movielist` : `@${watchlist}_tvlist`;
+
+    // get data from AsyncStorage
+    let currentList = JSON.parse(
+      (await AsyncStorage.getItem(asyncKey)) || '[]',
+    );
+
+    // check for duplicates
+    if (currentList.includes(id)) {
+      type === 'movie'
+        ? Alert.alert('This movie is already in the list')
+        : Alert.alert('This TV Show is already in the list');
+      setModalVisible(false);
+      return;
+    }
+
+    // add id to list and store back to AsyncStorage
+    currentList.push(id);
+    await AsyncStorage.setItem(asyncKey, JSON.stringify(currentList));
+
+    console.log(id, 'added to', asyncKey);
+    printAsyncKeyContent(asyncKey);
+
+    // close modal after adding to list
+    setModalVisible(false);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * @description The function first fetches IDs stored in AsyncStorage,
+ * then returns details from API using those IDs.
+ * @param key - key for AsyncStorage
+ * @param setListState - state to update
+ * @param type - 'movie' or 'tv'
+ */
+const FetchAPIwithAsync = async (key, setListState, type) => {
+  try {
+    const storedIDs =
+      JSON.parse(await AsyncStorage.getItem(`@${key}_${type}list`)) || [];
+    const promises = storedIDs.map((id) => Fetch_API_Data(`/${type}/${id}`));
+    const data = await Promise.all(promises);
+    setListState(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export {
   printAsyncKeyContent,
   printAllAsyncContent,
   clearAsyncStorage,
   fetchFromAsyncStorage,
+  addShowToAsync,
+  FetchAPIwithAsync,
 };
