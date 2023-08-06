@@ -4,7 +4,7 @@ import { Share, Alert } from 'react-native';
  * @description Share the titles of movies/tv shows in the watchlist
  * @param type - 'movie' or 'tv'
  * @param data - the state containing the movies/tv shows
- * @param watchlist - 'Watched', 'WatchLater', or 'WatchingNow'
+ * @param watchlist - 'Watched', 'Watch Later', or 'Watching Now'
  */
 const ShareWatchlist = async (type, data, watchlist) => {
   // get all the titles of the movies/tv shows and combine into a string
@@ -19,9 +19,9 @@ const ShareWatchlist = async (type, data, watchlist) => {
     let msg;
     if (watchlist == 'Watched') {
       msg = `Check out ${name} I've watched!\n${titles}`;
-    } else if (watchlist == 'WatchLater') {
+    } else if (watchlist == 'Watch Later') {
       msg = `Check out ${name} I'm planning to watch!\n${titles}`;
-    } else {
+    } else if (watchlist == 'Watching Now') {
       msg = `Check out ${name} I'm watching now!\n${titles}`;
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View, Text, TouchableOpacity, Image } from 'react-native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import styles from '../styles/watchlistStyles';
+import styles from '../watchlistStyles';
 import Constants from '../../../constants/constants';
 import removeIDfromList from './RemoveFromList';
 

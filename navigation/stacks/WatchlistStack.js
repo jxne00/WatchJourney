@@ -4,10 +4,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { View, StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
 import SCREEN_OPTIONS from './StackScreenOptions';
-// import WatchedList from '../../screens/watchlist/Watched';
-import WatchedScreen from '../../screens/watchlist/Watched';
-import WatchingNow from '../../screens/watchlist/WatchingNow';
-import WatchLater from '../../screens/watchlist/WatchLater';
+import WatchlistScreen from '../../screens/watchlist/Watchlist';
 import ShowDetails from '../../components/showDetails';
 
 const TopTab = createMaterialTopTabNavigator();
@@ -33,28 +30,31 @@ const WatchlistTopTab = () => (
     {/* "Watching now" screen stack */}
     <TopTab.Screen
       name="WatchingTopTab"
-      component={WatchingNow}
+      component={WatchlistScreen}
       options={{
         tabBarLabel: 'Watching Now',
       }}
+      initialParams={{ tabType: 'Watching Now' }}
     />
 
     {/* "Intend to watch" screen stack */}
     <TopTab.Screen
       name="WatchlaterTopTab"
-      component={WatchLater}
+      component={WatchlistScreen}
       options={{
         tabBarLabel: 'Watch Later',
       }}
+      initialParams={{ tabType: 'Watch Later' }}
     />
 
     {/* "Watched" screen stack */}
     <TopTab.Screen
       name="WatchedTopTab"
-      component={WatchedScreen}
+      component={WatchlistScreen}
       options={{
         tabBarLabel: 'Watched',
       }}
+      initialParams={{ tabType: 'Watched' }}
     />
   </TopTab.Navigator>
 );
@@ -67,6 +67,10 @@ const WatchlistMain = () => (
   </View>
 );
 
+/**
+ * @description stack navigator for watchlist screen.
+ * needed to navigate to 'ShowDetails' screen
+ */
 const WatchlistStackNav = () => (
   <WatchlistStack.Navigator>
     <WatchlistStack.Screen

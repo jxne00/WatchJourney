@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   chosenBtn: {
-    backgroundColor: '#afafaf',
+    backgroundColor: '#000000',
+    opacity: 0.6,
     borderRadius: 10,
     padding: 10,
     marginVertical: 5,
@@ -26,8 +27,8 @@ const styles = StyleSheet.create({
     width: '40%',
   },
   notChosenBtn: {
-    backgroundColor: Constants.SECONDARY_COL,
-    borderColor: '#4e4c4c',
+    backgroundColor: '#000',
+    borderColor: '#000000',
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
@@ -35,8 +36,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '40%',
   },
-  buttonText: {
-    color: '#000',
+  btnText: {
+    color: '#ffffff',
+    fontFamily: Constants.POPPINS_REGULAR_FONT,
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  chosenBtnText: {
+    color: '#ffffff',
     fontFamily: Constants.POPPINS_REGULAR_FONT,
     fontSize: 16,
     textAlign: 'center',

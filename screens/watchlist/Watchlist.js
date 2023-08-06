@@ -2,24 +2,24 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
-import styles from './styles/watchlistStyles';
-// import { FetchMovies, FetchTvShows } from './components/FetchWatchlist';
+import styles from './watchlistStyles';
 import { FetchAPIwithAsync } from '../../components/AsyncActions';
 import ShareWatchlist from './components/ShareWatchlist';
 import DetailsCard from './components/DetailsCard';
 
-const WatchedScreen = ({ navigation }) => {
-  const [watchedShows, setWatchedShows] = useState([]);
+const WatchlistScreen = ({ navigation, route }) => {
+  const { tabType } = route.params;
+  const [watchlistShows, setWatchlistShows] = useState([]);
   const [type, setType] = useState('movie');
 
   // reload the screen whenever it is visited
   // so that newly added items are displayed
   useFocusEffect(
     useCallback(() => {
-      // fetch movie/tv show data for 'Watched' list
+      // fetch data of movie/tvshows in watchlist
       type === 'movie'
-        ? FetchAPIwithAsync('Watched', setWatchedShows, 'movie')
-        : FetchAPIwithAsync('Watched', setWatchedShows, 'tv');
+        ? FetchAPIwithAsync(tabType, setWatchlistShows, 'movie')
+        : FetchAPIwithAsync(tabType, setWatchlistShows, 'tv');
       return () => {};
     }, [type]),
   );
@@ -42,8 +42,8 @@ const WatchedScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {/* display message if "watched" list is empty */}
-      {watchedShows.length === 0 &&
+      {/* display message if watchlist is empty */}
+      {watchlistShows.length === 0 &&
         (type === 'movie' ? (
           <Text style={styles.emptyListMsg}>Add some movies to your list!</Text>
         ) : (
@@ -52,27 +52,36 @@ const WatchedScreen = ({ navigation }) => {
           </Text>
         ))}
 
-      {/* render flatlist if "watched" list contains items */}
-      {watchedShows.length > 0 && (
+      {/* render flatlist if watchlist contains items */}
+      {watchlistShows.length > 0 && (
         <View>
           <Text style={styles.flatlistTitle}>
             {type === 'movie'
-              ? 'Movies currently watching'
+              ? tabType === 'Watched'
+                ? 'Movies watched'
+                : tabType === 'Watch Later'
+                ? 'Movies to watch later'
+                : 'Movies currently watching'
+              : tabType === 'Watched'
+              ? 'TV Shows watched'
+              : tabType === 'Watch Later'
+              ? 'TV shows to watch later'
               : 'TV Shows currently watching'}
           </Text>
 
+          {/* flatlist of tv shows/movies in the watchlist */}
           <DetailsCard
-            data={watchedShows}
+            data={watchlistShows}
             navigation={navigation}
-            watchlist={'Watched'}
+            watchlist={tabType}
             type={type}
-            setStateItem={setWatchedShows}
+            setStateItem={setWatchlistShows}
           />
 
           {/* display number of records found */}
           <View style={styles.footer}>
             <Text style={styles.numRecords}>
-              {watchedShows.length} record(s) found
+              {watchlistShows.length} record(s) found
             </Text>
 
             {/* share button */}
@@ -80,7 +89,7 @@ const WatchedScreen = ({ navigation }) => {
               style={styles.shareBtn}
               onPress={() => {
                 // share the titles of the movies/tv shows in the list
-                ShareWatchlist(type, watchedShows, 'Watched');
+                ShareWatchlist(type, watchlistShows, tabType);
               }}>
               <FontAwesome
                 name="share-square-o"
@@ -95,4 +104,4 @@ const WatchedScreen = ({ navigation }) => {
   );
 };
 
-export default WatchedScreen;
+export default WatchlistScreen;

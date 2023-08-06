@@ -11,7 +11,8 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { SegmentedButtons, Divider } from 'react-native-paper';
+import SegmentedControl from '@react-native-segmented-control/segmented-control';
+import { Divider } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fetch_API_Data, fetch_API_with_param } from '../../data/API/api';
 import styles from './HomeStyles';
@@ -37,7 +38,7 @@ const HomeScreen = ({ navigation }) => {
   useEffect(() => {
     // fetch movies showing in theaters now
     // docs: https://developer.themoviedb.org/reference/movie-now-playing-list
-    Fetch_API_Data('/movie/now_playing').then((response) =>
+    fetch_API_with_param('/movie/now_playing').then((response) =>
       setNowShowing(response.results),
     );
   }, []);
@@ -100,16 +101,15 @@ const HomeScreen = ({ navigation }) => {
 
         {/* =========== Search section =========== */}
         {/* buttons for indicating "tv show" or "movie" search */}
-        <SegmentedButtons
-          value={searchType}
-          onValueChange={(newValue) => {
-            setSearchType(newValue);
+        <SegmentedControl
+          values={['Movies', 'TV Shows']}
+          selectedIndex={searchType === 'movie' ? 0 : 1}
+          onChange={(event) => {
+            setSearchType(
+              event.nativeEvent.selectedSegmentIndex === 0 ? 'movie' : 'tv',
+            );
             resetSearch();
           }}
-          buttons={[
-            { label: 'Movies', value: 'movie' },
-            { label: 'TV Shows', value: 'tv' },
-          ]}
           style={styles.segBtnStyle}
         />
 
@@ -129,7 +129,7 @@ const HomeScreen = ({ navigation }) => {
             textContentType={'none'}
             contextMenuHidden={true}
             maxLength={100}
-            onKeyPress={getSearchResults}
+            // onKeyPress={getSearchResults}
           />
           <TouchableOpacity onPress={getSearchResults}>
             <MaterialIcons name="search" style={styles.searchIcon} />
@@ -162,13 +162,7 @@ const HomeScreen = ({ navigation }) => {
             showsHorizontalScrollIndicator={false}
             disableIntervalMomentum
             onScroll={Animated.event(
-              [
-                {
-                  nativeEvent: {
-                    contentOffset: { x: scrollX },
-                  },
-                },
-              ],
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
               { useNativeDriver: false },
             )}
             scrollEventThrottle={12}>
