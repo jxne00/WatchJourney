@@ -24,18 +24,23 @@ const HomeScreen = ({ navigation }) => {
   const [nowShowing, setNowShowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [nowAiring, setNowAiring] = useState([]);
 
   const OFFSET = 40;
   const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
 
-  // value to track scroll position of carousel cards
+  // values to track scroll positions of carousel cards
   const scrollX = useRef(new Animated.Value(0)).current;
+  const scrollX2 = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     // fetch movies showing in theaters now
-    // docs: https://developer.themoviedb.org/reference/movie-now-playing-list
-    fetch_API_with_param('/movie/now_playing').then((response) =>
-      setNowShowing(response.results),
+    fetch_API_with_param('/movie/upcoming?language=en-US&page=1').then(
+      (response) => setNowShowing(response.results),
+    );
+    // fetch tv shows airing today
+    fetch_API_with_param('/tv/airing_today?language=en-US&page=1').then(
+      (response) => setNowAiring(response.results),
     );
   }, []);
 
@@ -134,7 +139,7 @@ const HomeScreen = ({ navigation }) => {
           <View>
             <View style={styles.sectionContainer}>
               <MaterialIcons name="movie" size={24} />
-              <Text style={styles.sectionTitle}> In Theatres Now</Text>
+              <Text style={styles.sectionTitle}> Now In Theatres</Text>
             </View>
             <ScrollView
               horizontal={true}
@@ -162,7 +167,36 @@ const HomeScreen = ({ navigation }) => {
             </ScrollView>
           </View>
 
-          <View style={styles.horizontalLine}></View>
+          <View>
+            <View style={styles.sectionContainer}>
+              <MaterialIcons name="live-tv" size={24} />
+              <Text style={styles.sectionTitle}> Now On Air</Text>
+            </View>
+            <ScrollView
+              horizontal={true}
+              decelerationRate={'normal'}
+              snapToInterval={ITEM_WIDTH}
+              style={styles.scrollviewStyle}
+              showsHorizontalScrollIndicator={false}
+              disableIntervalMomentum
+              onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { x: scrollX2 } } }],
+                { useNativeDriver: false },
+              )}
+              scrollEventThrottle={12}>
+              {/* render custom carousel cards */}
+              {nowAiring.map((item, index) => (
+                <CarouselCard
+                  key={item.id}
+                  item={item}
+                  navigation={navigation}
+                  index={index}
+                  scrollX={scrollX2}
+                  last_index={nowAiring.length - 1}
+                />
+              ))}
+            </ScrollView>
+          </View>
         </View>
       </SafeAreaView>
     </TouchableWithoutFeedback>

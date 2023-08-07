@@ -22,6 +22,8 @@ const ITEM_HEIGHT = 180;
  * @param last_index - index of last movie object (used to determine margins)
  */
 const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
+  const showTitle = item.title || item.name;
+
   const inputRange = [
     (index - 1) * ITEM_WIDTH, // scroll pos of previous card
     index * ITEM_WIDTH, // scroll pos of current card
@@ -79,9 +81,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
         <View style={styles.titleContainer}>
           <Text style={styles.title}>
             {/* only show first 50 chars of title */}
-            {item.title.length > 25
-              ? item.title.slice(0, 25) + '...'
-              : item.title}
+            {showTitle.length > 25 ? showTitle.slice(0, 25) + '...' : showTitle}
           </Text>
         </View>
 

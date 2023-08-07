@@ -30,13 +30,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 10,
   },
-  horizontalLine: {
-    borderBottomColor: '#919191',
-    borderBottomWidth: 1,
-    width: '90%',
-    alignSelf: 'center',
-    marginVertical: 15,
-  },
 
   // ------ search box ------
   searchBoxContainer: {
