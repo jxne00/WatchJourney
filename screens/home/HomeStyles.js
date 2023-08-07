@@ -38,98 +38,34 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
 
-  // ------ radio buttons ------
-  segBtnStyle: {
-    marginHorizontal: 20,
-    marginTop: '5%',
-  },
-  segBtnTextStyle: {
-    fontSize: 16,
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    color: '#000',
-  },
-
   // ------ search box ------
   searchBoxContainer: {
     backgroundColor: '#fff',
-    borderRadius: 20,
+    borderRadius: 30,
+    height: 50,
     marginHorizontal: 15,
     marginTop: 15,
     paddingHorizontal: 10,
     paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#000',
   },
   searchInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: Constants.POPPINS_REGULAR_FONT,
     color: '#000',
     paddingHorizontal: 10,
   },
   searchIcon: {
-    fontSize: 25,
+    fontSize: 30,
     color: '#000',
   },
-  searchResultsContainer: {
-    backgroundColor: Constants.SECONDARY_COL,
-    borderRightWidth: 1,
-    borderLeftWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#000',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginHorizontal: 20,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    alignSelf: 'center',
-    top: '24%',
-    position: 'absolute',
-    zIndex: 1,
-  },
-  searchScrollStyle: {
-    maxHeight: 290,
-  },
-
-  // ------ search results ------
-  searchResult: {
-    // flexDirection: 'row',
-    alignItems: 'left',
-    marginVertical: 5,
-    paddingBottom: 5,
-    borderBottomColor: '#ababab',
-    borderBottomWidth: 1,
-  },
-  title: {
-    fontSize: 16,
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    color: '#000',
-  },
-  releaseRating: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  releaseDate: {
-    fontSize: 14,
-    fontFamily: Constants.POPPINS_ITALIC_FONT,
-    color: '#303030',
-    marginRight: 5,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    right: 5,
-  },
-  ratingIcon: {
-    fontSize: 14,
-    color: '#d88928',
-    marginRight: 2,
-  },
-  ratingNumber: {
-    fontSize: 14,
-    fontFamily: Constants.POPPINS_REGULAR_FONT,
-    color: '#000000',
-    paddingVertical: 5,
+  clearIcon: {
+    fontSize: 20,
+    color: '#232323',
   },
 });
 

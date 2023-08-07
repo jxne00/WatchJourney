@@ -126,7 +126,12 @@ const ShowDetails = ({ route, navigation }) => {
         <View>
           {/* details of the show */}
           <Text style={styles.title}>{showName}</Text>
-          <Text style={styles.release}>({releaseDate})</Text>
+          <View style={styles.dateShowType}>
+            <Text style={styles.release}>({releaseDate}) &#x2022;</Text>
+            <Text style={styles.showType}>
+              {type === 'movie' ? 'Movie' : 'TV Show'}
+            </Text>
+          </View>
         </View>
 
         <View style={styles.horizontalLine} />

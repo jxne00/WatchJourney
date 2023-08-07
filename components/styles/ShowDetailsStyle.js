@@ -20,6 +20,18 @@ const styles = StyleSheet.create({
     color: '#565656',
     alignSelf: 'center',
   },
+  dateShowType: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
+  showType: {
+    fontSize: 16,
+    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    color: '#d64545',
+    marginLeft: 5,
+  },
   ratingContainer: {
     backgroundColor: Constants.SECONDARY_COL,
     borderRadius: 10,
