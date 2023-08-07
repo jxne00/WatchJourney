@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import styles from './DiscoverStyles';
-// import MovieListView from '../../components/MoviesList';
-// import TvListView from '../../components/TvShowsList';
 import ShowsList from '../../components/ShowsList';
 
 /**
  * @description The discover screen displays a list of movies and tv shows.
  */
 function DiscoverScreen({ navigation }) {
+  // show movies by default
   const [type, setType] = useState('movie');
 
   return (
@@ -30,7 +29,7 @@ function DiscoverScreen({ navigation }) {
           {/* button to display TV show list */}
           <TouchableOpacity
             style={
-              // set a different style for chosen button
+              // set a different style for pressed/unpressed button
               type == 'tv' ? styles.chosenBtn : styles.notChosenBtn
             }
             onPress={() => setType('tv')}>
@@ -38,7 +37,7 @@ function DiscoverScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        {/* display a list of movies/tv shows according to button pressed */}
+        {/* display a list of movies or tvshows according to button pressed */}
         <ShowsList navigation={navigation} type={type} />
       </View>
     </SafeAreaView>

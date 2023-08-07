@@ -7,7 +7,6 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Switch,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {
@@ -50,7 +49,7 @@ const ProfileScreen = ({ navigation }) => {
           style={styles.profileAvatar}
         />
         <View style={styles.profileTexts}>
-          <Text style={styles.profileName}>June</Text>
+          <Text style={styles.profileName}>Demo</Text>
           <Text style={styles.profileUsername}>@kayatoast1234</Text>
         </View>
       </View>
@@ -60,7 +59,12 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.optionBtn}
           onPress={() => navigation.navigate('FaqPage')}>
-          <Text style={styles.optionText}>FAQ</Text>
+          <View>
+            <Text style={styles.optionText}>FAQ</Text>
+            <Text style={styles.optionDesc}>
+              Frequently asked questions about the app.
+            </Text>
+          </View>
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
@@ -70,7 +74,12 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.optionBtn}
           onPress={printAllAsyncContent}>
-          <Text style={styles.optionText}>Print all stored content</Text>
+          <View>
+            <Text style={styles.optionText}>Print stored async content</Text>
+            <Text style={styles.optionDesc}>
+              Prints all async storage stored content into the console.
+            </Text>
+          </View>
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
@@ -78,7 +87,12 @@ const ProfileScreen = ({ navigation }) => {
       {/* clear all contents of async storage */}
       <View style={styles.optionContainer}>
         <TouchableOpacity style={styles.optionBtn} onPress={confirmAsyncClear}>
-          <Text style={styles.optionText}>Clear Async Storage</Text>
+          <View>
+            <Text style={styles.optionText}>Clear async storage</Text>
+            <Text style={styles.optionDesc}>
+              Clears all contents currenty stored in async storage.
+            </Text>
+          </View>
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
@@ -87,7 +101,7 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity
           style={styles.signoutBtn}
           onPress={() =>
-            // show confirmation alert when button is pressed
+            // show confirmation alert when sign out button is pressed
             Alert.alert('Confirmation', 'Are you sure you want to sign out?', [
               {
                 // back to settings screen if "Cancel" pressed

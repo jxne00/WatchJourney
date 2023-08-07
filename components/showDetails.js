@@ -8,14 +8,12 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
 import styles from './styles/ShowDetailsStyle';
-import modalStyles from './styles/ModalStyles';
 import genres from '../data/API/genres';
-import { addShowToAsync } from './AsyncActions';
+import WatchlistModal from './ShowModal';
 
 const ShowDetails = ({ route, navigation }) => {
   const { item } = route.params;
@@ -86,41 +84,12 @@ const ShowDetails = ({ route, navigation }) => {
           </TouchableOpacity>
 
           {/* Modal to select watchlist */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setModalVisible(false)}>
-            <View style={modalStyles.modalContainer}>
-              <View style={modalStyles.modalView}>
-                <Text style={modalStyles.modalText}>Add to TV watchlist:</Text>
-
-                {/* render a button for each watchlist */}
-                {Constants.WATCHLISTS.map((watchList, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() =>
-                      addShowToAsync(watchList, type, item.id, setModalVisible)
-                    }
-                    style={modalStyles.modalBtnStyle}>
-                    <Text style={modalStyles.modelBtnText}>{watchList}</Text>
-                  </TouchableOpacity>
-                ))}
-
-                {/* close modal when cancel pressed */}
-                <TouchableOpacity
-                  onPress={() => {
-                    setModalVisible(false);
-                  }}>
-                  <MaterialIcons
-                    name="cancel"
-                    size={30}
-                    style={modalStyles.modalCancelIcon}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
+          <WatchlistModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            type={type}
+            show_id={item.id}
+          />
         </ImageBackground>
 
         <View>

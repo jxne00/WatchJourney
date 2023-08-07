@@ -5,7 +5,6 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  Modal,
   ActivityIndicator,
   Button,
 } from 'react-native';
@@ -14,8 +13,13 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { fetch_API_with_param } from '../data/API/api';
 import styles from './styles/ShowsListStyle';
 import Constants from '../constants/constants';
-import { addShowToAsync } from './AsyncActions';
+import WatchlistModal from './ShowModal';
 
+/**
+ * @description A flatlist of movies or tv shows
+ * @param navigation - navigation object passed from parent component
+ * @param type - 'movie' or 'tv'
+ */
 const ShowsList = ({ navigation, type }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -27,9 +31,8 @@ const ShowsList = ({ navigation, type }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    // fetch popular movies/tv shows based on type
-    const endpoint = type === 'movie' ? '/movie/popular' : '/tv/top_rated';
-    fetch_API_with_param(`${endpoint}?language=en-US&page=${page}`).then(
+    // fetch trending movies/tv shows based on type
+    fetch_API_with_param(`/trending/${type}/day?page=${page}`).then(
       (response) => setData(response),
     );
     setIsLoading(false);
@@ -131,41 +134,13 @@ const ShowsList = ({ navigation, type }) => {
         }
       />
 
-      {/* modal to allow user to choose which list to add to */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Add to TV watchlist:</Text>
-            {/* render a button for each watchlist */}
-            {Constants.WATCHLISTS.map((watchList, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() =>
-                  addShowToAsync(watchList, type, chosenShowID, setModalVisible)
-                }
-                style={styles.modalBtnStyle}>
-                <Text style={styles.modelBtnText}>{watchList}</Text>
-              </TouchableOpacity>
-            ))}
-
-            {/* close modal when cancel pressed */}
-            <TouchableOpacity
-              onPress={() => {
-                setModalVisible(false);
-              }}>
-              <MaterialIcons
-                name="cancel"
-                size={30}
-                style={styles.modalCancelIcon}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+      {/* Modal to select watchlist */}
+      <WatchlistModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        type={type}
+        show_id={chosenShowID}
+      />
     </View>
   );
 };

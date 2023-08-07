@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -26,6 +27,7 @@ const WatchlistScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="light" />
       <View style={styles.chosenBtnCont}>
         {/* button to display movie list */}
         <TouchableOpacity

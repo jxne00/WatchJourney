@@ -75,9 +75,8 @@ const HomeScreen = ({ navigation }) => {
     // dismiss keyboard when outside of text input is pressed
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
+        <StatusBar style="dark" />
         <View style={styles.container}>
-          <StatusBar style="dark" />
-
           {/* App Name */}
           <GradientText
             style={styles.appname}

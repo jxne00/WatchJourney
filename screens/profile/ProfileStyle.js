@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
 
-/**
- * @description stylesheet for settings screen
- */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -15,10 +12,11 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 14,
     backgroundColor: '#c8d6e8',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#000',
     borderRadius: 16,
     shadowColor: '#000',
+    elevation: 4,
     shadowOffset: { width: -3, height: 3 },
     shadowRadius: 4,
     shadowOpacity: 0.4,
@@ -45,7 +43,33 @@ const styles = StyleSheet.create({
     color: '#6a6a6a',
   },
 
-  // "sign out" button styles
+  optionContainer: {
+    marginVertical: '2%',
+    alignSelf: 'center',
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: '#000000',
+    backgroundColor: Constants.SECONDARY_COL,
+    paddingVertical: 12,
+  },
+  optionBtn: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: '5%',
+  },
+  optionText: {
+    color: '#000000',
+    fontSize: 20,
+    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+  },
+  optionDesc: {
+    color: '#000000',
+    fontSize: 16,
+    fontFamily: Constants.POPPINS_REGULAR_FONT,
+    maxWidth: '90%',
+  },
+
   signout: {
     marginVertical: 24,
   },
@@ -60,27 +84,6 @@ const styles = StyleSheet.create({
   SignoutBtnText: {
     color: Constants.SECONDARY_COL,
     fontSize: 16,
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-  },
-
-  optionContainer: {
-    marginVertical: 20,
-    alignSelf: 'center',
-    width: '100%',
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: '#000000',
-    backgroundColor: Constants.SECONDARY_COL,
-    paddingVertical: 12,
-  },
-  optionBtn: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: '5%',
-  },
-  optionText: {
-    color: '#000000',
-    fontSize: 20,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
   },
 });
