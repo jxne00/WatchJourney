@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
-
-import { fetch_API_with_param, Fetch_API_Data } from '../data/API/api';
+import { fetch_API_with_param, Fetch_API_Data } from '../data/API';
 
 /**
  * @description Print the contents of a key in AsyncStorage
@@ -10,8 +9,8 @@ const printAsyncKeyContent = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
     console.log(`Key: ${key} | Contains: ${value}`);
-  } catch (error) {
-    console.error(`Error reading value from ${key}: `, error);
+  } catch (err) {
+    console.error(`Error reading value from ${key}: `, err);
   }
 };
 
@@ -27,8 +26,8 @@ const printAllAsyncContent = async () => {
     result.forEach(([key, value]) => {
       console.log(`${key}: ${value}`);
     });
-  } catch (error) {
-    console.error('Error reading AsyncStorage:', error);
+  } catch (err) {
+    console.error('printAllAsyncContent(): ', err);
   }
 };
 
@@ -39,8 +38,7 @@ const clearAsyncStorage = async () => {
   try {
     await AsyncStorage.clear();
     Alert.alert('AsyncStorage successfully cleared!');
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
     Alert.alert('Failed to clear AsyncStorage');
   }
 };
@@ -57,8 +55,8 @@ const fetchFromAsyncStorage = async (key) => {
     );
     const data = await Promise.all(promises);
     return data;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error('fetchFromAsyncStorage(): ', err);
   }
 };
 
@@ -96,8 +94,8 @@ const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
 
     // close modal after adding to list
     setModalVisible(false);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log('addShowToAsync(): ', err);
   }
 };
 
@@ -115,8 +113,8 @@ const FetchAPIwithAsync = async (key, setListState, type) => {
     const promises = storedIDs.map((id) => Fetch_API_Data(`/${type}/${id}`));
     const data = await Promise.all(promises);
     setListState(data);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error('FetchAPIwithAsync(): ', err);
   }
 };
 

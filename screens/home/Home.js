@@ -14,17 +14,19 @@ import {
 } from 'react-native';
 import { Divider } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
-import { fetch_API_with_param } from '../../data/API/api';
+import { fetch_API_with_param, Fetch_API_Data } from '../../data/API';
 import Constants from '../../constants/constants';
 import styles from './HomeStyles';
 import GradientText from '../../components/GradientText';
 import CarouselCard from './components/CarouselCard';
+import { useGenres } from '../../data/GenresContext';
 
 const HomeScreen = ({ navigation }) => {
   const [nowShowing, setNowShowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [nowAiring, setNowAiring] = useState([]);
+  const { movieGenres, setMovieGenres, tvGenres, setTvGenres } = useGenres();
 
   const OFFSET = 40;
   const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
@@ -34,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
   const scrollX2 = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // fetch movies showing in theaters now
+    // fetch upcoming movies
     fetch_API_with_param('/movie/upcoming?language=en-US&page=1').then(
       (response) => setNowShowing(response.results),
     );
@@ -42,6 +44,19 @@ const HomeScreen = ({ navigation }) => {
     fetch_API_with_param('/tv/airing_today?language=en-US&page=1').then(
       (response) => setNowAiring(response.results),
     );
+
+    // fetch the list of movie genres, and store to context
+    if (movieGenres.length === 0) {
+      Fetch_API_Data('/genre/movie/list').then((response) => {
+        setMovieGenres(response.genres);
+      });
+    }
+    // fetch the list of tv genres, and store to context
+    if (tvGenres.length === 0) {
+      Fetch_API_Data('/genre/tv/list').then((response) => {
+        setTvGenres(response.genres);
+      });
+    }
   }, []);
 
   // clears the search query and results
@@ -139,7 +154,7 @@ const HomeScreen = ({ navigation }) => {
           <View>
             <View style={styles.sectionContainer}>
               <MaterialIcons name="movie" size={24} />
-              <Text style={styles.sectionTitle}> Now In Theatres</Text>
+              <Text style={styles.sectionTitle}> Upcoming movies</Text>
             </View>
             <ScrollView
               horizontal={true}

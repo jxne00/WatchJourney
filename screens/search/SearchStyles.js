@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 30,
     width: '95%',
-    borderRadius: 25,
     height: 50,
   },
   searchInput: {

@@ -10,8 +10,6 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-
-// import stylesheets
 import styles from './SignupStyles';
 
 const SignupScreen = ({ navigation }) => {

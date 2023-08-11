@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Fetch_API_Data } from '../../../data/API/api';
+import { Fetch_API_Data } from '../../../data/API';
 
 /**
  * @description The function first fetches movie IDs stored in AsyncStorage using key,

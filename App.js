@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import RootStack from './navigation/RootStack';
+import { GenresProvider } from './data/GenresContext';
 
 const App = () => {
   // load fonts from fonts folder
@@ -20,9 +21,11 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <GenresProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </GenresProvider>
   );
 };
 

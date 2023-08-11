@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import styles from '../styles/watchlistStyles';
+import styles from '../watchlistStyles';
 import Constants from '../../../constants/constants';
 import removeMovieFromWatchlist from '../components/RemoveFromList';
 

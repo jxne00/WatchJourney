@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import styles from './FaqStyle';
 
 const questions = [

@@ -10,7 +10,7 @@ import {
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import { MaterialIcons } from '@expo/vector-icons';
 import styles from './SearchStyles';
-import { fetch_API_with_param } from '../../data/API/api';
+import { fetch_API_with_param } from '../../data/API';
 
 const SearchScreen = ({ navigation, route }) => {
   const { query } = route.params;

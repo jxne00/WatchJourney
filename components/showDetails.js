@@ -12,25 +12,26 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
 import styles from './styles/ShowDetailsStyle';
-import genres from '../data/API/genres';
 import WatchlistModal from './ShowModal';
+import { useGenres } from '../data/GenresContext';
 
 const ShowDetails = ({ route, navigation }) => {
   const { item } = route.params;
+  const { movieGenres, tvGenres } = useGenres();
   const [modalVisible, setModalVisible] = useState(false);
 
-  // variables to use based on whether item is a movie or tv show
+  // set variables based on whether item is a movie or tv show
   let genresList, showName, type, releaseDate;
   if (item.title) {
     // if movie
     showName = item.title;
-    genresList = genres.movie;
+    genresList = movieGenres;
     type = 'movie';
     releaseDate = item.release_date;
   } else {
     // if tv show
-    genresList = genres.tv;
     showName = item.name;
+    genresList = tvGenres;
     type = 'tv';
     releaseDate = item.first_air_date;
   }
@@ -112,14 +113,14 @@ const ShowDetails = ({ route, navigation }) => {
         <View style={styles.horizontalLine} />
         <Text style={styles.sectionTitle}>Genres</Text>
 
-        {/* Display genres associated with the tv show.
-            The API returns 'item.genre_ids' when fetched from /discover endpoint,
-            and 'item.genres' when fetched through series_id. 
-            The code below handles both cases.
-        */}
+        {/* 
+        Get genre names based on id if array of genre_ids is passed in.
+        Otherwise, display genre names passed in.
+         */}
         <View style={styles.genresContainer}>
           {item.genre_ids
             ? item.genre_ids.map((index) => {
+                // get genre names based on genre id
                 const genres = genresList.find((genre) => genre.id === index);
                 return (
                   <View style={styles.genre} key={index}>
@@ -135,6 +136,8 @@ const ShowDetails = ({ route, navigation }) => {
         </View>
 
         <View style={styles.horizontalLine} />
+
+        {/* Button to see reviews - navigate to reviews page */}
         <Text style={styles.sectionTitle}>Reviews</Text>
         <TouchableOpacity
           style={styles.seeReviewsBtn}

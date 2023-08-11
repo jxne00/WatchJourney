@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { fetch_API_with_param } from '../data/API/api';
+import { fetch_API_with_param } from '../data/API';
 import styles from './styles/ShowsListStyle';
 import Constants from '../constants/constants';
 import WatchlistModal from './ShowModal';
