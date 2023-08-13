@@ -1,6 +1,19 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import { fetch_API_with_param, Fetch_API_Data } from '../data/API';
+import { auth } from '../data/Firebase';
+
+/**
+ * @description Get the firebase userID of current loggedin user
+ */
+const getUserId = async () => {
+  try {
+    const user = auth.currentUser;
+    return user.uid;
+  } catch (err) {
+    console.error('getUserId(): ', err);
+  }
+};
 
 /**
  * @description Print the contents of a key in AsyncStorage
@@ -68,8 +81,13 @@ const fetchFromAsyncStorage = async (key) => {
  */
 const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
   try {
+    // get user id
+    const userID = await getUserId();
+
     const asyncKey =
-      type === 'movie' ? `@${watchlist}_movielist` : `@${watchlist}_tvlist`;
+      type === 'movie'
+        ? `@${userID}_${watchlist}_movielist`
+        : `@${userID}_${watchlist}_tvlist`;
 
     // get data from AsyncStorage
     let currentList = JSON.parse(
@@ -108,8 +126,11 @@ const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
  */
 const FetchAPIwithAsync = async (key, setListState, type) => {
   try {
+    const userID = await getUserId();
+
     const storedIDs =
-      JSON.parse(await AsyncStorage.getItem(`@${key}_${type}list`)) || [];
+      JSON.parse(await AsyncStorage.getItem(`@${userID}_${key}_${type}list`)) ||
+      [];
     const promises = storedIDs.map((id) => Fetch_API_Data(`/${type}/${id}`));
     const data = await Promise.all(promises);
     setListState(data);

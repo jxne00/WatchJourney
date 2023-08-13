@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   View,
@@ -13,10 +13,33 @@ import {
   clearAsyncStorage,
   printAllAsyncContent,
 } from '../../components/AsyncActions';
+import { auth, db } from '../../data/Firebase';
 import Constants from '../../constants/constants';
 import styles from './ProfileStyle';
 
 const ProfileScreen = ({ navigation }) => {
+  const [loggedinUser, setLoggedinUser] = useState('');
+
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      const userRef = db.collection('users').doc(currentUser.uid);
+      userRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            setLoggedinUser(doc.data());
+          } else {
+            console.log('No such document!');
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting document:', error);
+        });
+    }
+  }, []);
+
   // confirms if user wants to clear async storage
   const confirmAsyncClear = () => {
     Alert.alert(
@@ -38,6 +61,19 @@ const ProfileScreen = ({ navigation }) => {
     );
   };
 
+  // signout user
+  const handleSignout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        console.log('User signed out successfully.');
+        navigation.navigate('LoginScreen');
+      })
+      .catch((error) => {
+        console.log('Error signing out: ', error);
+      });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar style="light" />
@@ -49,8 +85,8 @@ const ProfileScreen = ({ navigation }) => {
           style={styles.profileAvatar}
         />
         <View style={styles.profileTexts}>
-          <Text style={styles.profileName}>Demo</Text>
-          <Text style={styles.profileUsername}>@kayatoast1234</Text>
+          <Text style={styles.profileName}>{loggedinUser.name}</Text>
+          <Text style={styles.profileUsername}>{loggedinUser.email}</Text>
         </View>
       </View>
 
@@ -100,22 +136,7 @@ const ProfileScreen = ({ navigation }) => {
       <View style={styles.signout}>
         <TouchableOpacity
           style={styles.signoutBtn}
-          onPress={() =>
-            // show confirmation alert when sign out button is pressed
-            Alert.alert('Confirmation', 'Are you sure you want to sign out?', [
-              {
-                // back to settings screen if "Cancel" pressed
-                text: 'Cancel',
-                onPress: () => '',
-                style: 'cancel',
-              },
-              {
-                // go to login screen if "Yes" pressed
-                text: 'Yes',
-                onPress: () => navigation.navigate('Login'),
-              },
-            ])
-          }
+          onPress={handleSignout}
           colors={[Constants.PRIMARY_COL, Constants.PRIMARY_COL]}>
           <Text style={styles.SignoutBtnText}>Sign Out</Text>
         </TouchableOpacity>

@@ -10,25 +10,55 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { auth, db } from '../../data/Firebase';
 import styles from './SignupStyles';
 
 const SignupScreen = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  /**
-   * @description handles what happens when "Sign up" button is pressed
-   */
+  // sign up with firebase auth and firestore
   const handleSignup = () => {
-    Alert.alert('Notice', 'This function has not been implemented yet.', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      // navigate back to login when "Sign up" is pressed
-      { text: 'OK', onPress: () => navigation.navigate('LoginScreen') },
-    ]);
+    // check for empty fields
+    if (!email || !password || !name) {
+      Alert.alert(
+        'Oops',
+        'Looks like you missed something.\nPlease fill in all fields and try again.',
+      );
+      return;
+    }
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+
+        // store into firestore collection
+        db.collection('users').doc(user.uid).set({
+          name: name,
+          avatar: '../../assets/images/profile-avatar.jpeg',
+          email: email,
+        });
+
+        if (user) {
+          console.log('Successful signup of user: ', user.email);
+          // clear input fields
+          setEmail('');
+          setPassword('');
+          setName('');
+          // navigate back to login page
+          navigation.navigate('LoginScreen');
+        }
+      })
+      .catch((error) => {
+        // check for existing email error
+        if (error.code === 'auth/email-already-in-use')
+          alert('Email is already is use.');
+        else alert(error.message);
+      });
   };
 
   return (
@@ -41,38 +71,51 @@ const SignupScreen = ({ navigation }) => {
             {/* "Name" input box */}
             <TextInput
               style={styles.input}
+              value={name}
               placeholder="Name"
               placeholderTextColor="gray"
-              value={name}
               onChangeText={(text) => setName(text)}
               autoFocus={true}
+              autoCapitalize={'none'}
+              autoCorrect={false}
               autoCompleteType={'off'}
               textContentType={'none'}
             />
 
-            {/* "Username" input box */}
+            {/* "Email" input box */}
             <TextInput
               style={styles.input}
-              placeholder="Username"
+              value={email}
+              placeholder="Email"
               placeholderTextColor="gray"
-              value={username}
-              onChangeText={(text) => setUsername(text)}
-              // no auto complete
+              onChangeText={(text) => setEmail(text)}
+              autoCapitalize={'none'}
+              autoCorrect={false}
               autoCompleteType={'off'}
               textContentType={'none'}
             />
 
             {/* "Password" input box */}
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              placeholderTextColor="gray"
-              value={password}
-              onChangeText={(text) => setPassword(text)}
-              secureTextEntry={true}
-              textContentType="password"
-              autoCompleteType={'off'}
-            />
+            <View style={styles.passwordContainer}>
+              <TextInput
+                style={styles.passwordInput}
+                value={password}
+                placeholder="Password"
+                placeholderTextColor="gray"
+                onChangeText={(text) => setPassword(text)}
+                secureTextEntry={!showPassword}
+                textContentType="password"
+                autoCapitalize={'none'}
+                autoCorrect={false}
+                autoCompleteType={'off'}
+              />
+              <MaterialIcons
+                name={showPassword ? 'visibility' : 'visibility-off'}
+                size={24}
+                color="gray"
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            </View>
 
             {/* "Sign up" button */}
             <TouchableOpacity style={styles.signUpBtn} onPress={handleSignup}>

@@ -1,5 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Fetch_API_Data } from '../../../data/API';
+import { auth } from '../../../data/Firebase';
+
+/**
+ * @description Get the firebase userID of current loggedin user
+ */
+const getUserId = async () => {
+  try {
+    const user = await auth.currentUser;
+    return user.uid;
+  } catch (err) {
+    console.error('getUserId(): ', err);
+  }
+};
 
 /**
  * @description The function first fetches movie IDs stored in AsyncStorage using key,
@@ -7,8 +20,11 @@ import { Fetch_API_Data } from '../../../data/API';
  */
 const FetchMovies = async (key, setListState) => {
   try {
+    const userID = await getUserId();
+
     const storedMovies =
-      JSON.parse(await AsyncStorage.getItem(`@${key}_movielist`)) || [];
+      JSON.parse(await AsyncStorage.getItem(`@${userID}_${key}_movielist`)) ||
+      [];
     const promises = storedMovies.map((movie_id) =>
       Fetch_API_Data(`/movie/${movie_id}`),
     );
@@ -26,7 +42,7 @@ const FetchMovies = async (key, setListState) => {
 const FetchTvShows = async (key, setListState) => {
   try {
     const storedTvShows =
-      JSON.parse(await AsyncStorage.getItem(`@${key}_tvlist`)) || [];
+      JSON.parse(await AsyncStorage.getItem(`@${userID}_${key}_tvlist`)) || [];
     const promises = storedTvShows.map((tv_id) =>
       Fetch_API_Data(`/tv/${tv_id}`),
     );
