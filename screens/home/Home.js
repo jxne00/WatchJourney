@@ -18,7 +18,7 @@ import { fetch_API_with_param, Fetch_API_Data } from '../../data/API';
 import Constants from '../../constants/constants';
 import styles from './HomeStyles';
 import GradientText from '../../components/GradientText';
-import CarouselCard from './components/CarouselCard';
+import CarouselCard from '../../components/CarouselCard';
 import { useGenres } from '../../data/GenresContext';
 
 const HomeScreen = ({ navigation }) => {
@@ -36,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
   const scrollX2 = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // fetch upcoming movies
+    // fetch movies showing in theaters now
     fetch_API_with_param('/movie/upcoming?language=en-US&page=1').then(
       (response) => setNowShowing(response.results),
     );
@@ -103,10 +103,9 @@ const HomeScreen = ({ navigation }) => {
             colors={['#688CB6', '#42648A', '#283C53']}>
             WatchJourney{' '}
           </GradientText>
+
           <Divider />
-
           {/* =========== Search section =========== */}
-
           {/* search box */}
           <View style={styles.searchBoxContainer}>
             {searchQuery.length > 0 && (
@@ -137,7 +136,6 @@ const HomeScreen = ({ navigation }) => {
               <MaterialIcons name="search" style={styles.searchIcon} />
             </TouchableOpacity>
           </View>
-
           {/* display search results */}
           {searchResults.length > 0 && (
             <View style={styles.searchResultsContainer}>
@@ -149,12 +147,11 @@ const HomeScreen = ({ navigation }) => {
               />
             </View>
           )}
-
           {/* ========= carousel cards ========= */}
           <View>
             <View style={styles.sectionContainer}>
               <MaterialIcons name="movie" size={24} />
-              <Text style={styles.sectionTitle}> Upcoming movies</Text>
+              <Text style={styles.sectionTitle}> Now In Theatres</Text>
             </View>
             <ScrollView
               horizontal={true}
@@ -181,7 +178,6 @@ const HomeScreen = ({ navigation }) => {
               ))}
             </ScrollView>
           </View>
-
           <View>
             <View style={styles.sectionContainer}>
               <MaterialIcons name="live-tv" size={24} />

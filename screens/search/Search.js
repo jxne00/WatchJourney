@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import {
   View,
   Text,
@@ -7,10 +8,10 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
+import { fetch_API_with_param } from '../../data/API';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import { MaterialIcons } from '@expo/vector-icons';
 import styles from './SearchStyles';
-import { fetch_API_with_param } from '../../data/API';
 
 const SearchScreen = ({ navigation, route }) => {
   const { query } = route.params;
@@ -30,8 +31,14 @@ const SearchScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    getSearchResults();
-  }, []);
+    // get search results of both movie and tvshows from API
+    fetch_API_with_param(`/search/movie?query=${searchQuery}`).then(
+      (response) => setMovieSearchResults(response.results),
+    );
+    fetch_API_with_param(`/search/tv?query=${searchQuery}`).then((response) =>
+      setTvSearchResults(response.results),
+    );
+  }, [searchQuery]);
 
   // clears the search query and results
   const resetSearch = () => {
@@ -86,6 +93,8 @@ const SearchScreen = ({ navigation, route }) => {
     <SafeAreaView style={styles.safeArea}>
       {/* search box */}
       <View style={styles.searchInputContainer}>
+        <StatusBar style="light" />
+
         {/* 'X' icon to clear search input */}
         {searchQuery.length > 0 && (
           <TouchableOpacity onPress={resetSearch}>

@@ -9,10 +9,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    marginLeft: 5,
     marginBottom: 5,
     alignSelf: 'center',
     flexWrap: 'wrap',
+  },
+  subtitle: {
+    fontSize: 20,
+    fontFamily: Constants.POPPINS_REGULAR_FONT,
+    textAlign: 'center',
+    marginTop: -3,
+    marginBottom: 5,
   },
   release: {
     fontSize: 16,
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginVertical: 15,
   },
-  
+
   // ---- poster image ----
   ImageBg: {
     width: Constants.WIDTH,
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
     fontFamily: Constants.POPPINS_REGULAR_FONT,
     color: '#000',
   },
-  
+
   // ---- adding to list ----
   addToListBtn: {
     backgroundColor: Constants.PRIMARY_COL,
@@ -128,7 +134,7 @@ const styles = StyleSheet.create({
   addToListIcon: {
     color: Constants.SECONDARY_COL,
   },
-  
+
   // ---- reviews section ----
   seeReviewsBtn: {
     backgroundColor: Constants.PRIMARY_COL,

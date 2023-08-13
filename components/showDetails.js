@@ -21,19 +21,21 @@ const ShowDetails = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // set variables based on whether item is a movie or tv show
-  let genresList, showName, type, releaseDate;
+  let genresList, showName, type, releaseDate, originalName;
   if (item.title) {
     // if movie
     showName = item.title;
     genresList = movieGenres;
     type = 'movie';
     releaseDate = item.release_date;
+    originalName = item.original_title;
   } else {
     // if tv show
     showName = item.name;
     genresList = tvGenres;
     type = 'tv';
     releaseDate = item.first_air_date;
+    originalName = item.original_name;
   }
 
   return (
@@ -96,6 +98,12 @@ const ShowDetails = ({ route, navigation }) => {
         <View>
           {/* details of the show */}
           <Text style={styles.title}>{showName}</Text>
+          {
+            // display original name only if it is different from show name
+            originalName !== showName && (
+              <Text style={styles.subtitle}>({originalName})</Text>
+            )
+          }
           <View style={styles.dateShowType}>
             <Text style={styles.release}>({releaseDate}) &#x2022;</Text>
             <Text style={styles.showType}>
@@ -113,10 +121,8 @@ const ShowDetails = ({ route, navigation }) => {
         <View style={styles.horizontalLine} />
         <Text style={styles.sectionTitle}>Genres</Text>
 
-        {/* 
-        Get genre names based on id if array of genre_ids is passed in.
-        Otherwise, display genre names passed in.
-         */}
+        {/* Get genre names based on id if array of genre_ids is passed in.
+          Otherwise, display genre names passed in. */}
         <View style={styles.genresContainer}>
           {item.genre_ids
             ? item.genre_ids.map((index) => {

@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
   appname: {
     fontSize: 30,
     fontFamily: Constants.BANGER_FONT,
-    marginTop: '5%',
+    color: Constants.PRIMARY_COL,
+    marginVertical: '5%',
     textAlign: 'center',
     letterSpacing: 2,
   },

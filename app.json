@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "WatchJourney",
-    "slug": "watchjourney",
+    "slug": "WatchJourney",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#5B3776"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.pangju.WatchJourney"
@@ -22,18 +20,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.pangju.WatchJourney"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "owner": "pangju",
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/63200edd-9ea4-43cf-9da3-c70ee4e76ff8"
     }
   }
 }

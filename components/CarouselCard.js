@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Constants from '../../../constants/constants';
+import Constants from '../constants/constants';
 
 const OFFSET = 40;
 const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
@@ -46,7 +46,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
 
   // use placeholder image if poster & backdrop from API are null
   if (!item.backdrop_path && !item.poster_path) {
-    poster_src = require('../../../assets/images/poster-placeholder.png');
+    poster_src = require('../assets/images/poster-placeholder.png');
   } else {
     // use poster path if backdrop path is null
     poster_src = item.backdrop_path

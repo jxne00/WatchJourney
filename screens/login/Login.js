@@ -61,6 +61,11 @@ const LoginScreen = ({ navigation }) => {
             'Try again',
             'User does not exist. Please enter a valid email and password.',
           );
+        else if (code === 'auth/wrong-password')
+          Alert.alert(
+            'Try again',
+            'Incorrect password. Please enter a valid email and password.',
+          );
         else alert(error.message);
       });
   };
@@ -91,9 +96,8 @@ const LoginScreen = ({ navigation }) => {
             placeholderTextColor={'#8d8d8d'}
             onChangeText={(text) => setEmail(text)}
             style={styles.input}
-            autoCapitalize={false}
+            autoCapitalize={'none'}
             autoCorrect={false}
-            autoComplete={false}
           />
 
           <View style={styles.passwordContainer}>
