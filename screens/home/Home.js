@@ -120,6 +120,8 @@ const HomeScreen = ({ navigation }) => {
               value={searchQuery}
               autoCompleteType={'off'}
               textContentType={'none'}
+              autoCorrect={false}
+              autoCapitalize="none"
               contextMenuHidden={true}
               maxLength={100}
             />

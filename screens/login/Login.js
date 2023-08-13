@@ -49,6 +49,7 @@ const LoginScreen = ({ navigation }) => {
           // clear input fields
           setEmail('');
           setPassword('');
+          setShowPassword(false);
           // navigate to main screens
           navigation.navigate('AppScreens');
         }

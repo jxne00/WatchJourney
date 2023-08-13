@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import { GenresProvider } from '../data/GenresContext'; // provider for a list of genres
 import Constants from '../constants/constants';
 import ProfileScreenStack from './stacks/ProfileStack';
 import WatchlistStackNav from './stacks/WatchlistStack';
@@ -12,9 +12,10 @@ import DiscoverStackNav from './stacks/DiscoverStack';
 const BottomTab = createBottomTabNavigator();
 
 /**
- * @description The bottom navigation bar that links to the main screens of the app
+ * @description bottom navigation bar that links to the main screens of the app.
  */
 const MainScreensNav = () => (
+  <GenresProvider>
     <BottomTab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
@@ -87,6 +88,7 @@ const MainScreensNav = () => (
         component={ProfileScreenStack}
       />
     </BottomTab.Navigator>
+  </GenresProvider>
 );
 
 const styles = StyleSheet.create({
