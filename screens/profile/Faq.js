@@ -4,6 +4,7 @@ import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import styles from './FaqStyle';
 
+// FAQ questions and answers
 const questions = [
   {
     question: 'Q1. What is this app about?',
@@ -19,13 +20,13 @@ const questions = [
 
 const FaqScreen = () => {
   // remember if a question has been uncollapsed
-  const [activeQuestions, setActiveQuestions] = useState([]);
+  const [pressedQns, setPressedQns] = useState([]);
 
-  // set state for active questions
+  // set state for pressed questions
   const handlePress = (index) => {
-    activeQuestions.includes(index)
-      ? setActiveQuestions(activeQuestions.filter((item) => item !== index))
-      : setActiveQuestions([...activeQuestions, index]);
+    pressedQns.includes(index)
+      ? setPressedQns(pressedQns.filter((item) => item !== index))
+      : setPressedQns([...pressedQns, index]);
   };
 
   return (
@@ -42,10 +43,12 @@ const FaqScreen = () => {
             <TouchableOpacity
               onPress={() => handlePress(index)}
               style={styles.touchable}>
+              
               <Text style={styles.question}>{faq.question}</Text>
+              
               <MaterialIcons
                 name={
-                  activeQuestions.includes(index)
+                  pressedQns.includes(index)
                     ? 'keyboard-arrow-up'
                     : 'keyboard-arrow-down'
                 }
@@ -55,7 +58,7 @@ const FaqScreen = () => {
             </TouchableOpacity>
 
             {/* display answer only if uncollapsed */}
-            {activeQuestions.includes(index) && (
+            {pressedQns.includes(index) && (
               <Text style={styles.answer}>{faq.answer}</Text>
             )}
           </View>

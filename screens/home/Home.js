@@ -57,7 +57,14 @@ const HomeScreen = ({ navigation }) => {
         setTvGenres(response.genres);
       });
     }
-  }, []);
+  }, [
+    setNowAiring,
+    setNowShowing,
+    movieGenres.length,
+    tvGenres.length,
+    setMovieGenres,
+    setTvGenres,
+  ]);
 
   // clears the search query and results
   const resetSearch = () => {
