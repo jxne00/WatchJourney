@@ -12,12 +12,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
-import { Divider } from 'react-native-paper';
 import { MaterialIcons } from '@expo/vector-icons';
 import { fetch_API_with_param, Fetch_API_Data } from '../../data/API';
 import Constants from '../../constants/constants';
 import styles from './HomeStyles';
-import GradientText from '../../components/GradientText';
 import CarouselCard from '../../components/CarouselCard';
 import { useGenres } from '../../data/GenresContext';
 
@@ -57,14 +55,7 @@ const HomeScreen = ({ navigation }) => {
         setTvGenres(response.genres);
       });
     }
-  }, [
-    setNowAiring,
-    setNowShowing,
-    movieGenres.length,
-    tvGenres.length,
-    setMovieGenres,
-    setTvGenres,
-  ]);
+  }, [setNowAiring, setNowShowing]);
 
   // clears the search query and results
   const resetSearch = () => {
@@ -102,16 +93,12 @@ const HomeScreen = ({ navigation }) => {
     // dismiss keyboard when outside of text input is pressed
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
-        <StatusBar style="dark" />
         <View style={styles.container}>
+          <StatusBar style="dark" />
           {/* App Name */}
-          <GradientText
-            style={styles.appname}
-            colors={['#688CB6', '#42648A', '#283C53']}>
-            WatchJourney{' '}
-          </GradientText>
+          <Text style={styles.appname}>WatchJourney</Text>
 
-          <Divider />
+          <View style={styles.horizontalLine} />
           {/* =========== Search section =========== */}
           {/* search box */}
           <View style={styles.searchBoxContainer}>
@@ -156,12 +143,14 @@ const HomeScreen = ({ navigation }) => {
               />
             </View>
           )}
-          {/* ========= carousel cards ========= */}
+
+          {/* ========= "Now In Theatres" carousel cards ========= */}
           <View>
             <View style={styles.sectionContainer}>
               <MaterialIcons name="movie" size={24} />
               <Text style={styles.sectionTitle}> Now In Theatres</Text>
             </View>
+
             <ScrollView
               horizontal={true}
               decelerationRate={'normal'}
@@ -187,11 +176,14 @@ const HomeScreen = ({ navigation }) => {
               ))}
             </ScrollView>
           </View>
+
+          {/* ========= "Now On Air" carousel cards ========= */}
           <View>
             <View style={styles.sectionContainer}>
               <MaterialIcons name="live-tv" size={24} />
               <Text style={styles.sectionTitle}> Now On Air</Text>
             </View>
+
             <ScrollView
               horizontal={true}
               decelerationRate={'normal'}

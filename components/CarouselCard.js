@@ -12,7 +12,7 @@ import Constants from '../constants/constants';
 
 const OFFSET = 40;
 const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
-const ITEM_HEIGHT = 180;
+const ITEM_HEIGHT = Constants.HEIGHT * 0.22;
 
 /**
  * @description A custom carousel card to that displays movie poster and title.
@@ -87,7 +87,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
 
         <View style={styles.ratingContainer}>
           <Text style={styles.ratingText}>
-            <MaterialIcons name="star" size={16} color={'#deb72d'} />
+            <MaterialIcons name="star" size={16} color={'#fffb15'} />
             {item.vote_average}
           </Text>
         </View>
@@ -97,6 +97,10 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  animatedView: {
+    width: ITEM_WIDTH,
+    height: ITEM_HEIGHT,
+  },
   imgBgStyle: {
     flex: 1,
     resizeMode: 'cover',
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: ITEM_WIDTH * 0.9,
-    height: 40,
+    height: Constants.HEIGHT * 0.04,
     backgroundColor: '#cc8de9',
     borderTopWidth: 1,
     borderRightWidth: 1,
@@ -121,10 +125,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
   },
-  animatedView: {
-    width: ITEM_WIDTH,
-    height: ITEM_HEIGHT,
-  },
   ratingContainer: {
     position: 'absolute',
     top: 0,
@@ -132,14 +132,14 @@ const styles = StyleSheet.create({
     width: 50,
     height: 35,
     borderRadius: 20,
-    backgroundColor: '#b4562e',
+    backgroundColor: '#fe3f3f',
     padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   ratingText: {
-    color: '#e7e5e7',
-    fontFamily: Constants.POPPINS_ITALIC_FONT,
+    color: '#f5d5f5',
+    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
     fontSize: 16,
   },
 });

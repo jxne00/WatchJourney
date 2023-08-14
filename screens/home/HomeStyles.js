@@ -7,29 +7,40 @@ const styles = StyleSheet.create({
     backgroundColor: Constants.SECONDARY_COL,
     paddingBottom: 10,
   },
+  appname: {
+    fontSize: 30,
+    fontFamily: Constants.BANGER_FONT,
+    color: '#854883',
+    marginTop: Constants.HEIGHT * 0.02,
+    textAlign: 'center',
+    letterSpacing: 2,
+  },
+  horizontalLine: {
+    height: 1,
+    width: '90%',
+    alignSelf: 'center',
+    backgroundColor: '#afafaf',
+    marginTop: 10,
+    marginBottom: 3,
+  },
+
   sectionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '10%',
-    marginBottom: 5,
-    marginLeft: 20,
+    marginTop: Constants.HEIGHT * 0.03,
+    marginBottom: Constants.HEIGHT * 0.01,
+    marginLeft: Constants.WIDTH * 0.05,
   },
   sectionTitle: {
     fontSize: 20,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
     color: '#000',
   },
-  appname: {
-    fontSize: 30,
-    fontFamily: Constants.BANGER_FONT,
-    color: Constants.PRIMARY_COL,
-    marginVertical: '5%',
-    textAlign: 'center',
-    letterSpacing: 2,
-  },
+
+  // ------ carousel ------
   scrollviewStyle: {
     paddingHorizontal: 0,
-    paddingVertical: 10,
+    paddingVertical: Constants.HEIGHT * 0.01,
   },
 
   // ------ search box ------
