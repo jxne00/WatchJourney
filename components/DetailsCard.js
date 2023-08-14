@@ -1,14 +1,12 @@
 import React from 'react';
 import { FlatList, View, Text, TouchableOpacity, Image } from 'react-native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import styles from '../watchlistStyles';
-import Constants from '../../../constants/constants';
-import removeIDfromList from './RemoveFromList';
+import styles from '../screens/watchlist/watchlistStyles';
+import Constants from '../constants/constants';
+import { removeIDfromList } from '../data/AsyncActions';
 
 const DetailsCard = ({ data, navigation, watchlist, type, setStateItem }) => {
   const RenderCard = ({ item }) => {
-    // const type = data.title ? 'movie' : 'tv';
-
     return (
       <View style={styles.cardContainer}>
         {/* Button to remove item from the list */}

@@ -12,7 +12,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import {
   clearAsyncStorage,
   printAllAsyncContent,
-} from '../../components/AsyncActions';
+} from '../../data/AsyncActions';
 import { auth, db } from '../../data/Firebase';
 import Constants from '../../constants/constants';
 import styles from './ProfileStyle';

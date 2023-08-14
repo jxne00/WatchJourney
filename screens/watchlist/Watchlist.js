@@ -4,9 +4,9 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import styles from './watchlistStyles';
-import { FetchAPIwithAsync } from '../../components/AsyncActions';
-import ShareWatchlist from './components/ShareWatchlist';
-import DetailsCard from './components/DetailsCard';
+import { FetchAPIwithAsync } from '../../data/AsyncActions';
+import ShareWatchlist from '../../components/ShareWatchlist';
+import DetailsCard from '../../components/DetailsCard';
 
 const WatchlistScreen = ({ navigation, route }) => {
   const { tabType } = route.params;

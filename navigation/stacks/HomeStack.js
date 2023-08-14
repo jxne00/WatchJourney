@@ -25,7 +25,7 @@ const HomeStackNav = () => (
       name="SearchResultsPage"
       component={SearchScreen}
       options={{
-        title: 'Search Results',
+        title: 'Search',
         ...SCREEN_OPTIONS,
       }}
     />

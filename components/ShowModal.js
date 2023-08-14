@@ -3,14 +3,14 @@ import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
 import modalStyles from './styles/ModalStyles';
-import { addShowToAsync } from './AsyncActions';
+import { addShowToAsync } from '../data/AsyncActions';
 
 /**
  * @description Modal to add a show to a watchlist.
- * @param modalVisible - state with modal's visibility
+ * @param modalVisible - state for modal's visibility
  * @param setModalVisible - state for setting modal visibility
  * @param type - 'movie' or 'tv
- * @param show_id - id of show to add
+ * @param show_id - id of show to add to watchlist
  */
 const WatchlistModal = ({ modalVisible, setModalVisible, type, show_id }) => (
   <Modal

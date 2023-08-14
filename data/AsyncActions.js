@@ -1,19 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
-import { fetch_API_with_param, Fetch_API_Data } from '../data/API';
-import { auth } from '../data/Firebase';
-
-/**
- * @description Get the firebase userID of current loggedin user
- */
-const getUserId = async () => {
-  try {
-    const user = auth.currentUser;
-    return user.uid;
-  } catch (err) {
-    console.error('getUserId(): ', err);
-  }
-};
+import { fetch_API_with_param, Fetch_API_Data } from './API';
+import { getUserId } from './Firebase';
 
 /**
  * @description Print the contents of a key in AsyncStorage
@@ -139,6 +127,91 @@ const FetchAPIwithAsync = async (key, setListState, type) => {
   }
 };
 
+/**
+ * @description The function first fetches movie IDs stored in AsyncStorage using key,
+ * then returns movie details from API using those movie IDs.
+ */
+const FetchMovies = async (key, setListState) => {
+  try {
+    const userID = await getUserId();
+
+    const storedMovies =
+      JSON.parse(await AsyncStorage.getItem(`@${userID}_${key}_movielist`)) ||
+      [];
+    const promises = storedMovies.map((movie_id) =>
+      Fetch_API_Data(`/movie/${movie_id}`),
+    );
+    const data = await Promise.all(promises);
+    setListState(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * @description The function first fetches tvshow IDs stored in AsyncStorage using key,
+ * then returns the show details from API using those tv IDs.
+ */
+const FetchTvShows = async (key, setListState) => {
+  try {
+    const storedTvShows =
+      JSON.parse(await AsyncStorage.getItem(`@${userID}_${key}_tvlist`)) || [];
+    const promises = storedTvShows.map((tv_id) =>
+      Fetch_API_Data(`/tv/${tv_id}`),
+    );
+    const data = await Promise.all(promises);
+    setListState(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
+ * @description Remove a movie or TV show ID from a watchlist in AsyncStorage
+ * @param watchlist - the watchlist to remove from
+ * @param id - the ID of the movie/TV show to remove
+ * @param setStateItem - the state item to update
+ * @param type - 'movie' or 'tv'
+ */
+const removeIDfromList = async (watchlist, id, setStateItem, type) => {
+  try {
+    userID = await getUserId();
+
+    // Retrieve the current list of IDs
+    const storedIDs =
+      JSON.parse(
+        await AsyncStorage.getItem(`@${userID}_${watchlist}_${type}list`),
+      ) || [];
+
+    // Filter out the ID to remove
+    const updatedIDs = storedIDs.filter((storedID) => storedID !== id);
+
+    // Store the updated list back in AsyncStorage
+    await AsyncStorage.setItem(
+      `@${userID}_${watchlist}_${type}list`,
+      JSON.stringify(updatedIDs),
+    );
+
+    // Fetch the updated list of IDs from AsyncStorage
+    const updatedList = await fetchFromAsyncStorage(
+      `@${userID}_${watchlist}_${type}list`,
+    );
+    setStateItem(updatedList);
+
+    console.log(id, 'removed from', `@${userID}_${watchlist}_${type}list`);
+  } catch (err) {
+    type === 'movie'
+      ? console.log(
+          `Error removing movie from "${userID}_${watchlist}" list: `,
+          err,
+        )
+      : console.log(
+          `Error removing TV show from "${userID}_${watchlist}" list: `,
+          err,
+        );
+  }
+};
+
 export {
   printAsyncKeyContent,
   printAllAsyncContent,
@@ -146,4 +219,7 @@ export {
   fetchFromAsyncStorage,
   addShowToAsync,
   FetchAPIwithAsync,
+  FetchMovies,
+  FetchTvShows,
+  removeIDfromList,
 };

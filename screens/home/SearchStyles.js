@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   searchInput: {
     fontSize: 18,
     flex: 1,
-    marginLeft: '6%',
+    marginLeft: '4%',
     fontFamily: Constants.POPPINS_REGULAR_FONT,
   },
   searchIcon: {
@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     color: '#000000',
   },
   clearIcon: {
+    marginLeft: 8,
     fontSize: 20,
     color: '#232323',
   },

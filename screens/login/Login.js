@@ -75,7 +75,6 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.container}>
       <LinearGradient
         // linear gradient background
-        // colors={['rgb(130, 160, 245)', 'rgb(240, 60, 130)']}
         colors={['rgb(220, 60, 130)', 'rgb(130, 160, 245)']}
         style={styles.background}
         start={{ x: 0.7, y: 0 }}

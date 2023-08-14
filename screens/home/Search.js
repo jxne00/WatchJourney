@@ -102,12 +102,15 @@ const SearchScreen = ({ navigation, route }) => {
           </TouchableOpacity>
         )}
 
+        {/* search input */}
         <TextInput
           style={styles.searchInput}
           value={searchQuery}
           onChangeText={(text) => setSearchQuery(text)}
           placeholder={'Search for a movie or TV show'}
           autoCompleteType={'off'}
+          autoCorrect={false}
+          autoCapitalize={'none'}
           textContentType={'none'}
           contextMenuHidden={true}
           maxLength={100}

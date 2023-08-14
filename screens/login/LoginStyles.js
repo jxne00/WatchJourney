@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   },
   signupBtn: {
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    fontSize: 17,
-    color: '#70b2f4',
+    fontSize: 16,
+    color: '#2b57be',
   },
 });
 
