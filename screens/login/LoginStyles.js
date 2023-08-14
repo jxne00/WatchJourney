@@ -10,13 +10,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
-  imgbg: {
-    resizeMode: 'cover',
-    justifyContent: 'center',
+  background: {
     position: 'absolute',
-    width: '100%',
+    left: 0,
+    right: 0,
+    top: 0,
     height: '100%',
-    opacity: 0.9,
   },
   appicon: {
     alignSelf: 'center',

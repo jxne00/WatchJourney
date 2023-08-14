@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   View,
   Text,
   TextInput,
-  ImageBackground,
   KeyboardAvoidingView,
   TouchableOpacity,
   Alert,
   Image,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { auth } from '../../data/Firebase';
 import styles from './LoginStyles';
@@ -73,9 +73,12 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/images/login-bg.jpg')}
-        style={styles.imgbg}
+      <LinearGradient
+        // linear gradient background
+        // colors={['rgb(130, 160, 245)', 'rgb(240, 60, 130)']}
+        colors={['rgb(220, 60, 130)', 'rgb(130, 160, 245)']}
+        style={styles.background}
+        start={{ x: 0.7, y: 0 }}
       />
       <KeyboardAvoidingView behavior="padding">
         <StatusBar style="light" />
