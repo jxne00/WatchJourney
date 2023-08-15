@@ -3,9 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
-import SCREEN_OPTIONS from './StackScreenOptions';
 import WatchlistScreen from '../../screens/watchlist/Watchlist';
-import ShowDetails from '../../components/showDetails';
 
 const TopTab = createMaterialTopTabNavigator();
 const WatchlistStack = createNativeStackNavigator();
@@ -78,14 +76,6 @@ const WatchlistStackNav = () => (
       component={WatchlistMain}
       options={{
         headerShown: false,
-      }}
-    />
-    <WatchlistStack.Screen
-      name="ShowDetailsPage"
-      component={ShowDetails}
-      options={{
-        title: 'Details',
-        ...SCREEN_OPTIONS,
       }}
     />
   </WatchlistStack.Navigator>
