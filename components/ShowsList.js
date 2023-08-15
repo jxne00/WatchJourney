@@ -26,6 +26,7 @@ const ShowsList = ({ navigation, type }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [chosenShowID, setChosenShowID] = useState(null);
+  const [chosenShowName, setChosenShowName] = useState(null);
 
   const flatListRef = useRef();
 
@@ -41,6 +42,10 @@ const ShowsList = ({ navigation, type }) => {
   // set the selected show and display the modal
   const setChosenShow = async (id) => {
     setChosenShowID(id);
+    setChosenShowName(
+      data.results.find((show) => show.id === id).name ||
+        data.results.find((show) => show.id === id).title,
+    );
     setModalVisible(true);
   };
 
@@ -140,6 +145,7 @@ const ShowsList = ({ navigation, type }) => {
         setModalVisible={setModalVisible}
         type={type}
         show_id={chosenShowID}
+        showName={chosenShowName}
       />
     </View>
   );

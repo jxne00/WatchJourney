@@ -15,9 +15,15 @@ const modalStyles = StyleSheet.create({
     padding: 35,
     alignItems: 'center',
     width: '80%',
-    height: '40%',
+    height: '43%',
   },
-
+  modalTitle: {
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#000',
+    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    fontSize: 20,
+  },
   modalText: {
     marginBottom: 15,
     textAlign: 'center',

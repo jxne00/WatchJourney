@@ -92,6 +92,7 @@ const ShowDetails = ({ route, navigation }) => {
             setModalVisible={setModalVisible}
             type={type}
             show_id={item.id}
+            showName={showName}
           />
         </ImageBackground>
 
