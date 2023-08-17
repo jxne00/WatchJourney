@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   FlatList,
 } from 'react-native';
-import { fetch_API_with_param } from '../../data/API';
+import Fetch_API_Data from '../../data/API';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import { MaterialIcons } from '@expo/vector-icons';
 import styles from './SearchStyles';
@@ -22,20 +22,20 @@ const SearchScreen = ({ navigation, route }) => {
 
   // get search results of both movie and tvshows from API
   const getSearchResults = () => {
-    fetch_API_with_param(`/search/movie?query=${searchQuery}`).then(
-      (response) => setMovieSearchResults(response.results),
+    Fetch_API_Data('/search/movie', `query=${searchQuery}`).then((response) =>
+      setMovieSearchResults(response.results),
     );
-    fetch_API_with_param(`/search/tv?query=${searchQuery}`).then((response) =>
+    Fetch_API_Data('/search/tv', `query=${searchQuery}`).then((response) =>
       setTvSearchResults(response.results),
     );
   };
 
   useEffect(() => {
     // get search results of both movie and tvshows from API
-    fetch_API_with_param(`/search/movie?query=${searchQuery}`).then(
-      (response) => setMovieSearchResults(response.results),
+    Fetch_API_Data('/search/movie', `query=${searchQuery}`).then((response) =>
+      setMovieSearchResults(response.results),
     );
-    fetch_API_with_param(`/search/tv?query=${searchQuery}`).then((response) =>
+    Fetch_API_Data('/search/tv', `query=${searchQuery}`).then((response) =>
       setTvSearchResults(response.results),
     );
   }, [searchQuery]);

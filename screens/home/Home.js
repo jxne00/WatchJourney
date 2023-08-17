@@ -13,7 +13,7 @@ import {
   Keyboard,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { fetch_API_with_param, Fetch_API_Data } from '../../data/API';
+import Fetch_API_Data from '../../data/API';
 import Constants from '../../constants/constants';
 import styles from './HomeStyles';
 import CarouselCard from '../../components/CarouselCard';
@@ -35,11 +35,11 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     // fetch movies showing in theaters now
-    fetch_API_with_param('/movie/upcoming?language=en-US&page=1').then(
+    Fetch_API_Data('/movie/upcoming', 'language=en-US&page=1').then(
       (response) => setNowShowing(response.results),
     );
     // fetch tv shows airing today
-    fetch_API_with_param('/tv/airing_today?language=en-US&page=1').then(
+    Fetch_API_Data('/tv/airing_today', 'language=en-US&page=1').then(
       (response) => setNowAiring(response.results),
     );
 

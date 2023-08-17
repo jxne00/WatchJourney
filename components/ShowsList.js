@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { fetch_API_with_param } from '../data/API';
+import Fetch_API_Data from '../data/API';
 import styles from './styles/ShowsListStyle';
 import Constants from '../constants/constants';
 import WatchlistModal from './ShowModal';
@@ -33,8 +33,8 @@ const ShowsList = ({ navigation, type }) => {
   useEffect(() => {
     setIsLoading(true);
     // fetch trending movies/tv shows based on type
-    fetch_API_with_param(`/trending/${type}/day?page=${page}`).then(
-      (response) => setData(response),
+    Fetch_API_Data(`/trending/${type}/day`, `page=${page}`).then((response) =>
+      setData(response),
     );
     setIsLoading(false);
   }, [page, type]);

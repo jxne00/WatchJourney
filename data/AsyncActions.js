@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
-import { fetch_API_with_param, Fetch_API_Data } from './API';
+import * as Haptics from 'expo-haptics';
+import Fetch_API_Data from './API';
 import { getUserId } from './Firebase';
 
 /**
@@ -52,7 +53,7 @@ const fetchFromAsyncStorage = async (key) => {
   try {
     const storedMovies = JSON.parse(await AsyncStorage.getItem(key)) || [];
     const promises = storedMovies.map((movie_id) =>
-      fetch_API_with_param(`/movie/${movie_id}`),
+      Fetch_API_Data(`/movie/${movie_id}`),
     );
     const data = await Promise.all(promises);
     return data;
@@ -87,6 +88,7 @@ const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
       type === 'movie'
         ? Alert.alert('This movie is already in the list')
         : Alert.alert('This TV Show is already in the list');
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
       setModalVisible(false);
       return;
     }
@@ -94,8 +96,10 @@ const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
     // add id to list and store back to AsyncStorage
     currentList.push(id);
     await AsyncStorage.setItem(asyncKey, JSON.stringify(currentList));
-
     console.log(id, 'added to', asyncKey);
+
+    // success haptic feedback
+    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     printAsyncKeyContent(asyncKey);
 
     // close modal after adding to list

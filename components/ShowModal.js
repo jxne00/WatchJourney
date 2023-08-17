@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
@@ -28,9 +28,7 @@ const WatchlistModal = ({
       <View style={modalStyles.modalContainer}>
         <View style={modalStyles.modalView}>
           {/* show only up to 17 chars of name */}
-          <Text style={modalStyles.modalTitle}>
-            "{showName}"
-          </Text>
+          <Text style={modalStyles.modalTitle}>"{showName}"</Text>
 
           {type === 'movie' ? (
             <Text style={modalStyles.modalText}>Add to movie watchlist:</Text>
