@@ -9,8 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-
-import { Fetch_API_Data } from '../../data/API';
+import Fetch_API_Data from '../../data/API';
 import styles from './ReviewsStyles';
 
 const Reviews = ({ route }) => {

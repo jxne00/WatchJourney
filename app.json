@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#5B3776"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.pangju.WatchJourney"
@@ -24,6 +26,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c58e71b0-58fc-40b5-9c31-ebab44085184"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c58e71b0-58fc-40b5-9c31-ebab44085184"
     }
   }
 }
