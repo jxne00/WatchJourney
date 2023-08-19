@@ -96,9 +96,10 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   signupBtn: {
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    fontFamily: Constants.POPPINS_REGULAR_FONT,
+    textDecorationLine: 'underline',
     fontSize: 16,
-    color: '#2b57be',
+    color: '#51f9ff',
   },
 });
 

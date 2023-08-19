@@ -4,6 +4,7 @@ import Constants from '../../constants/constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: Constants.SECONDARY_COL,
   },
   numRecords: {
     fontSize: 16,
@@ -19,53 +20,19 @@ const styles = StyleSheet.create({
     marginVertical: '30%',
     fontFamily: Constants.POPPINS_REGULAR_FONT,
   },
-  // ------- styles for flatlist items ------- //
-  cardContainer: {
-    flex: 1,
-    margin: 8,
-    backgroundColor: Constants.SECONDARY_COL,
-    borderRadius: 10,
-    padding: 8,
-    elevation: 3, // for android
-    shadowOffset: { width: 1, height: 1 }, // for ios
-  },
-  removeItemContainer: {
-    alignSelf: 'center',
-    position: 'absolute',
-    backgroundColor: '#efefef',
-    borderWidth: 2,
-    borderColor: '#f31f1f',
-    borderRadius: 5,
-    padding: 3,
-    left: 0,
-    top: 0,
-    zIndex: 1, // make button appear on top of image
-  },
-  poster: {
-    height: 150,
-    borderRadius: 10,
-  },
-  movieTitle: {
-    fontSize: 18,
-    marginTop: 10,
-    fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-  },
-  rating: {
-    fontSize: 14,
-    color: Constants.PRIMARY_COL,
-    flexDirection: 'row',
-    fontFamily: Constants.POPPINS_REGULAR_FONT,
-  },
-  starIcon: {
-    color: '#ff9900',
-    marginRight: 5,
-  },
+
   // ------- styles for view choosing button ------- //
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
   flatlistTitle: {
+    marginRight: 10,
     fontSize: 20,
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
-    alignSelf: 'center',
-    marginVertical: 5,
   },
   chosenBtnCont: {
     flexDirection: 'row',

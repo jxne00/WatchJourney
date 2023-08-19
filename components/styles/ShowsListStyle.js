@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     textAlign: 'center',
   },
+  loadingScreen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Constants.SECONDARY_COL,
+  },
   contentContainer: {
     paddingTop: 5,
     paddingBottom: 10,

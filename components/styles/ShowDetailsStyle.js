@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Constants from '../../constants/constants';
 
 const styles = StyleSheet.create({
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
   },
   posterImage: {
     resizeMode: 'contain',
-    width: Constants.WIDTH * 0.95,
+    width:
+      Platform.OS === 'ios' ? Constants.WIDTH * 0.95 : Constants.WIDTH * 0.6,
     height: Constants.HEIGHT * 0.42,
     borderRadius: Constants.HEIGHT * 0.04,
     alignSelf: 'center',
@@ -145,7 +146,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginLeft: 10,
     alignContent: 'center',
-    alignSelf: 'left',
   },
   reviewLink: {
     textAlign: 'center',

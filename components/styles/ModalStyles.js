@@ -15,7 +15,6 @@ const modalStyles = StyleSheet.create({
     padding: 35,
     alignItems: 'center',
     width: '80%',
-    height: '43%',
   },
   modalTitle: {
     marginBottom: 10,

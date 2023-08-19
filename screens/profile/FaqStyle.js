@@ -5,11 +5,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: Constants.SECONDARY_COL,
   },
   title: {
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
+    color: Constants.PRIMARY_COL,
     fontSize: 22,
-    color: '#000',
     marginTop: 20,
     marginBottom: 10,
     alignSelf: 'center',
@@ -24,13 +25,14 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginVertical: 10,
     marginTop: '10%',
-    backgroundColor: '#e0dfdf',
+    backgroundColor: '#f3f3f3',
     padding: 10,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: -3, height: 3 },
     shadowRadius: 4,
     shadowOpacity: 0.4,
+    elevation: 5,
   },
   touchable: {
     flexDirection: 'row',
@@ -39,9 +41,9 @@ const styles = StyleSheet.create({
   },
   question: {
     marginHorizontal: 10,
+    color: '#000',
     fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
     fontSize: 20,
-    color: Constants.PRIMARY_COL,
   },
   answer: {
     marginTop: 5,

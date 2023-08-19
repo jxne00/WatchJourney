@@ -23,6 +23,7 @@ import WatchlistModal from './ShowModal';
 const ShowsList = ({ navigation, type }) => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [chosenShowID, setChosenShowID] = useState(null);
@@ -54,11 +55,16 @@ const ShowsList = ({ navigation, type }) => {
     <View style={styles.showContainer}>
       {/* poster image */}
       <View style={styles.posterContainer}>
+        {!imageLoaded && (
+          // show loading indicator while image is loading
+          <ActivityIndicator size="large" color={Constants.PRIMARY_COL} />
+        )}
         <Image
           source={{
             uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
           }}
           style={styles.posterImage}
+          onLoadEnd={() => setImageLoaded(true)}
         />
 
         {/* show modal when button is pressed */}
@@ -108,7 +114,7 @@ const ShowsList = ({ navigation, type }) => {
             {type === 'movie' ? 'Popular Movies' : 'Top Rated TV Shows'}
           </Text>
         }
-        // pagination
+        // pagination with 'back' and 'next' buttons
         ListFooterComponent={
           isLoading ? (
             <ActivityIndicator />

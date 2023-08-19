@@ -6,7 +6,7 @@ import FaqScreen from '../../screens/profile/Faq';
 const ProfileStack = createNativeStackNavigator();
 
 /**
- * @description stack navigator for the "Profile" screen
+ * @description stack navigator containing profile and faq screen
  */
 const ProfileScreenStack = () => (
   <ProfileStack.Navigator

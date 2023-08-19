@@ -33,16 +33,8 @@ const HomeScreen = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const scrollX2 = useRef(new Animated.Value(0)).current;
 
+  // fetch movie and tv genres
   useEffect(() => {
-    // fetch movies showing in theaters now
-    Fetch_API_Data('/movie/upcoming', 'language=en-US&page=1').then(
-      (response) => setNowShowing(response.results),
-    );
-    // fetch tv shows airing today
-    Fetch_API_Data('/tv/airing_today', 'language=en-US&page=1').then(
-      (response) => setNowAiring(response.results),
-    );
-
     // fetch the list of movie genres, and store to context
     if (movieGenres.length === 0) {
       Fetch_API_Data('/genre/movie/list').then((response) => {
@@ -55,6 +47,17 @@ const HomeScreen = ({ navigation }) => {
         setTvGenres(response.genres);
       });
     }
+  }, [movieGenres, setMovieGenres, tvGenres, setTvGenres]);
+
+  useEffect(() => {
+    // fetch movies showing in theaters now
+    Fetch_API_Data('/movie/upcoming', 'language=en-US&page=1').then(
+      (response) => setNowShowing(response.results),
+    );
+    // fetch tv shows airing today
+    Fetch_API_Data('/tv/airing_today', 'language=en-US&page=1').then(
+      (response) => setNowAiring(response.results),
+    );
   }, [setNowAiring, setNowShowing]);
 
   // clears the search query and results
@@ -93,13 +96,13 @@ const HomeScreen = ({ navigation }) => {
     // dismiss keyboard when outside of text input is pressed
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
+        <StatusBar style="dark" />
         <View style={styles.container}>
-          <StatusBar style="dark" />
           {/* App Name */}
           <Text style={styles.appname}>WatchJourney</Text>
 
           <View style={styles.horizontalLine} />
-          {/* =========== Search section =========== */}
+
           {/* search box */}
           <View style={styles.searchBoxContainer}>
             {searchQuery.length > 0 && (

@@ -23,7 +23,7 @@ const Reviews = ({ route }) => {
     Fetch_API_Data(`/${type}/${id}/reviews`).then((response) =>
       setReviews(response.results),
     );
-  }, []);
+  }, [type, id]);
 
   // set expand or collapse review content
   const toggleExpanded = (id) => {
@@ -39,16 +39,16 @@ const Reviews = ({ route }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="light" />
-      <ScrollView>
-        <Text style={styles.title}>Reviews: {name}</Text>
+      <Text style={styles.title}>Reviews: {name}</Text>
+
+      <ScrollView nestedScrollEnabled={true}>
         {reviews.length > 0 ? (
           reviews.map((review, index) => {
             authorData = review.author_details;
             let avatarPath = authorData.avatar_path;
 
-            // remove leading '/' from avatar path
-            if (avatarPath && avatarPath.startsWith('/')) {
-              avatarPath = avatarPath.substring(1);
+            if (avatarPath) {
+              avatarPath = `https://image.tmdb.org/t/p/original/${avatarPath}`;
             }
 
             return (

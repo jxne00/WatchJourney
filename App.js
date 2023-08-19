@@ -1,4 +1,5 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import RootStack from './navigation/RootStack';
@@ -14,9 +15,11 @@ const App = () => {
     'Poppins-Italic': require('./assets/fonts/Poppins-Italic.ttf'),
   });
 
-  // continue if fonts all loaded
+  // show loading if font is still loading
   if (!fontsLoaded) {
-    return null;
+    return (
+      <ActivityIndicator size="small" color="black" animating={fontsLoaded} />
+    );
   }
 
   return (

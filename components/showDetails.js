@@ -112,7 +112,7 @@ const ShowDetails = ({ route, navigation }) => {
             </Text>
           </View>
         </View>
-
+        
         <View style={styles.horizontalLine} />
 
         {/* TV show overview */}
@@ -120,6 +120,7 @@ const ShowDetails = ({ route, navigation }) => {
         <Text style={styles.overview}>{item.overview}</Text>
 
         <View style={styles.horizontalLine} />
+
         <Text style={styles.sectionTitle}>Genres</Text>
 
         {/* Get genre names based on id if array of genre_ids is passed in.
@@ -146,6 +147,7 @@ const ShowDetails = ({ route, navigation }) => {
 
         {/* Button to see reviews - navigate to reviews page */}
         <Text style={styles.sectionTitle}>Reviews</Text>
+
         <TouchableOpacity
           style={styles.seeReviewsBtn}
           onPress={() =>

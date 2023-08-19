@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,13 +6,16 @@ import {
   Animated,
   ImageBackground,
   TouchableOpacity,
+  Platform,
+  ActivityIndicator,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
 
 const OFFSET = 40;
 const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
-const ITEM_HEIGHT = Constants.HEIGHT * 0.22;
+const ITEM_HEIGHT =
+  Platform.OS === 'ios' ? Constants.HEIGHT * 0.22 : Constants.HEIGHT * 0.25;
 
 /**
  * @description A custom carousel card to that displays movie poster and title.
@@ -23,6 +26,7 @@ const ITEM_HEIGHT = Constants.HEIGHT * 0.22;
  */
 const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
   const showTitle = item.title || item.name;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const inputRange = [
     (index - 1) * ITEM_WIDTH, // scroll pos of previous card
@@ -72,10 +76,18 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
             transform: [{ scale: translation }],
           },
         ]}>
+        {!imageLoaded && (
+          // show loading indicator while image is loading
+          <View style={styles.imgBgStyle}>
+            <ActivityIndicator size="large" color={Constants.PRIMARY_COL} />
+          </View>
+        )}
+
         <ImageBackground
           source={poster_src}
           style={styles.imgBgStyle}
           imageStyle={{ borderRadius: 20 }}
+          onLoad={() => setImageLoaded(true)}
         />
 
         <View style={styles.titleContainer}>
@@ -110,7 +122,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: ITEM_WIDTH * 0.9,
-    height: Constants.HEIGHT * 0.04,
+    height:
+      Platform.OS === 'ios' ? Constants.HEIGHT * 0.04 : Constants.HEIGHT * 0.05,
     backgroundColor: '#cc8de9',
     borderTopWidth: 1,
     borderRightWidth: 1,
@@ -127,7 +140,7 @@ const styles = StyleSheet.create({
   },
   ratingContainer: {
     position: 'absolute',
-    top: 0,
+    top: Platform.OS === 'ios' ? 0 : 5,
     right: 0,
     width: 50,
     height: 35,

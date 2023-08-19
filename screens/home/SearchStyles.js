@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
 
   searchResult: {
-    alignItems: 'left',
+    // alignItems: 'left',
     height: 70,
     paddingVertical: 10,
   },
