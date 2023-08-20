@@ -9,9 +9,8 @@ import {
   Button,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import Fetch_API_Data from '../data/API';
-import styles from './styles/ShowsListStyle';
+import ShowsListStyles from './styles/ShowsListStyle';
 import Constants from '../constants/constants';
 import WatchlistModal from './ShowModal';
 
@@ -29,6 +28,7 @@ const ShowsList = ({ navigation, type }) => {
   const [chosenShowID, setChosenShowID] = useState(null);
   const [chosenShowName, setChosenShowName] = useState(null);
 
+  const styles = ShowsListStyles();
   const flatListRef = useRef();
 
   useEffect(() => {

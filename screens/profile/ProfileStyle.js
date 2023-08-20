@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
 import setColor from '../../constants/colors';

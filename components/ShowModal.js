@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
-import modalStyles from './styles/ModalStyles';
+import ModalStyles from './styles/ModalStyles';
 import { addShowToAsync } from '../data/AsyncActions';
 
 /**
@@ -19,21 +19,23 @@ const WatchlistModal = ({
   show_id,
   showName,
 }) => {
+  const styles = ModalStyles();
+
   return (
     <Modal
       animationType="slide"
       transparent={true}
       visible={modalVisible}
       onRequestClose={() => setModalVisible(false)}>
-      <View style={modalStyles.modalContainer}>
-        <View style={modalStyles.modalView}>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalView}>
           {/* show only up to 17 chars of name */}
-          <Text style={modalStyles.modalTitle}>"{showName}"</Text>
+          <Text style={styles.modalTitle}>"{showName}"</Text>
 
           {type === 'movie' ? (
-            <Text style={modalStyles.modalText}>Add to movie watchlist:</Text>
+            <Text style={styles.modalText}>Add to movie watchlist:</Text>
           ) : (
-            <Text style={modalStyles.modalText}>Add to TV watchlist:</Text>
+            <Text style={styles.modalText}>Add to TV watchlist:</Text>
           )}
 
           {/* render a button for each watchlist */}
@@ -43,8 +45,8 @@ const WatchlistModal = ({
               onPress={() =>
                 addShowToAsync(watchList, type, show_id, setModalVisible)
               }
-              style={modalStyles.modalBtnStyle}>
-              <Text style={modalStyles.modelBtnText}>{watchList}</Text>
+              style={styles.modalBtnStyle}>
+              <Text style={styles.modelBtnText}>{watchList}</Text>
             </TouchableOpacity>
           ))}
 
@@ -56,7 +58,7 @@ const WatchlistModal = ({
             <MaterialIcons
               name="cancel"
               size={30}
-              style={modalStyles.modalCancelIcon}
+              style={styles.modalCancelIcon}
             />
           </TouchableOpacity>
         </View>

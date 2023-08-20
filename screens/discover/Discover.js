@@ -1,20 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
-import styles from './DiscoverStyles';
+import { ThemeContext } from '../../data/ThemeContext';
+import DiscoverStyles from './DiscoverStyles';
 import ShowsList from '../../components/ShowsList';
 
 /**
  * @description The discover screen displays a list of movies and tv shows.
  */
 function DiscoverScreen({ navigation }) {
+  const styles = DiscoverStyles();
+  const { theme } = useContext(ThemeContext);
   // show movies by default
   const [type, setType] = useState('movie');
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <StatusBar style="dark" />
+        <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
         <View style={styles.chosenBtnCont}>
           {/* button to display movie list */}
           <TouchableOpacity

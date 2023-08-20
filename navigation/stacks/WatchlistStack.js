@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { View, StyleSheet } from 'react-native';
 import Constants from '../../constants/constants';
+import { ThemeContext } from '../../data/ThemeContext';
+import setColor from '../../constants/colors';
 import WatchlistScreen from '../../screens/watchlist/Watchlist';
 
 const TopTab = createMaterialTopTabNavigator();
@@ -58,12 +60,15 @@ const WatchlistTopTab = () => (
 );
 
 // let tabs start slightly below the top of the screen
-const WatchlistMain = () => (
-  <View style={styles.container}>
-    <View style={styles.header}></View>
-    <WatchlistTopTab />
-  </View>
-);
+const WatchlistMain = () => {
+  const styles = WatchlistStyles();
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}></View>
+      <WatchlistTopTab />
+    </View>
+  );
+};
 
 /**
  * @description stack navigator for watchlist screen.
@@ -81,14 +86,19 @@ const WatchlistStackNav = () => (
   </WatchlistStack.Navigator>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    height: 50,
-    backgroundColor: Constants.PRIMARY_COL,
-  },
-});
+const WatchlistStyles = () => {
+  const { theme } = useContext(ThemeContext);
+  const { PRIMARY_COL } = setColor(theme);
+
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    header: {
+      height: 50,
+      backgroundColor: PRIMARY_COL,
+    },
+  });
+};
 
 export default WatchlistStackNav;

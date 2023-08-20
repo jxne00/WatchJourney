@@ -11,9 +11,10 @@ import {
 import Fetch_API_Data from '../../data/API';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import { MaterialIcons } from '@expo/vector-icons';
-import styles from './SearchStyles';
+import SearchStyles from './SearchStyles';
 
 const SearchScreen = ({ navigation, route }) => {
+  const styles = SearchStyles();
   const { query } = route.params;
   const [searchQuery, setSearchQuery] = useState(query);
   const [movieSearchResults, setMovieSearchResults] = useState([]);

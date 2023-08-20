@@ -10,7 +10,7 @@ const setColor = (theme) => {
       };
     case 'dark':
       return {
-        PRIMARY_COL: '#501A74',
+        PRIMARY_COL: '#400142',
         SECONDARY_COL: '#191D23',
       };
     default:

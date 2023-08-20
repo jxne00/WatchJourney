@@ -4,8 +4,6 @@ import { Dimensions } from 'react-native';
 const Constants = {
   PRIMARY_COL: '#74369D',
   SECONDARY_COL: '#D7DCEA',
-  DARK_PRIMARY_COL: '#21A0A0',
-  DARK_SECONDARY_COL: '#075E8D',
   BANGER_FONT: 'Bangers-Regular',
   POPPINS_REGULAR_FONT: 'Poppins-Regular',
   POPPINS_SEMIBOLD_FONT: 'Poppins-SemiBold',

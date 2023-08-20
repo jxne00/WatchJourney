@@ -3,16 +3,16 @@ import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import styles from './WatchlistStyles';
+import WatchlistStyles from './WatchlistStyles';
 import { FetchAPIwithAsync } from '../../data/AsyncActions';
 import ShareWatchlist from '../../components/ShareWatchlist';
 import DetailsCard from '../../components/DetailsCard';
 
 const WatchlistScreen = ({ navigation, route }) => {
+  const styles = WatchlistStyles();
   const { tabType } = route.params;
   const [watchlistShows, setWatchlistShows] = useState([]);
   const [type, setType] = useState('movie');
-
   const [isEditing, setIsEditing] = useState(false);
 
   // reload the screen whenever it is visited
@@ -45,7 +45,6 @@ const WatchlistScreen = ({ navigation, route }) => {
           <Text style={styles.buttonText}>TV Shows</Text>
         </TouchableOpacity>
       </View>
-
       {/* display message if watchlist is empty */}
       {watchlistShows.length === 0 &&
         (type === 'movie' ? (
@@ -55,7 +54,6 @@ const WatchlistScreen = ({ navigation, route }) => {
             Add some TV shows to your list!
           </Text>
         ))}
-
       {/* render flatlist if watchlist contains items */}
       {watchlistShows.length > 0 && (
         <View>

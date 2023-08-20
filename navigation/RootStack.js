@@ -2,7 +2,6 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ScreenOptions from './stacks/StackScreenOptions';
 import MainScreensNav from './AppBottomNav';
-
 import LoginStack from './stacks/LoginStack';
 import Reviews from '../screens/reviews/Reviews';
 import ShowDetails from '../components/showDetails';

@@ -8,16 +8,19 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Constants from '../constants/constants';
-import styles from './styles/ShowDetailsStyle';
+import ShowDetailsStyles from './styles/ShowDetailsStyle';
 import WatchlistModal from './ShowModal';
 import { useGenres } from '../data/GenresContext';
 
 const ShowDetails = ({ route, navigation }) => {
+  const styles = ShowDetailsStyles();
   const { item } = route.params;
   const { movieGenres, tvGenres } = useGenres();
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   // set variables based on whether item is a movie or tv show
@@ -51,12 +54,22 @@ const ShowDetails = ({ route, navigation }) => {
           {/* Dark overlay on top of background image */}
           <View style={styles.darkOverlay} />
 
+          {!imageLoaded && (
+            // show loading indicator while image is loading
+            <ActivityIndicator
+              size="large"
+              color="#fff"
+              style={styles.loadingIndicator}
+            />
+          )}
+
           {/* Poster image of show */}
           <Image
             source={{
               uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
             }}
             style={styles.posterImage}
+            onLoad={() => setImageLoaded(true)}
           />
 
           {/* show rating - go to reviw page when clicked */}
@@ -112,7 +125,7 @@ const ShowDetails = ({ route, navigation }) => {
             </Text>
           </View>
         </View>
-        
+
         <View style={styles.horizontalLine} />
 
         {/* TV show overview */}

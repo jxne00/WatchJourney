@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-
 import Constants from '../constants/constants';
 import { ThemeContext } from '../data/ThemeContext';
 import setColor from '../constants/colors';
@@ -28,7 +27,7 @@ const MainScreensNav = () => {
         tabBarInactiveTintColor: theme === 'light' ? SECONDARY_COL : '#e0e0e0',
         tabBarStyle: {
           display: route.name === 'ShowDetailsPage' ? 'none' : 'flex',
-          backgroundColor: theme === 'light' ? PRIMARY_COL : '#400142',
+          backgroundColor: PRIMARY_COL,
           paddingTop: 5,
         },
         tabBarIcon: ({ color, size }) => {

@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Fetch_API_Data from '../../data/API';
-import styles from './ReviewsStyles';
+import ReviewsStyles from './ReviewsStyles';
 
 const Reviews = ({ route }) => {
+  const styles = ReviewsStyles();
   const { id, name, type } = route.params;
   const [reviews, setReviews] = useState([]);
 
@@ -67,7 +68,7 @@ const Reviews = ({ route }) => {
                         style={styles.avatarImage}
                       />
                     ) : (
-                      <FontAwesome name="user-circle" size={30} />
+                      <FontAwesome name="user-circle" size={30} style={styles.userIcon} />
                     )}
 
                     {/* review author's name & username */}
