@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   View,
@@ -15,16 +15,19 @@ import {
 import { MaterialIcons } from '@expo/vector-icons';
 import Fetch_API_Data from '../../data/API';
 import Constants from '../../constants/constants';
-import styles from './HomeStyles';
+import HomeStyles from './HomeStyles';
 import CarouselCard from '../../components/CarouselCard';
 import { useGenres } from '../../data/GenresContext';
+import { ThemeContext } from '../../data/ThemeContext';
 
 const HomeScreen = ({ navigation }) => {
+  const styles = HomeStyles();
   const [nowShowing, setNowShowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [nowAiring, setNowAiring] = useState([]);
   const { movieGenres, setMovieGenres, tvGenres, setTvGenres } = useGenres();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const OFFSET = 40;
   const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
@@ -96,10 +99,20 @@ const HomeScreen = ({ navigation }) => {
     // dismiss keyboard when outside of text input is pressed
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <SafeAreaView style={styles.container}>
-        <StatusBar style="dark" />
+        <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
+
         <View style={styles.container}>
-          {/* App Name */}
-          <Text style={styles.appname}>WatchJourney</Text>
+          <View style={styles.headerContainer}>
+            {/* App Name */}
+            <Text style={styles.appname}>WatchJourney</Text>
+            <MaterialIcons
+              name="brightness-6"
+              size={24}
+              color={theme === 'light' ? '#000' : '#fff'}
+              style={styles.themeSwitch}
+              onPress={toggleTheme}
+            />
+          </View>
 
           <View style={styles.horizontalLine} />
 
@@ -150,7 +163,7 @@ const HomeScreen = ({ navigation }) => {
           {/* ========= "Now In Theatres" carousel cards ========= */}
           <View>
             <View style={styles.sectionContainer}>
-              <MaterialIcons name="movie" size={24} />
+              <MaterialIcons name="movie" size={24} style={styles.icons} />
               <Text style={styles.sectionTitle}> Now In Theatres</Text>
             </View>
 
@@ -183,7 +196,7 @@ const HomeScreen = ({ navigation }) => {
           {/* ========= "Now On Air" carousel cards ========= */}
           <View>
             <View style={styles.sectionContainer}>
-              <MaterialIcons name="live-tv" size={24} />
+              <MaterialIcons name="live-tv" size={24} style={styles.icons} />
               <Text style={styles.sectionTitle}> Now On Air</Text>
             </View>
 

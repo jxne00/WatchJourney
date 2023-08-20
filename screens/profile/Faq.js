@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import styles from './FaqStyle';
+import FaqStyles from './FaqStyle';
 
 // FAQ questions and answers
 const questions = [
@@ -19,6 +19,7 @@ const questions = [
 ];
 
 const FaqScreen = () => {
+  const styles = FaqStyles();
   // remember if a question has been uncollapsed
   const [pressedQns, setPressedQns] = useState([]);
 
@@ -43,9 +44,8 @@ const FaqScreen = () => {
             <TouchableOpacity
               onPress={() => handlePress(index)}
               style={styles.touchable}>
-              
               <Text style={styles.question}>{faq.question}</Text>
-              
+
               <MaterialIcons
                 name={
                   pressedQns.includes(index)

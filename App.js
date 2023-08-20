@@ -2,6 +2,7 @@ import React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
+import { ThemeContextProvider } from './data/ThemeContext';
 import RootStack from './navigation/RootStack';
 
 const App = () => {
@@ -23,9 +24,11 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <ThemeContextProvider>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </ThemeContextProvider>
   );
 };
 

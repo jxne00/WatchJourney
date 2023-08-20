@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   View,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Switch,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import {
@@ -15,10 +16,13 @@ import {
 } from '../../data/AsyncActions';
 import { auth, db } from '../../data/Firebase';
 import Constants from '../../constants/constants';
-import styles from './ProfileStyle';
+import ProfileStyles from './ProfileStyle';
+import { ThemeContext } from '../../data/ThemeContext';
 
 const ProfileScreen = ({ navigation }) => {
+  const styles = ProfileStyles();
   const [loggedinUser, setLoggedinUser] = useState('');
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const currentUser = auth.currentUser;
@@ -87,6 +91,23 @@ const ProfileScreen = ({ navigation }) => {
         <View style={styles.profileTexts}>
           <Text style={styles.profileName}>{loggedinUser.name}</Text>
           <Text style={styles.profileUsername}>{loggedinUser.email}</Text>
+        </View>
+      </View>
+
+      {/* switch to toggle theme */}
+      <View style={styles.darkModeContainer}>
+        <View>
+          <Text style={styles.darkmodeText}>Dark mode</Text>
+        </View>
+
+        <View style={styles.themeSwitch}>
+          <Switch
+            trackColor={{ false: '#767577', true: '#81b0ff' }}
+            thumbColor={theme === 'light' ? '#f4f3f4' : '#f5dd4b'}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleTheme}
+            value={theme === 'dark'}
+          />
         </View>
       </View>
 

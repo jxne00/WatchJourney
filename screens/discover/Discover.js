@@ -23,7 +23,10 @@ function DiscoverScreen({ navigation }) {
               type === 'movie' ? styles.chosenBtn : styles.notChosenBtn
             }
             onPress={() => setType('movie')}>
-            <Text style={styles.chosenBtnText}>Movies</Text>
+            <Text
+              style={type === 'movie' ? styles.chosenBtnText : styles.btnText}>
+              Movies
+            </Text>
           </TouchableOpacity>
 
           {/* button to display TV show list */}
@@ -33,7 +36,9 @@ function DiscoverScreen({ navigation }) {
               type == 'tv' ? styles.chosenBtn : styles.notChosenBtn
             }
             onPress={() => setType('tv')}>
-            <Text style={styles.btnText}>TV Shows</Text>
+            <Text style={type === 'tv' ? styles.chosenBtnText : styles.btnText}>
+              TV Shows
+            </Text>
           </TouchableOpacity>
         </View>
 
