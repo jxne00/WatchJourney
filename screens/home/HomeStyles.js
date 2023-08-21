@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Constants from '../../constants/constants';
 import setColor from '../../constants/colors';
 import { ThemeContext } from '../../data/ThemeContext';
@@ -14,13 +14,11 @@ const HomeStyles = () => {
       backgroundColor: SECONDARY_COL,
       paddingBottom: 10,
     },
-    headerContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: Constants.HEIGHT * 0.02,
-    },
     appname: {
+      marginTop:
+        Platform.OS === 'ios'
+          ? Constants.HEIGHT * 0.02
+          : Constants.HEIGHT * 0.03,
       fontSize: 30,
       fontFamily: Constants.BANGER_FONT,
       color: theme === 'light' ? '#854883' : '#cda7cc',
@@ -30,7 +28,10 @@ const HomeStyles = () => {
     themeSwitch: {
       position: 'absolute',
       right: 10,
-      top: 2,
+      top:
+        Platform.OS === 'ios'
+          ? Constants.HEIGHT * 0.02
+          : 40,
     },
     horizontalLine: {
       height: 1,

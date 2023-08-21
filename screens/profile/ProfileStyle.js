@@ -54,7 +54,7 @@ const ProfileStyles = () => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginTop: '5%',
+      marginTop: '3%',
       marginBottom: '2%',
       alignSelf: 'center',
       width: '100%',
@@ -80,7 +80,7 @@ const ProfileStyles = () => {
       borderBottomWidth: 1,
       borderColor: theme === 'light' ? '#000000' : '#fff',
       backgroundColor: SECONDARY_COL,
-      paddingVertical: 12,
+      paddingVertical: 5,
     },
     optionBtn: {
       flexDirection: 'row',

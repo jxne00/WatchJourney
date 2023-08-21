@@ -7,7 +7,6 @@ import {
   ScrollView,
   Animated,
   TextInput,
-  FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
@@ -19,12 +18,15 @@ import HomeStyles from './HomeStyles';
 import CarouselCard from '../../components/CarouselCard';
 import { useGenres } from '../../data/GenresContext';
 import { ThemeContext } from '../../data/ThemeContext';
+import {
+  registerForPushNotif,
+  schedulePushNotif,
+} from '../../components/HandleNotifications';
 
 const HomeScreen = ({ navigation }) => {
   const styles = HomeStyles();
   const [nowShowing, setNowShowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
   const [nowAiring, setNowAiring] = useState([]);
   const { movieGenres, setMovieGenres, tvGenres, setTvGenres } = useGenres();
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -63,37 +65,26 @@ const HomeScreen = ({ navigation }) => {
     );
   }, [setNowAiring, setNowShowing]);
 
+  useEffect(() => {
+    registerForPushNotif();
+
+    // select random movie to display in notification
+    const randVal = Math.floor(Math.random() * nowShowing.length);
+    const movie = nowShowing[randVal];
+
+    // send notif 3 seconds after loading home screen
+    const timer = setTimeout(() => {
+      schedulePushNotif(movie.title);
+    }, 3000);
+
+    // clear timer if user leaves home screen
+    return () => clearTimeout(timer);
+  }, [nowShowing]);
+
   // clears the search query and results
   const resetSearch = () => {
     setSearchQuery('');
-    setSearchResults([]);
   };
-
-  /**
-   * @description function to render search results
-   */
-  const renderSearchResults = ({ item }) => (
-    <TouchableOpacity
-      key={item.id}
-      style={styles.searchResult}
-      onPress={() => navigation.navigate('ShowDetailsPage', { item })}>
-      {/* "item.title" for movies, "item.name" for tvshows */}
-      <Text style={styles.title}>{item.title || item.name}</Text>
-
-      <View style={styles.releaseRating}>
-        <Text style={styles.releaseDate}>
-          {/* "item.release_date" for movies, "item.first_air_date" for tvshows */}
-          ({item.release_date || item.first_air_date}) &#x2022;
-        </Text>
-
-        {/* display rating */}
-        <View style={styles.ratingContainer}>
-          <MaterialIcons name="star" style={styles.ratingIcon} />
-          <Text style={styles.ratingNumber}>{item.vote_average}</Text>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
 
   return (
     // dismiss keyboard when outside of text input is pressed
@@ -102,17 +93,18 @@ const HomeScreen = ({ navigation }) => {
         <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
 
         <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            {/* App Name */}
-            <Text style={styles.appname}>WatchJourney</Text>
-            <MaterialIcons
-              name="brightness-6"
-              size={24}
-              color={theme === 'light' ? '#000' : '#fff'}
-              style={styles.themeSwitch}
-              onPress={toggleTheme}
-            />
-          </View>
+          {/* <View style={styles.headerContainer}> */}
+          {/* App Name */}
+          <Text style={styles.appname}>WatchJourney</Text>
+
+          <MaterialIcons
+            name="brightness-6"
+            size={24}
+            color={theme === 'light' ? '#000' : '#fff'}
+            style={styles.themeSwitch}
+            onPress={toggleTheme}
+          />
+          {/* </View> */}
 
           <View style={styles.horizontalLine} />
 
@@ -148,17 +140,6 @@ const HomeScreen = ({ navigation }) => {
               <MaterialIcons name="search" style={styles.searchIcon} />
             </TouchableOpacity>
           </View>
-          {/* display search results */}
-          {searchResults.length > 0 && (
-            <View style={styles.searchResultsContainer}>
-              <FlatList
-                data={searchResults}
-                keyExtractor={(item) => item.id.toString()}
-                style={styles.searchScrollStyle}
-                renderItem={renderSearchResults}
-              />
-            </View>
-          )}
 
           {/* ========= "Now In Theatres" carousel cards ========= */}
           <View>
