@@ -10,6 +10,7 @@ import {
   Switch,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import {
   clearAsyncStorage,
   printAllAsyncContent,
@@ -21,9 +22,11 @@ import { ThemeContext } from '../../data/ThemeContext';
 
 const ProfileScreen = ({ navigation }) => {
   const styles = ProfileStyles();
-  const [loggedinUser, setLoggedinUser] = useState('');
   const { theme, toggleTheme } = useContext(ThemeContext);
 
+  const [loggedinUser, setLoggedinUser] = useState('');
+
+  // get details of logged in user
   useEffect(() => {
     const currentUser = auth.currentUser;
 
@@ -88,6 +91,7 @@ const ProfileScreen = ({ navigation }) => {
           source={require('../../assets/images/profile-avatar.jpeg')}
           style={styles.profileAvatar}
         />
+
         <View style={styles.profileTexts}>
           <Text style={styles.profileName}>{loggedinUser.name}</Text>
           <Text style={styles.profileUsername}>{loggedinUser.email}</Text>
@@ -122,6 +126,7 @@ const ProfileScreen = ({ navigation }) => {
               Frequently asked questions about the app.
             </Text>
           </View>
+
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
@@ -137,6 +142,7 @@ const ProfileScreen = ({ navigation }) => {
               Prints all async storage stored content into the console.
             </Text>
           </View>
+
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
@@ -150,6 +156,7 @@ const ProfileScreen = ({ navigation }) => {
               Clears all contents currenty stored in async storage.
             </Text>
           </View>
+          
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>

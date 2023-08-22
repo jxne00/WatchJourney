@@ -12,10 +12,12 @@ import {
   Keyboard,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import Fetch_API_Data from '../../data/API';
 import Constants from '../../constants/constants';
 import HomeStyles from './HomeStyles';
 import CarouselCard from '../../components/CarouselCard';
+
 import { useGenres } from '../../data/GenresContext';
 import { ThemeContext } from '../../data/ThemeContext';
 import {
@@ -28,6 +30,7 @@ const HomeScreen = ({ navigation }) => {
   const [nowShowing, setNowShowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [nowAiring, setNowAiring] = useState([]);
+  
   const { movieGenres, setMovieGenres, tvGenres, setTvGenres } = useGenres();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
@@ -35,8 +38,8 @@ const HomeScreen = ({ navigation }) => {
   const ITEM_WIDTH = Constants.WIDTH - OFFSET * 2;
 
   // values to track scroll positions of carousel cards
-  const scrollX = useRef(new Animated.Value(0)).current;
-  const scrollX2 = useRef(new Animated.Value(0)).current;
+  const movie_scroll = useRef(new Animated.Value(0)).current;
+  const tv_scroll = useRef(new Animated.Value(0)).current;
 
   // fetch movie and tv genres
   useEffect(() => {
@@ -72,10 +75,10 @@ const HomeScreen = ({ navigation }) => {
     const randVal = Math.floor(Math.random() * nowShowing.length);
     const movie = nowShowing[randVal];
 
-    // send notif 3 seconds after loading home screen
+    // send notif 10 seconds after loading home screen
     const timer = setTimeout(() => {
       schedulePushNotif(movie.title);
-    }, 3000);
+    }, 10000);
 
     // clear timer if user leaves home screen
     return () => clearTimeout(timer);
@@ -93,7 +96,6 @@ const HomeScreen = ({ navigation }) => {
         <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
 
         <View style={styles.container}>
-          {/* <View style={styles.headerContainer}> */}
           {/* App Name */}
           <Text style={styles.appname}>WatchJourney</Text>
 
@@ -104,7 +106,6 @@ const HomeScreen = ({ navigation }) => {
             style={styles.themeSwitch}
             onPress={toggleTheme}
           />
-          {/* </View> */}
 
           <View style={styles.horizontalLine} />
 
@@ -118,6 +119,7 @@ const HomeScreen = ({ navigation }) => {
             <TextInput
               style={styles.searchInput}
               placeholder={'Search for a movie or TV show'}
+              placeholderTextColor={'#666'}
               onChangeText={(text) => setSearchQuery(text)}
               value={searchQuery}
               autoCompleteType={'off'}
@@ -156,7 +158,7 @@ const HomeScreen = ({ navigation }) => {
               showsHorizontalScrollIndicator={false}
               disableIntervalMomentum
               onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                [{ nativeEvent: { contentOffset: { x: movie_scroll } } }],
                 { useNativeDriver: false },
               )}
               scrollEventThrottle={12}>
@@ -165,9 +167,8 @@ const HomeScreen = ({ navigation }) => {
                 <CarouselCard
                   key={item.id}
                   item={item}
-                  navigation={navigation}
                   index={index}
-                  scrollX={scrollX}
+                  scrollX={movie_scroll}
                   last_index={nowShowing.length - 1}
                 />
               ))}
@@ -189,7 +190,7 @@ const HomeScreen = ({ navigation }) => {
               showsHorizontalScrollIndicator={false}
               disableIntervalMomentum
               onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { x: scrollX2 } } }],
+                [{ nativeEvent: { contentOffset: { x: tv_scroll } } }],
                 { useNativeDriver: false },
               )}
               scrollEventThrottle={12}>
@@ -198,9 +199,8 @@ const HomeScreen = ({ navigation }) => {
                 <CarouselCard
                   key={item.id}
                   item={item}
-                  navigation={navigation}
                   index={index}
-                  scrollX={scrollX2}
+                  scrollX={tv_scroll}
                   last_index={nowAiring.length - 1}
                 />
               ))}

@@ -9,7 +9,9 @@ import {
   Platform,
   ActivityIndicator,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import Constants from '../constants/constants';
 
 const OFFSET = 40;
@@ -18,20 +20,20 @@ const ITEM_HEIGHT =
   Platform.OS === 'ios' ? Constants.HEIGHT * 0.22 : Constants.HEIGHT * 0.25;
 
 /**
- * @description A custom carousel card to that displays movie poster and title.
- * @param item - movie object
- * @param index - index of movie
- * @param scrollX - scroll position
- * @param last_index - index of last movie object (used to determine margins)
+ * @description Carousel card showing movie/show name and rating.
  */
-const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
+const CarouselCard = (props) => {
+  const { item, index, scrollX, last_index } = props;
   const showTitle = item.title || item.name;
+
+  const navigation = useNavigation();
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  // sets position of previous, current, and next cards
   const inputRange = [
-    (index - 1) * ITEM_WIDTH, // scroll pos of previous card
-    index * ITEM_WIDTH, // scroll pos of current card
-    (index + 1) * ITEM_WIDTH, // scroll pos of next card
+    (index - 1) * ITEM_WIDTH,
+    index * ITEM_WIDTH,
+    (index + 1) * ITEM_WIDTH,
   ];
 
   // make middle card bigger than left and right cards
@@ -97,6 +99,7 @@ const CarouselCard = ({ item, index, scrollX, last_index, navigation }) => {
           </Text>
         </View>
 
+        {/* show rating */}
         <View style={styles.ratingContainer}>
           <Text style={styles.ratingText}>
             <MaterialIcons name="star" size={16} color={'#fffb15'} />

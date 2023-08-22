@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import { auth } from '../../data/Firebase';
 import styles from './LoginStyles';
 
@@ -79,8 +80,10 @@ const LoginScreen = ({ navigation }) => {
         style={styles.background}
         start={{ x: 0.7, y: 0 }}
       />
+
       <KeyboardAvoidingView behavior="padding">
         <StatusBar style="light" />
+
         <Image
           source={require('../../assets/images/app-icon.png')}
           style={styles.appicon}
@@ -112,6 +115,8 @@ const LoginScreen = ({ navigation }) => {
               secureTextEntry={!showPassword}
               style={styles.passwordInput}
             />
+
+            {/* icon to show/hide password input text */}
             <MaterialIcons
               name={showPassword ? 'visibility' : 'visibility-off'}
               size={24}

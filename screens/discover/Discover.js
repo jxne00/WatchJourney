@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+
 import { ThemeContext } from '../../data/ThemeContext';
 import DiscoverStyles from './DiscoverStyles';
 import ShowsList from '../../components/ShowsList';

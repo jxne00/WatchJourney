@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+
 import { auth, db } from '../../data/Firebase';
 import styles from './SignupStyles';
 
@@ -64,10 +65,12 @@ const SignupScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="auto" />
+
       <KeyboardAvoidingView behavior="padding">
         <ScrollView style={styles.scrollview}>
           <View style={styles.container}>
             <Text style={styles.headerText}>Create Account</Text>
+
             {/* "Name" input box */}
             <TextInput
               style={styles.input}
@@ -109,6 +112,8 @@ const SignupScreen = ({ navigation }) => {
                 autoCorrect={false}
                 autoCompleteType={'off'}
               />
+
+              {/* icon to show/hide password input text */}
               <MaterialIcons
                 name={showPassword ? 'visibility' : 'visibility-off'}
                 size={24}

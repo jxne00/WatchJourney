@@ -9,12 +9,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+
 import Fetch_API_Data from '../../data/API';
 import ReviewsStyles from './ReviewsStyles';
 
 const Reviews = ({ route }) => {
   const styles = ReviewsStyles();
   const { id, name, type } = route.params;
+  
   const [reviews, setReviews] = useState([]);
 
   // fetch reviews of movie or tv show
