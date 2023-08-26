@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Constants from '../../constants/constants';
 import setColor from '../../constants/colors';
 import { ThemeContext } from '../../data/ThemeContext';
@@ -22,7 +22,8 @@ const DiscoverStyles = () => {
     chosenBtnCont: {
       flexDirection: 'row',
       justifyContent: 'space-evenly',
-      marginVertical: 5,
+      marginTop: Platform.OS === 'ios' ? 5 : 7,
+      marginBottom: 5,
     },
     chosenBtn: {
       backgroundColor: PRIMARY_COL,

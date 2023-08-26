@@ -12,6 +12,14 @@ $ cd WatchJourney
 $ npm install
 $ npx expo start
 ```
+## Login
+
+Create a new account by clicking on the "Sign Up" button on the login screen, or login with the following credentials:
+
+```txt
+Email: user@demo.com
+Password: demopass
+```
 
 ## Screens
 

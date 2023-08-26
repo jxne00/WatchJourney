@@ -17,7 +17,7 @@ import SearchStyles from './SearchStyles';
 const SearchScreen = ({ navigation, route }) => {
   const styles = SearchStyles();
   const { query } = route.params;
-  
+
   const [searchQuery, setSearchQuery] = useState(query);
   const [movieSearchResults, setMovieSearchResults] = useState([]);
   const [tvSearchResults, setTvSearchResults] = useState([]);
@@ -62,14 +62,22 @@ const SearchScreen = ({ navigation, route }) => {
 
         <View style={styles.releaseRating}>
           <Text style={styles.releaseDate}>
-            {/* "item.release_date" for movies, "item.first_air_date" for tvshows */}
-            ({item.release_date || item.first_air_date}) &#x2022;
+            (
+            {
+              // if release date is not available, display "N/A"
+              item.release_date || item.first_air_date
+                ? item.release_date || item.first_air_date
+                : 'no date'
+            }
+            ) &#x2022;
           </Text>
 
           {/* display rating */}
           <View style={styles.ratingContainer}>
             <MaterialIcons name="star" size={18} style={styles.ratingIcon} />
-            <Text style={styles.ratingNumber}>{item.vote_average}</Text>
+            <Text style={styles.ratingNumber}>
+              {item.vote_average ? item.vote_average : '-'}
+            </Text>
           </View>
         </View>
       </TouchableOpacity>

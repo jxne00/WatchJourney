@@ -61,7 +61,7 @@ const schedulePushNotif = async (title) => {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: 'Check out this movie!',
-      body: `Looking for movies to add to your watchlist? "${title}" is now showing in theaters!`,
+      body: `Looking for movies to add to your watchlist? "${title}" is now showing in theatres!`,
     },
     trigger: null,
   });

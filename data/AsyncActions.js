@@ -36,13 +36,31 @@ const printAllAsyncContent = async () => {
 /**
  * @description clear all contents of AsyncStorage
  */
-const clearAsyncStorage = async () => {
-  try {
-    await AsyncStorage.clear();
-    Alert.alert('AsyncStorage successfully cleared!');
-  } catch (err) {
-    Alert.alert('Failed to clear AsyncStorage');
-  }
+const clearAsyncStorage = () => {
+  Alert.alert(
+    'Warning!',
+    'This will clear all contents stored in async storage. Do you want to proceed?',
+    [
+      {
+        // dont clear if "Cancel" pressed
+        text: 'Cancel',
+        onPress: () => '',
+        style: 'cancel',
+      },
+      {
+        // clear if "Yes" pressed
+        text: 'Yes',
+        onPress: async () => {
+          try {
+            await AsyncStorage.clear();
+            Alert.alert('AsyncStorage successfully cleared!');
+          } catch (err) {
+            Alert.alert('Failed to clear AsyncStorage');
+          }
+        },
+      },
+    ],
+  );
 };
 
 /**

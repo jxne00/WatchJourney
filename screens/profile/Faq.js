@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { ThemeContext } from '../../data/ThemeContext';
 import FaqStyles from './FaqStyle';
 
 // FAQ questions and answers
@@ -21,6 +22,7 @@ const questions = [
 
 const FaqScreen = () => {
   const styles = FaqStyles();
+  const { theme } = useContext(ThemeContext);
   // remember if a question has been uncollapsed
   const [pressedQns, setPressedQns] = useState([]);
 
@@ -41,6 +43,7 @@ const FaqScreen = () => {
 
       <View style={styles.container}>
         {questions.map((faq, index) => (
+          // display questions and answers
           <View style={styles.contentContainer} key={index}>
             <TouchableOpacity
               onPress={() => handlePress(index)}
@@ -54,7 +57,7 @@ const FaqScreen = () => {
                     : 'keyboard-arrow-down'
                 }
                 size={24}
-                color="#000"
+                color={theme === 'light' ? '#000' : '#dfdfdf'}
               />
             </TouchableOpacity>
 

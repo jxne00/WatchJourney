@@ -32,7 +32,7 @@ const FaqStyles = () => {
     contentContainer: {
       marginVertical: 10,
       marginTop: '10%',
-      backgroundColor: theme === 'light' ? '#f3f3f3' : PRIMARY_COL,
+      backgroundColor: theme === 'light' ? '#f3f3f3' : '#424242',
       padding: 10,
       borderRadius: 10,
       shadowColor: '#000',
@@ -54,7 +54,7 @@ const FaqStyles = () => {
     },
     answer: {
       marginTop: 5,
-      color: theme === 'light' ? '#444343' : '#c3c0c0',
+      color: theme === 'light' ? '#444343' : '#d8d8d8',
       fontFamily: Constants.POPPINS_REGULAR_FONT,
       paddingHorizontal: 5,
       fontSize: 16,

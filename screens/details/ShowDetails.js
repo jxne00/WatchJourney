@@ -28,23 +28,24 @@ const ShowDetails = ({ route, navigation }) => {
   let genresList, showName, type, releaseDate, originalName;
   if (item.title) {
     // if movie
-    showName = item.title;
+    showName = item.title || 'N/A';
     genresList = movieGenres;
     type = 'movie';
-    releaseDate = item.release_date;
+    releaseDate = item.release_date || 'no date';
     originalName = item.original_title;
   } else {
     // if tv show
-    showName = item.name;
+    showName = item.name || 'N/A';
     genresList = tvGenres;
     type = 'tv';
-    releaseDate = item.first_air_date;
+    releaseDate = item.first_air_date || 'no date';
     originalName = item.original_name;
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
+
       <ScrollView style={styles.container}>
         {/* Set image backdrop image as background */}
         <ImageBackground
@@ -119,6 +120,7 @@ const ShowDetails = ({ route, navigation }) => {
               <Text style={styles.subtitle}>({originalName})</Text>
             )
           }
+
           <View style={styles.dateShowType}>
             <Text style={styles.release}>({releaseDate}) &#x2022;</Text>
             <Text style={styles.showType}>
@@ -131,7 +133,9 @@ const ShowDetails = ({ route, navigation }) => {
 
         {/* TV show overview */}
         <Text style={styles.sectionTitle}>Overview</Text>
-        <Text style={styles.overview}>{item.overview}</Text>
+        <Text style={styles.overview}>
+          {item.overview ? item.overview : 'No overview'}
+        </Text>
 
         <View style={styles.horizontalLine} />
 

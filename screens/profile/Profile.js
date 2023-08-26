@@ -3,12 +3,20 @@ import { StatusBar } from 'expo-status-bar';
 import {
   View,
   Text,
-  Alert,
   ScrollView,
   Image,
   TouchableOpacity,
   Switch,
+  ActivityIndicator,
 } from 'react-native';
+import Animated, {
+  Easing,
+  withTiming,
+  useSharedValue,
+  useAnimatedStyle,
+  withSequence,
+  interpolate,
+} from 'react-native-reanimated';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import {
@@ -16,7 +24,6 @@ import {
   printAllAsyncContent,
 } from '../../data/AsyncActions';
 import { auth, db } from '../../data/Firebase';
-import Constants from '../../constants/constants';
 import ProfileStyles from './ProfileStyle';
 import { ThemeContext } from '../../data/ThemeContext';
 
@@ -25,46 +32,47 @@ const ProfileScreen = ({ navigation }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   const [loggedinUser, setLoggedinUser] = useState('');
+  const [detailsLoaded, setDetailsLoaded] = useState(false);
+  const rotate = useSharedValue(0); // for rotation animation
 
-  // get details of logged in user
+  // get details of logged in user from firestore
   useEffect(() => {
     const currentUser = auth.currentUser;
 
     if (currentUser) {
       const userRef = db.collection('users').doc(currentUser.uid);
+
       userRef
         .get()
         .then((doc) => {
-          if (doc.exists) {
-            setLoggedinUser(doc.data());
-          } else {
-            console.log('No such document!');
-          }
+          if (doc.exists) setLoggedinUser(doc.data());
         })
-        .catch((error) => {
-          console.log('Error getting document:', error);
+        .then(() => setDetailsLoaded(true))
+        .catch((err) => {
+          console.log('Error getting document:', err);
         });
     }
   }, []);
 
-  // confirms if user wants to clear async storage
-  const confirmAsyncClear = () => {
-    Alert.alert(
-      'Confirmation',
-      'This will clear all contents stored in async storage. Do you want to proceed?',
-      [
-        {
-          // dont clear if "Cancel" pressed
-          text: 'Cancel',
-          onPress: () => '',
-          style: 'cancel',
-        },
-        {
-          // clear if "Yes" pressed
-          text: 'Yes',
-          onPress: () => clearAsyncStorage(),
-        },
-      ],
+  // animation style object for profile card
+  const animationStyle = useAnimatedStyle(() => {
+    const scale = interpolate(
+      rotate.value, // input value
+      [0, 360, 1080], // input range
+      [1, 0.5, 1], // output range (scale to 0.5 and back)
+    );
+
+    return {
+      // rotate along z-axis
+      transform: [{ rotateZ: `${rotate.value}deg` }, { scale }],
+    };
+  });
+
+  const rotationAnimation = () => {
+    // rotate 360deg for 0.5s, then 1080deg for 0.5s
+    rotate.value = withSequence(
+      withTiming(360, { duration: 500, easing: Easing.inOut(Easing.ease) }),
+      withTiming(1080, { duration: 500, easing: Easing.inOut(Easing.ease) }),
     );
   };
 
@@ -73,7 +81,6 @@ const ProfileScreen = ({ navigation }) => {
     auth
       .signOut()
       .then(() => {
-        console.log('User signed out successfully.');
         navigation.navigate('LoginScreen');
       })
       .catch((error) => {
@@ -86,17 +93,26 @@ const ProfileScreen = ({ navigation }) => {
       <StatusBar style="light" />
 
       {/* profile card */}
-      <View style={styles.profile}>
-        <Image
-          source={require('../../assets/images/profile-avatar.jpeg')}
-          style={styles.profileAvatar}
-        />
+      <TouchableOpacity onPress={rotationAnimation}>
+        <Animated.View style={[styles.profile, animationStyle]}>
+          <Image
+            source={require('../../assets/images/profile-avatar.jpeg')}
+            style={styles.profileAvatar}
+          />
 
-        <View style={styles.profileTexts}>
-          <Text style={styles.profileName}>{loggedinUser.name}</Text>
-          <Text style={styles.profileUsername}>{loggedinUser.email}</Text>
-        </View>
-      </View>
+          <View style={styles.profileTexts}>
+            {/* show loading indicator if details not loaded */}
+            {!detailsLoaded && (
+              <ActivityIndicator
+                size="small"
+                color={theme === 'light' ? '#74369D' : '#D7DCEA'}
+              />
+            )}
+            <Text style={styles.profileName}>{loggedinUser.name}</Text>
+            <Text style={styles.profileUsername}>{loggedinUser.email}</Text>
+          </View>
+        </Animated.View>
+      </TouchableOpacity>
 
       {/* switch to toggle theme */}
       <View style={styles.darkModeContainer}>
@@ -107,7 +123,7 @@ const ProfileScreen = ({ navigation }) => {
         <View style={styles.themeSwitch}>
           <Switch
             trackColor={{ false: '#767577', true: '#81b0ff' }}
-            thumbColor={theme === 'light' ? '#f4f3f4' : '#f5dd4b'}
+            thumbColor={theme === 'light' ? '#f4f3f4' : '#000'}
             ios_backgroundColor="#3e3e3e"
             onValueChange={toggleTheme}
             value={theme === 'dark'}
@@ -149,23 +165,20 @@ const ProfileScreen = ({ navigation }) => {
 
       {/* clear all contents of async storage */}
       <View style={styles.optionContainer}>
-        <TouchableOpacity style={styles.optionBtn} onPress={confirmAsyncClear}>
+        <TouchableOpacity style={styles.optionBtn} onPress={clearAsyncStorage}>
           <View>
             <Text style={styles.optionText}>Clear async storage</Text>
             <Text style={styles.optionDesc}>
               Clears all contents currenty stored in async storage.
             </Text>
           </View>
-          
+
           <MaterialIcons name="arrow-forward-ios" size={22} color="#616162" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.signout}>
-        <TouchableOpacity
-          style={styles.signoutBtn}
-          onPress={handleSignout}
-          colors={[Constants.PRIMARY_COL, Constants.PRIMARY_COL]}>
+        <TouchableOpacity style={styles.signoutBtn} onPress={handleSignout}>
           <Text style={styles.SignoutBtnText}>Sign Out</Text>
         </TouchableOpacity>
       </View>

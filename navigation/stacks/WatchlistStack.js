@@ -24,6 +24,12 @@ const WatchlistTopTab = () => (
         fontFamily: Constants.POPPINS_SEMIBOLD_FONT,
         fontSize: 12,
       },
+      tabBarStyle: {
+        backgroundColor: Constants.SECONDARY_COL,
+        height: 50,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderTopColor: Constants.PRIMARY_COL,
+      },
       tabBarIndicatorStyle: {
         backgroundColor: Constants.PRIMARY_COL,
       },
