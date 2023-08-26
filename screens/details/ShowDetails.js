@@ -11,10 +11,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Constants from '../constants/constants';
-import ShowDetailsStyles from './styles/ShowDetailsStyle';
-import WatchlistModal from './ShowModal';
-import { useGenres } from '../data/GenresContext';
+
+import Constants from '../../constants/constants';
+import ShowDetailsStyles from './ShowDetailsStyle';
+import WatchlistModal from '../../components/ShowModal';
+import { useGenres } from '../../data/GenresContext';
 
 const ShowDetails = ({ route, navigation }) => {
   const styles = ShowDetailsStyles();

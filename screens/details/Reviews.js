@@ -16,7 +16,7 @@ import ReviewsStyles from './ReviewsStyles';
 const Reviews = ({ route }) => {
   const styles = ReviewsStyles();
   const { id, name, type } = route.params;
-  
+
   const [reviews, setReviews] = useState([]);
 
   // fetch reviews of movie or tv show
@@ -70,7 +70,11 @@ const Reviews = ({ route }) => {
                         style={styles.avatarImage}
                       />
                     ) : (
-                      <FontAwesome name="user-circle" size={30} style={styles.userIcon} />
+                      <FontAwesome
+                        name="user-circle"
+                        size={30}
+                        style={styles.userIcon}
+                      />
                     )}
 
                     {/* review author's name & username */}
@@ -89,7 +93,9 @@ const Reviews = ({ route }) => {
                     {/* rating */}
                     <View style={styles.ratingContainer}>
                       <FontAwesome name="star" size={20} color={'#da9132'} />
-                      <Text style={styles.ratingText}>{authorData.rating}</Text>
+                      <Text style={styles.ratingText}>
+                        {authorData.rating ? authorData.rating : '-'}
+                      </Text>
                     </View>
                   </View>
 

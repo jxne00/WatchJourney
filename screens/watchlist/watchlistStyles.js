@@ -13,13 +13,6 @@ const WatchlistStyles = () => {
       flex: 1,
       backgroundColor: SECONDARY_COL,
     },
-    numRecords: {
-      fontSize: 16,
-      marginVertical: 10,
-      alignSelf: 'center',
-      color: theme === 'light' ? PRIMARY_COL : '#fff',
-      fontFamily: Constants.POPPINS_ITALIC_FONT,
-    },
     emptyListMsg: {
       fontSize: 16,
       alignSelf: 'center',
@@ -70,15 +63,7 @@ const WatchlistStyles = () => {
       fontSize: 16,
       textAlign: 'center',
     },
-    footer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    shareIcon: {
-      color: theme === 'light' ? '#2e2e2e' : '#dadada',
-      paddingLeft: '3%',
-    },
+
   });
 };
 

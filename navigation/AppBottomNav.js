@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
-import Constants from '../constants/constants';
+
 import { ThemeContext } from '../data/ThemeContext';
+import Constants from '../constants/constants';
 import setColor from '../constants/colors';
+
 import ProfileScreenStack from './stacks/ProfileStack';
 import WatchlistStackNav from './stacks/WatchlistStack';
 import DiscoverScreen from '../screens/discover/Discover';
@@ -30,6 +32,7 @@ const MainScreensNav = () => {
           backgroundColor: PRIMARY_COL,
           paddingTop: 5,
         },
+        // set icon for each tab
         tabBarIcon: ({ color, size }) => {
           let iconName;
           switch (route.name) {
@@ -50,6 +53,7 @@ const MainScreensNav = () => {
           }
           return <MaterialIcons name={iconName} color={color} size={size} />;
         },
+        // set label for each tab
         tabBarLabel: ({ color }) => {
           let labelName;
           switch (route.name) {

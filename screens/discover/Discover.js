@@ -6,9 +6,6 @@ import { ThemeContext } from '../../data/ThemeContext';
 import DiscoverStyles from './DiscoverStyles';
 import ShowsList from '../../components/ShowsList';
 
-/**
- * @description The discover screen displays a list of movies and tv shows.
- */
 function DiscoverScreen({ navigation }) {
   const styles = DiscoverStyles();
   const { theme } = useContext(ThemeContext);
@@ -19,6 +16,7 @@ function DiscoverScreen({ navigation }) {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <StatusBar style={theme === 'light' ? 'dark' : 'light'} />
+
         <View style={styles.chosenBtnCont}>
           {/* button to display movie list */}
           <TouchableOpacity

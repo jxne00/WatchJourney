@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   FlatList,
   View,
@@ -7,21 +7,37 @@ import {
   Image,
   Animated,
   Easing,
+  ActivityIndicator,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
-import styles from './styles/DetailsCardStyles';
+
+import DetailsStyles from './styles/DetailsCardStyles';
 import Constants from '../constants/constants';
+import ShareWatchlist from './ShareWatchlist';
 import { removeIDfromList } from '../data/AsyncActions';
 
-const DetailsCard = ({
-  data,
-  navigation,
-  watchlist,
-  type,
-  setStateItem,
-  isEditing,
-}) => {
+/**
+ * @description renders a flatlist of cards with movie or tv show details.
+ * @param data - data to display
+ * @param watchlist - watchlist to remove item from
+ * @param type - 'movie' or 'tv'
+ * @param setStateItem - state to set after removing item from watchlist
+ * @param isEditing - true if user is editing watchlist
+ */
+const DetailsCard = (props) => {
+  const navigation = useNavigation();
+  const styles = DetailsStyles();
+
+  const { data, watchlist, type, setStateItem, isEditing } = props;
+  const [numRecords, setNumRecords] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const jiggleAnim = useRef(new Animated.Value(0)).current;
+
+  // set number of records found
+  useState(() => {
+    setNumRecords(data.length);
+  }, [data]);
 
   // animate the remove button when editing
   if (isEditing) {
@@ -68,7 +84,24 @@ const DetailsCard = ({
     return data;
   };
 
-  const RenderCard = ({ item }) => {
+  // displays number of records found and share button
+  const FooterComponent = () => (
+    <View style={styles.footer}>
+      <Text style={styles.numRecords}>{numRecords} record(s) found</Text>
+
+      {/* share button */}
+      <TouchableOpacity
+        // style={styles.shareBtn}
+        onPress={() => {
+          // share the titles of the movies/tv shows in the list
+          ShareWatchlist(type, data, watchlist);
+        }}>
+        <FontAwesome name="share-square-o" size={25} style={styles.shareIcon} />
+      </TouchableOpacity>
+    </View>
+  );
+
+  const FlatlistCard = ({ item }) => {
     if (item.empty) {
       return <View style={[styles.cardContainer, styles.emptyItem]} />;
     }
@@ -97,12 +130,16 @@ const DetailsCard = ({
         {/* navigate to show details page if clicked */}
         <TouchableOpacity
           onPress={() => navigation.navigate('ShowDetailsPage', { item })}>
+          {/* show loading indicator while image is loading */}
+          {!imageLoaded && <ActivityIndicator size="large" color="black" />}
+
           {/* poster image of the movie */}
           <Image
             style={styles.poster}
             source={{
               uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
             }}
+            onLoad={() => setImageLoaded(true)}
           />
 
           {/* show title and rating */}
@@ -122,10 +159,11 @@ const DetailsCard = ({
   return (
     <FlatList
       data={data}
-      renderItem={RenderCard}
+      renderItem={FlatlistCard}
       keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={{ alignItems: 'center' }}
       numColumns={2} // display 2 cards per row
+      ListFooterComponent={FooterComponent}
     />
   );
 };

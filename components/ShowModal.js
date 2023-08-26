@@ -11,14 +11,10 @@ import { addShowToAsync } from '../data/AsyncActions';
  * @param setModalVisible - state for setting modal visibility
  * @param type - 'movie' or 'tv
  * @param show_id - id of show to add to watchlist
+ * @param showName - name of show to add to watchlist
  */
-const WatchlistModal = ({
-  modalVisible,
-  setModalVisible,
-  type,
-  show_id,
-  showName,
-}) => {
+const WatchlistModal = (props) => {
+  const { modalVisible, setModalVisible, type, show_id, showName } = props;
   const styles = ModalStyles();
 
   return (

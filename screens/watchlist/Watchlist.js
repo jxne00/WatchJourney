@@ -2,14 +2,13 @@ import React, { useState, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import WatchlistStyles from './WatchlistStyles';
 import { FetchAPIwithAsync } from '../../data/AsyncActions';
-import ShareWatchlist from '../../components/ShareWatchlist';
 import DetailsCard from '../../components/DetailsCard';
 
-const WatchlistScreen = ({ navigation, route }) => {
+const WatchlistScreen = ({ route }) => {
   const styles = WatchlistStyles();
   const { tabType } = route.params;
 
@@ -90,33 +89,11 @@ const WatchlistScreen = ({ navigation, route }) => {
           {/* flatlist of tv shows/movies in the watchlist */}
           <DetailsCard
             data={watchlistShows}
-            navigation={navigation}
             watchlist={tabType}
             type={type}
             setStateItem={setWatchlistShows}
             isEditing={isEditing}
           />
-
-          {/* display number of records found */}
-          <View style={styles.footer}>
-            <Text style={styles.numRecords}>
-              {watchlistShows.length} record(s) found
-            </Text>
-
-            {/* share button */}
-            <TouchableOpacity
-              style={styles.shareBtn}
-              onPress={() => {
-                // share the titles of the movies/tv shows in the list
-                ShareWatchlist(type, watchlistShows, tabType);
-              }}>
-              <FontAwesome
-                name="share-square-o"
-                size={25}
-                style={styles.shareIcon}
-              />
-            </TouchableOpacity>
-          </View>
         </View>
       )}
     </View>

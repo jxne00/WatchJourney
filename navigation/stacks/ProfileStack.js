@@ -15,6 +15,7 @@ const ProfileScreenStack = () => {
     <ProfileStack.Navigator
       screenOptions={SCREEN_OPTIONS}
       initialRouteName="ProfilePage">
+      {/* profile screen */}
       <ProfileStack.Screen
         name="ProfilePage"
         component={ProfileScreen}
@@ -22,6 +23,8 @@ const ProfileScreenStack = () => {
           title: 'Profile',
         }}
       />
+
+      {/* FAQ screen */}
       <ProfileStack.Screen
         name="FaqPage"
         component={FaqScreen}

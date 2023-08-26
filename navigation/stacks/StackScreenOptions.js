@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Constants from '../../constants/constants';
 import setColor from '../../constants/colors';
 import { ThemeContext } from '../../data/ThemeContext';
@@ -8,7 +8,7 @@ import { ThemeContext } from '../../data/ThemeContext';
  */
 const ScreenOptions = () => {
   const { theme } = useContext(ThemeContext);
-  const { PRIMARY_COL, SECONDARY_COL } = setColor(theme);
+  const { PRIMARY_COL } = setColor(theme);
 
   return {
     headerShown: true,

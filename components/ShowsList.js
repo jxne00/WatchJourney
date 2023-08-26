@@ -57,14 +57,15 @@ const ShowsList = ({ navigation, type }) => {
       <View style={styles.posterContainer}>
         {!imageLoaded && (
           // show loading indicator while image is loading
-          <ActivityIndicator size="large" color={Constants.PRIMARY_COL} />
+          <ActivityIndicator size="small" color={Constants.PRIMARY_COL} />
         )}
+
         <Image
           source={{
             uri: `${Constants.POSTER_BASE_PATH}/original/${item.poster_path}`,
           }}
           style={styles.posterImage}
-          onLoadEnd={() => setImageLoaded(true)}
+          onLoad={() => setImageLoaded(true)}
         />
 
         {/* show modal when button is pressed */}
@@ -111,7 +112,7 @@ const ShowsList = ({ navigation, type }) => {
         // header
         ListHeaderComponent={
           <Text style={styles.header}>
-            {type === 'movie' ? 'Popular Movies' : 'Top Rated TV Shows'}
+            {type === 'movie' ? 'Trending movies' : 'Trending TV Shows'}
           </Text>
         }
         // pagination with 'back' and 'next' buttons

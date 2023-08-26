@@ -1,11 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import ScreenOptions from './stacks/StackScreenOptions';
 import MainScreensNav from './AppBottomNav';
 import LoginStack from './stacks/LoginStack';
-import Reviews from '../screens/reviews/Reviews';
-import ShowDetails from '../components/showDetails';
+import Reviews from '../screens/details/Reviews';
+import ShowDetails from '../screens/details/ShowDetails';
 import SearchScreen from '../screens/home/Search';
+
 // provider for a list of genres
 import { GenresProvider } from '../data/GenresContext';
 

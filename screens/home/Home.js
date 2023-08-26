@@ -30,7 +30,7 @@ const HomeScreen = ({ navigation }) => {
   const [nowShowing, setNowShowing] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [nowAiring, setNowAiring] = useState([]);
-  
+
   const { movieGenres, setMovieGenres, tvGenres, setTvGenres } = useGenres();
   const { theme, toggleTheme } = useContext(ThemeContext);
 
@@ -151,7 +151,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             <ScrollView
-              horizontal={true}
+              horizontal
               decelerationRate={'normal'}
               snapToInterval={ITEM_WIDTH}
               style={styles.scrollviewStyle}
@@ -183,7 +183,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             <ScrollView
-              horizontal={true}
+              horizontal
               decelerationRate={'normal'}
               snapToInterval={ITEM_WIDTH}
               style={styles.scrollviewStyle}

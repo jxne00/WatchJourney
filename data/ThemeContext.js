@@ -15,8 +15,9 @@ const ThemeContextProvider = ({ children }) => {
   // default to lightmode
   const [theme, setTheme] = useState('light');
 
+  // set theme to opposite of current theme
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((currTheme) => (currTheme === 'light' ? 'dark' : 'light'));
   };
 
   return (

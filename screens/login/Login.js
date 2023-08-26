@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -15,13 +16,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { auth } from '../../data/Firebase';
 import styles from './LoginStyles';
 
-/**
- * @description Login page to login with email and password.
- * credentils you can use:
- * email: user@demo.com
- * password: demopass
- */
 const LoginScreen = ({ navigation }) => {
+  const [logoLoaded, setLogoLoaded] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -84,9 +80,13 @@ const LoginScreen = ({ navigation }) => {
       <KeyboardAvoidingView behavior="padding">
         <StatusBar style="light" />
 
+        {!logoLoaded && <ActivityIndicator size="large" color="white" />}
+
+        {/* app logo */}
         <Image
           source={require('../../assets/images/app-icon.png')}
           style={styles.appicon}
+          onLoad={() => setLogoLoaded(true)}
         />
 
         <View style={styles.contentContainer}>
@@ -130,7 +130,6 @@ const LoginScreen = ({ navigation }) => {
             <Text style={styles.loginBtnText}>Login</Text>
           </TouchableOpacity>
         </View>
-
         {/* sign up link */}
         <View style={styles.signUpContainer}>
           <Text style={styles.signup}>Don't have an account?</Text>
