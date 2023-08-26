@@ -21,12 +21,30 @@ Email: user@demo.com
 Password: demopass
 ```
 
-## Screens
+## Screens (iOS)
+
+**Light mode**
 
 <p align="center">
-  <img src="https://github.com/jxne00/WatchJourney/blob/main/assets/demo/lightmode.png" alt="App Screens in light mode">
+  <img src="https://github.com/jxne00/WatchJourney/blob/main/assets/demo/light-ios.png" alt="iOS screens in light mode">
 </p>
 
+**Dark mode**
+
 <p align="center">
-  <img src="https://github.com/jxne00/WatchJourney/blob/main/assets/demo/darkmode.png" alt="App Screens in dark mode">
+  <img src="https://github.com/jxne00/WatchJourney/blob/main/assets/demo/dark-ios.png" alt="iOS screens in dark mode">
+</p>
+
+## Screens (Android)
+
+**Light mode**
+
+<p align="center">
+  <img src="https://github.com/jxne00/WatchJourney/blob/main/assets/demo/light-android.png" alt="Android screens in light mode">
+</p>
+
+**Dark mode**
+
+<p align="center">
+  <img src="https://github.com/jxne00/WatchJourney/blob/main/assets/demo/dark-android.png" alt="Android screens in dark mode">
 </p>
