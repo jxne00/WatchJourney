@@ -24,20 +24,15 @@ import { removeIDfromList } from '../data/AsyncActions';
  * @param type - 'movie' or 'tv'
  * @param setStateItem - state to set after removing item from watchlist
  * @param isEditing - true if user is editing watchlist
+ * @param numRecords - number of records
  */
 const DetailsCard = (props) => {
   const navigation = useNavigation();
   const styles = DetailsStyles();
 
-  const { data, watchlist, type, setStateItem, isEditing } = props;
-  const [numRecords, setNumRecords] = useState(0);
+  const { data, watchlist, type, setStateItem, isEditing, numRecords } = props;
   const [imageLoaded, setImageLoaded] = useState(false);
   const jiggleAnim = useRef(new Animated.Value(0)).current;
-
-  // set number of records found
-  useState(() => {
-    setNumRecords(data.length);
-  }, [data]);
 
   // animate the remove button when editing
   if (isEditing) {

@@ -24,6 +24,7 @@ const WatchlistScreen = ({ route }) => {
       type === 'movie'
         ? FetchAPIwithAsync(tabType, setWatchlistShows, 'movie')
         : FetchAPIwithAsync(tabType, setWatchlistShows, 'tv');
+
       return () => {};
     }, [type, tabType]),
   );
@@ -93,6 +94,7 @@ const WatchlistScreen = ({ route }) => {
             type={type}
             setStateItem={setWatchlistShows}
             isEditing={isEditing}
+            numRecords={watchlistShows.length}
           />
         </View>
       )}
