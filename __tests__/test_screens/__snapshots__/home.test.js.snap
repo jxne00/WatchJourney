@@ -1,0 +1,1175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests for Home screen renders correctly 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "backgroundColor": "#74369D",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "backgroundColor": "#74369D",
+        "flex": 1,
+      }
+    }
+  >
+    <RNCMaskedView>
+      <View
+        pointerEvents="none"
+        style={
+          {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <Text
+          style={
+            {
+              "fontFamily": "Bangers-Regular",
+              "fontSize": 26,
+              "fontWeight": "bold",
+              "letterSpacing": 2,
+              "padding": 10,
+            }
+          }
+        >
+          WatchJourney
+        </Text>
+      </View>
+      <ViewManagerAdapter_ExpoLinearGradient
+        proxiedProperties={
+          {
+            "colors": [
+              4286906368,
+              4282410929,
+              4288745326,
+            ],
+            "endPoint": [
+              1,
+              0,
+            ],
+            "locations": undefined,
+            "startPoint": [
+              0,
+              0,
+            ],
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "fontFamily": "Bangers-Regular",
+                "fontSize": 26,
+                "fontWeight": "bold",
+                "letterSpacing": 2,
+                "padding": 10,
+              },
+              {
+                "opacity": 0,
+              },
+            ]
+          }
+        >
+          WatchJourney
+        </Text>
+      </ViewManagerAdapter_ExpoLinearGradient>
+    </RNCMaskedView>
+    <RCTScrollView
+      bounces={false}
+      decelerationRate="normal"
+      disableIntervalMomentum={true}
+      horizontal={true}
+      onScroll={[Function]}
+      scrollEventThrottle={12}
+      showsHorizontalScrollIndicator={false}
+      snapToInterval={670}
+      style={
+        {
+          "marginBottom": 10,
+          "marginTop": 10,
+          "paddingHorizontal": 0,
+        }
+      }
+      testID="home_scrollview"
+    >
+      <View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": 40,
+              "marginRight": undefined,
+              "opacity": 1,
+              "transform": [
+                {
+                  "scale": 1,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": 0.5,
+              "transform": [
+                {
+                  "scale": 0.85,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/rtmmvqkIC5zDMEd638Es2woxbz8.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": 0,
+              "transform": [
+                {
+                  "scale": 0.7,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/qzMYKnT4MG1d0gnhwytr4cKhUvS.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -0.5,
+              "transform": [
+                {
+                  "scale": 0.5499999999999999,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/8chwENebfUEJzZ7sMUA0nOgiCKk.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -1,
+              "transform": [
+                {
+                  "scale": 0.3999999999999999,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -1.5,
+              "transform": [
+                {
+                  "scale": 0.2499999999999999,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -2,
+              "transform": [
+                {
+                  "scale": 0.09999999999999987,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/21b0i0Ozc2o9YNsVyEf4iyYNt5r.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -2.5,
+              "transform": [
+                {
+                  "scale": -0.050000000000000155,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -3,
+              "transform": [
+                {
+                  "scale": -0.2000000000000003,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/oe1cs6GZIpmiWuZ0ZgJUOyPcoXE.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -3.5,
+              "transform": [
+                {
+                  "scale": -0.3500000000000002,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/utZTb3VBrH0zR77BcISU67pHuAx.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -4,
+              "transform": [
+                {
+                  "scale": -0.5000000000000001,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -4.5,
+              "transform": [
+                {
+                  "scale": -0.6500000000000002,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -5,
+              "transform": [
+                {
+                  "scale": -0.8000000000000004,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/uv9Yaze9xwEJIVjrsOGhhZzSV5s.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -5.5,
+              "transform": [
+                {
+                  "scale": -0.9500000000000003,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/iDtXSiHfHiO98oWf39AN1aVQ1d0.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -6,
+              "transform": [
+                {
+                  "scale": -1.1,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/jkQ6FDJ4Wmla3tID7mG27j6c5Mp.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -6.5,
+              "transform": [
+                {
+                  "scale": -1.2500000000000004,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={1}
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -7,
+              "transform": [
+                {
+                  "scale": -1.4000000000000004,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/5JYi2v014mfJBuFFnv9X8cGPXkp.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -7.5,
+              "transform": [
+                {
+                  "scale": -1.5500000000000003,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/fwUSmJ4gnliuyNYyFrviVYJVOF3.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": undefined,
+              "opacity": -8,
+              "transform": [
+                {
+                  "scale": -1.7000000000000002,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/hUe1G6Ziwl8b6DaaGHjhG6LQQH8.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          collapsable={false}
+          style={
+            {
+              "height": 200,
+              "marginLeft": undefined,
+              "marginRight": 40,
+              "opacity": -8.5,
+              "transform": [
+                {
+                  "scale": -1.85,
+                },
+              ],
+              "width": 670,
+            }
+          }
+        >
+          <View
+            accessibilityIgnoresInvertColors={true}
+            style={
+              {
+                "flex": 1,
+                "justifyContent": "center",
+                "resizeMode": "cover",
+              }
+            }
+          >
+            <Image
+              source={
+                {
+                  "uri": "undefined/rjL2xIlk7E6s0U35v4IJMJ22QmK.jpg",
+                }
+              }
+              style={
+                [
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  {
+                    "borderRadius": 6,
+                  },
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+    <Text
+      style={
+        {
+          "fontFamily": "Poppins-Regular",
+          "fontSize": 16,
+        }
+      }
+    >
+      Welcome to WatchJourney!
+      
+
+      This is the homescreen.
+    </Text>
+  </View>
+</RCTSafeAreaView>
+`;

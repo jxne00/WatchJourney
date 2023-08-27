@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests for Discover screen renders correctly 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#74369D",
+      "flex": 1,
+      "padding": 10,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "fontFamily": "Poppins-SemiBold",
+        "fontSize": 24,
+        "marginBottom": 10,
+      }
+    }
+  >
+    Movies
+  </Text>
+</View>
+`;
