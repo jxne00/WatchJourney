@@ -87,7 +87,15 @@ const ShowsList = ({ navigation, type }) => {
         onPress={() => navigation.navigate('ShowDetailsPage', { item })}
         style={styles.showDetails}>
         {/* title and overview of tv show */}
-        <Text style={styles.showTitle}>{item.name || item.title}</Text>
+        <Text style={styles.showTitle}>
+          {item.name
+            ? item.name.length > 30
+              ? `${item.name.substring(0, 30)}...`
+              : item.name
+            : item.title.length > 30
+            ? `${item.title.substring(0, 30)}...`
+            : item.title}
+        </Text>
 
         <Text style={styles.showOverview}>
           {/* only show first 100 characters of overview */}
