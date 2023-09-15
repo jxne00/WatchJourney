@@ -1,4 +1,4 @@
-// API key (docs: https://developer.themoviedb.org/docs)
+// TMDB API key (docs: https://developer.themoviedb.org/docs)
 const API_KEY = 'c13e2b2ef81e2b4c693abcfcff67a5c0';
 
 // base path of endpoints
@@ -16,14 +16,12 @@ const Fetch_API_Data = async (url, param) => {
       ? `${BASE_PATH}${url}?api_key=${API_KEY}&${param}`
       : `${BASE_PATH}${url}?api_key=${API_KEY}`;
 
-    console.log(`(API) fetching from: ${endpoint}`);
-
     const response = await fetch(endpoint);
 
     // convert response to JSON
     return await response.json();
   } catch (err) {
-    console.log('Fetch_API_Data(): ', err);
+    alert(err);
   }
 };
 

@@ -5,18 +5,6 @@ import Fetch_API_Data from './API';
 import { getUserId } from './Firebase';
 
 /**
- * @description Print the contents of a key in AsyncStorage
- */
-const printAsyncKeyContent = async (key) => {
-  try {
-    const value = await AsyncStorage.getItem(key);
-    console.log(`Key: ${key} | Contains: ${value}`);
-  } catch (err) {
-    console.error(`Error reading value from ${key}: `, err);
-  }
-};
-
-/**
  * @description Print contents of all keys in AsyncStorage
  */
 const printAllAsyncContent = async () => {
@@ -29,7 +17,7 @@ const printAllAsyncContent = async () => {
       console.log(`${key}: ${value}`);
     });
   } catch (err) {
-    console.error('printAllAsyncContent(): ', err);
+    alert(err);
   }
 };
 
@@ -76,7 +64,7 @@ const fetchFromAsyncStorage = async (key) => {
     const data = await Promise.all(promises);
     return data;
   } catch (err) {
-    console.error('fetchFromAsyncStorage(): ', err);
+    alert(err);
   }
 };
 
@@ -114,16 +102,14 @@ const addShowToAsync = async (watchlist, type, id, setModalVisible) => {
     // add id to list and store back to AsyncStorage
     currentList.push(id);
     await AsyncStorage.setItem(asyncKey, JSON.stringify(currentList));
-    console.log(id, 'added to', asyncKey);
 
     // success haptic feedback
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    printAsyncKeyContent(asyncKey);
 
     // close modal after adding to list
     setModalVisible(false);
   } catch (err) {
-    console.log('addShowToAsync(): ', err);
+    alert(err);
   }
 };
 
@@ -145,7 +131,7 @@ const FetchAPIwithAsync = async (key, setListState, type) => {
     const data = await Promise.all(promises);
     setListState(data);
   } catch (err) {
-    console.error('FetchAPIwithAsync(): ', err);
+    alert(err);
   }
 };
 
@@ -165,8 +151,8 @@ const FetchMovies = async (key, setListState) => {
     );
     const data = await Promise.all(promises);
     setListState(data);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    alert(err);
   }
 };
 
@@ -183,8 +169,8 @@ const FetchTvShows = async (key, setListState) => {
     );
     const data = await Promise.all(promises);
     setListState(data);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    alert(err);
   }
 };
 
@@ -219,23 +205,12 @@ const removeIDfromList = async (watchlist, id, setStateItem, type) => {
       `@${userID}_${watchlist}_${type}list`,
     );
     setStateItem(updatedList);
-
-    console.log(id, 'removed from', `@${userID}_${watchlist}_${type}list`);
   } catch (err) {
-    type === 'movie'
-      ? console.log(
-          `Error removing movie from "${userID}_${watchlist}" list: `,
-          err,
-        )
-      : console.log(
-          `Error removing TV show from "${userID}_${watchlist}" list: `,
-          err,
-        );
+    alert(err);
   }
 };
 
 export {
-  printAsyncKeyContent,
   printAllAsyncContent,
   clearAsyncStorage,
   fetchFromAsyncStorage,

@@ -38,7 +38,6 @@ const registerForPushNotif = async () => {
     }
 
     if (finalStatus !== 'granted') {
-      console.log('(notification) Permission not granted!');
       return;
     }
 
@@ -47,8 +46,6 @@ const registerForPushNotif = async () => {
         projectId: 'c58e71b0-58fc-40b5-9c31-ebab44085184',
       })
     ).data;
-  } else {
-    console.log('Notifications not supported on this device.');
   }
 
   return token;
@@ -61,7 +58,7 @@ const schedulePushNotif = async (title) => {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: 'Check out this movie!',
-      body: `Looking for movies to add to your watchlist? "${title}" is now showing in theatres!`,
+      body: `Looking for movies to add to your watchlist? "${title}" is now showing in theaters!`,
     },
     trigger: null,
   });

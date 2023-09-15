@@ -33,7 +33,7 @@ const getUserId = async () => {
     const user = auth.currentUser;
     return user.uid;
   } catch (err) {
-    console.error('getUserId(): ', err);
+    alert(err);
   }
 };
 
