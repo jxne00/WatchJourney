@@ -8,8 +8,8 @@ WatchJourney is a mobile application that can help you keep track of all your TV
 
 If you have the Expo Go app installed on your mobile device, you can use the links below to run the app.
 
-- iOS: exp://u.expo.dev/update/0450f41f-4d34-4f75-abea-12bfbae9806b
-- Android: exp://u.expo.dev/update/69dd5f86-5aad-45bf-a1fe-f63d1931ac87
+- iOS: [exp://u.expo.dev/update/0450f41f-4d34-4f75-abea-12bfbae9806b](exp://u.expo.dev/update/0450f41f-4d34-4f75-abea-12bfbae9806b)
+- Android: [exp://u.expo.dev/update/69dd5f86-5aad-45bf-a1fe-f63d1931ac87](exp://u.expo.dev/update/69dd5f86-5aad-45bf-a1fe-f63d1931ac87)
 
 ## Installation
 
